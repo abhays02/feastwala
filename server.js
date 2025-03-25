@@ -44,7 +44,9 @@ const flash = require('express-flash');
 const MongoStore = require('connect-mongo')(session);
 const Emitter = require('events');
 
-const PORT = process.env.PORT || 3000;
+app.listen(process.env.PORT || 10000, '0.0.0.0', () => {
+  console.log(`Listening on port ${process.env.PORT || 10000}`);
+});
 
 const DB = process.env.APP_ATLAS_CONNECTION_STRING;
 mongoose.connect(DB, { useNewUrlParser: true, useUnifiedTopology: true })
