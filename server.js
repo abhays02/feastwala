@@ -47,10 +47,6 @@ const Emitter = require('events');
 
 const PORT = process.env.PORT || 10000;
 
-const server = app.listen(PORT, () => {
-  console.log(`✅ Server is running on port ${PORT}`);
-});
-
 const DB = process.env.APP_ATLAS_CONNECTION_STRING;
 mongoose.connect(DB, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => console.log('DB connected successfully!...'))
