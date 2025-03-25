@@ -44,8 +44,11 @@ const flash = require('express-flash');
 const MongoStore = require('connect-mongo')(session);
 const Emitter = require('events');
 
-app.listen(process.env.PORT || 10000, '0.0.0.0', () => {
-  console.log(`Listening on port ${process.env.PORT || 10000}`);
+
+const PORT = process.env.PORT || 10000;
+
+const server = app.listen(PORT, () => {
+  console.log(`✅ Server is running on port ${PORT}`);
 });
 
 const DB = process.env.APP_ATLAS_CONNECTION_STRING;
