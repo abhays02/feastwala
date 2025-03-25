@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 # MealMate
 
@@ -76,3 +77,6 @@ Order Detail Page (Customer can track order in real-time):
 - [@noob-nilarghya](https://www.github.com/noob-nilarghya)
 - [@shlokjjw](https://www.github.com/shlokjjw)
 
+=======
+# feastwala
+>>>>>>> 021e17e47f643dd47adba816bc3e893465bca77a
