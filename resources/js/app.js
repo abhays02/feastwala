@@ -882,31 +882,14 @@ if (mapID) {
             console.log("Intersected");
 
             // Actual Map Integration
-            //console.log(locations);
-            /*
-            [
-              {
-                coordinates: [-80.128473, 25.781842],
-                day: 1,
-                description: "Lummus Park Beach",
-                ....
-              },
-              {} ....
-            ]
-            */
-
             const locations = [
                 {
-                    coordinates: [88.4137187, 22.5573695],
-                    description: "RA-422, Chingrighata, Sector 4",
+                    coordinates: [77.1612691, 28.5204006],
+                    description: "Kishangarh Gaushala, New Delhi, India",
                 },
                 {
-                    coordinates: [88.4515353, 22.5781405],
-                    description: "Newtown, Rajarhat, Sector 5",
-                },
-                {
-                    coordinates: [88.3533401, 22.6321847],
-                    description: "Belur Math, Belur, Howrah",
+                    coordinates: [77.1733907, 28.5671703],
+                    description: "Munirka, New Delhi, India",
                 }
             ];
 
@@ -915,13 +898,7 @@ if (mapID) {
             var map = new maplibregl.Map({
                 container: 'map', // that id in which map will be placed
                 style: 'https://api.maptiler.com/maps/streets/style.json?key=k9IFWLIKRlgFFrLE2I20', // style of map
-                scrollZoom: true // scroll to zoom set to false
-
-
-                // OTHER OPTIONS
-                // zoom: 10
-                // center: [-118.113491, 34.111745],
-                // interactive: false
+                scrollZoom: true 
             });
 
             const bounds = new maplibregl.LngLatBounds();
@@ -929,12 +906,12 @@ if (mapID) {
             locations.forEach(loc => {
                 // Create marker
                 const el = document.createElement('div'); // create div
-                el.className = 'marker';  // apply pre defined style class named 'marker'
+                el.className = 'marker';  // apply pre-defined style class named 'marker'
 
                 // Add marker
                 new maplibregl.Marker({
                     element: el,
-                    anchor: 'bottom' // point will be at the bottom of pin (image in 'marker')
+                    anchor: 'bottom' 
                 })
                     .setLngLat(loc.coordinates)
                     .addTo(map);
@@ -947,12 +924,11 @@ if (mapID) {
                     .setHTML(`<p>${loc.description}</p>`) // what will be written on each of the marker
                     .addTo(map);
 
-                // Extend map bounds to include current location. [OR adjust map zoom to accomodate all location]
+                // Extend map bounds to include current location. [OR adjust map zoom to accommodate all locations]
                 bounds.extend(loc.coordinates);
             });
 
             map.fitBounds(bounds, {
-                // Manual padding (not mandatory, but useful if your map is not completely visible due to styling of your webpage)
                 padding: {
                     top: 100,
                     bottom: 100,
@@ -967,11 +943,12 @@ if (mapID) {
 
     const sectionObserverMap = new IntersectionObserver(interSectionMap, {
         root: null,
-        threshold: 0.1, // 0.1 means 10% errorMargin
+        threshold: 0.1, // 0.1 means 10% error margin
     });
 
     sectionObserverMap.observe(mapID);
 }
+
 
 
 
