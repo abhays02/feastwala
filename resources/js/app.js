@@ -118,7 +118,7 @@ if (document.querySelector('.menuWrapper')) {
                 //make those card's display none whose 'foodType' is !== sortLink.textContent
                 menuCardArray.forEach((card) => {
                     let txt = sortLink.textContent;
-                    if (txt === 'Main') { txt = 'Main Course'; }
+                    if (txt === 'Break') { txt = 'breakfast'; }
                     if (card.querySelector('.foodType').textContent !== txt) {
                         card.style.display = "none";
                         card.style.height = "100%";
