@@ -145,7 +145,7 @@
     },
     {
         "name": "Veg Thali",
-        "foodType": "Thali",
+        "foodType": "breakfast",
         "image": "VegThali.jpg",
         "halfFull": false,
         "isVeg": false,
