@@ -884,12 +884,12 @@ if (mapID) {
             // Actual Map Integration
             const locations = [
                 {
-                    coordinates: [77.1612691, 28.5204006],
-                    description: "Kishangarh Gaushala, New Delhi, India",
+                    coordinates: [77.1676293, 28.5230879],
+                    description: "Kishangarh, New Delhi, India",
                 },
                 {
-                    coordinates: [77.1733907, 28.5671703],
-                    description: "Munirka, New Delhi, India",
+                    coordinates: [77.1690067, 28.5567326],
+                    description: "Munirka Enclave, New Delhi, India",
                 }
             ];
 
