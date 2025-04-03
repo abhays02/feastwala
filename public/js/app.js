@@ -2841,20 +2841,18 @@ if (mapID) {
       */
 
       var locations = [{
-        coordinates: [88.4137187, 22.5573695],
-        description: "RA-422, Chingrighata, Sector 4"
-      }, {
-        coordinates: [88.4515353, 22.5781405],
-        description: "Newtown, Rajarhat, Sector 5"
-      }, {
-        coordinates: [88.3533401, 22.6321847],
-        description: "Belur Math, Belur, Howrah"
-      }];
+        coordinates: [77.1676293, 28.5230879],
+        description: "Kishangarh, New Delhi, India",
+    },
+    {
+        coordinates: [77.1690067, 28.5567326],
+        description: "Munirka Enclave, New Delhi, India",
+    }];
       console.log(locations);
       var map = new maplibregl.Map({
         container: 'map',
         // that id in which map will be placed
-        style: 'https://api.maptiler.com/maps/streets/style.json?key=k9IFWLIKRlgFFrLE2I20',
+        style: 'https://api.maptiler.com/maps/streets-v2/style.json?key=yExgVD2w6i8h5kbsJEcM',
         // style of map
         scrollZoom: true // scroll to zoom set to false
 
