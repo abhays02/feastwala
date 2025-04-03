@@ -1788,6 +1788,7 @@ module.exports = {
 
 /***/ }),
 
+<<<<<<< HEAD
 /***/ "./resources/js/app.js":
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
@@ -2946,6 +2947,8 @@ if (isAdminPage) {
 
 /***/ }),
 
+=======
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
 /***/ "./node_modules/gsap/CSSPlugin.js":
 /*!****************************************!*\
   !*** ./node_modules/gsap/CSSPlugin.js ***!
@@ -2963,12 +2966,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var _gsap_core_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./gsap-core.js */ "./node_modules/gsap/gsap-core.js");
 /*!
+<<<<<<< HEAD
  * CSSPlugin 3.11.5
  * https://greensock.com
  *
  * Copyright 2008-2023, GreenSock. All rights reserved.
  * Subject to the terms at https://greensock.com/standard-license or for
  * Club GreenSock members, the agreement issued with that membership.
+=======
+ * CSSPlugin 3.12.7
+ * https://gsap.com
+ *
+ * Copyright 2008-2025, GreenSock. All rights reserved.
+ * Subject to the terms at https://gsap.com/standard-license or for
+ * Club GSAP members, the agreement issued with that membership.
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
  * @author: Jack Doyle, jack@greensock.com
 */
 
@@ -3047,16 +3059,29 @@ _renderRoundedCSSProp = function _renderRoundedCSSProp(ratio, data) {
   var _this = this;
 
   var target = this.target,
+<<<<<<< HEAD
       style = target.style;
 
   if (property in _transformProps) {
+=======
+      style = target.style,
+      cache = target._gsap;
+
+  if (property in _transformProps && style) {
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
     this.tfm = this.tfm || {};
 
     if (property !== "transform") {
       property = _propertyAliases[property] || property;
       ~property.indexOf(",") ? property.split(",").forEach(function (a) {
         return _this.tfm[a] = _get(target, a);
+<<<<<<< HEAD
       }) : this.tfm[property] = target._gsap.x ? target._gsap[property] : _get(target, property); // note: scale would map to "scaleX,scaleY", thus we loop and apply them both.
+=======
+      }) : this.tfm[property] = cache.x ? cache[property] : _get(target, property); // note: scale would map to "scaleX,scaleY", thus we loop and apply them both.
+
+      property === _transformOriginProp && (this.tfm.zOrigin = cache.zOrigin);
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
     } else {
       return _propertyAliases.transform.split(",").forEach(function (p) {
         return _saveStyle.call(_this, p, isNotCSS);
@@ -3067,7 +3092,11 @@ _renderRoundedCSSProp = function _renderRoundedCSSProp(ratio, data) {
       return;
     }
 
+<<<<<<< HEAD
     if (target._gsap.svg) {
+=======
+    if (cache.svg) {
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
       this.svgo = target.getAttribute("data-svg-origin");
       this.props.push(_transformOriginProp, isNotCSS, "");
     }
@@ -3094,7 +3123,19 @@ _renderRoundedCSSProp = function _renderRoundedCSSProp(ratio, data) {
 
   for (i = 0; i < props.length; i += 3) {
     // stored like this: property, isNotCSS, value
+<<<<<<< HEAD
     props[i + 1] ? target[props[i]] = props[i + 2] : props[i + 2] ? style[props[i]] = props[i + 2] : style.removeProperty(props[i].substr(0, 2) === "--" ? props[i] : props[i].replace(_capsExp, "-$1").toLowerCase());
+=======
+    if (!props[i + 1]) {
+      props[i + 2] ? style[props[i]] = props[i + 2] : style.removeProperty(props[i].substr(0, 2) === "--" ? props[i] : props[i].replace(_capsExp, "-$1").toLowerCase());
+    } else if (props[i + 1] === 2) {
+      // non-CSS value (function-based)
+      target[props[i]](props[i + 2]);
+    } else {
+      // non-CSS value (not function-based)
+      target[props[i]] = props[i + 2];
+    }
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
   }
 
   if (this.tfm) {
@@ -3112,6 +3153,16 @@ _renderRoundedCSSProp = function _renderRoundedCSSProp(ratio, data) {
     if ((!i || !i.isStart) && !style[_transformProp]) {
       _removeIndependentTransforms(style);
 
+<<<<<<< HEAD
+=======
+      if (cache.zOrigin && style[_transformOriginProp]) {
+        style[_transformOriginProp] += " " + cache.zOrigin + "px"; // since we're uncaching, we must put the zOrigin back into the transformOrigin so that we can pull it out accurately when we parse again. Otherwise, we'd lose the z portion of the origin since we extract it to protect from Safari bugs.
+
+        cache.zOrigin = 0;
+        cache.renderTransform();
+      }
+
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
       cache.uncache = 1; // if it's a startAt that's being reverted in the _initTween() of the core, we don't need to uncache transforms. This is purely a performance optimization.
     }
   }
@@ -3125,16 +3176,27 @@ _renderRoundedCSSProp = function _renderRoundedCSSProp(ratio, data) {
   };
   target._gsap || _gsap_core_js__WEBPACK_IMPORTED_MODULE_0__.gsap.core.getCache(target); // just make sure there's a _gsap cache defined because we read from it in _saveStyle() and it's more efficient to just check it here once.
 
+<<<<<<< HEAD
   properties && properties.split(",").forEach(function (p) {
     return saver.save(p);
   });
+=======
+  properties && target.style && target.nodeType && properties.split(",").forEach(function (p) {
+    return saver.save(p);
+  }); // make sure it's a DOM node too.
+
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
   return saver;
 },
     _supports3D,
     _createElement = function _createElement(type, ns) {
   var e = _doc.createElementNS ? _doc.createElementNS((ns || "http://www.w3.org/1999/xhtml").replace(/^https/, "http"), type) : _doc.createElement(type); //some servers swap in https for http in the namespace which can break things, making "style" inaccessible.
 
+<<<<<<< HEAD
   return e.style ? e : _doc.createElement(type); //some environments won't allow access to the element's style when created with a namespace in which case we default to the standard createElement() to work around the issue. Also note that when GSAP is embedded directly inside an SVG file, createElement() won't allow access to the style object in Firefox (see https://greensock.com/forums/topic/20215-problem-using-tweenmax-in-standalone-self-containing-svg-file-err-cannot-set-property-csstext-of-undefined/).
+=======
+  return e && e.style ? e : _doc.createElement(type); //some environments won't allow access to the element's style when created with a namespace in which case we default to the standard createElement() to work around the issue. Also note that when GSAP is embedded directly inside an SVG file, createElement() won't allow access to the style object in Firefox (see https://gsap.com/forums/topic/20215-problem-using-tweenmax-in-standalone-self-containing-svg-file-err-cannot-set-property-csstext-of-undefined/).
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
 },
     _getComputedProperty = function _getComputedProperty(target, property, skipPrefixFallback) {
   var cs = getComputedStyle(target);
@@ -3174,6 +3236,7 @@ _renderRoundedCSSProp = function _renderRoundedCSSProp(ratio, data) {
     _pluginInitted = 1;
   }
 },
+<<<<<<< HEAD
     _getBBoxHack = function _getBBoxHack(swapIfPossible) {
   //works around issues in some browsers (like Firefox) that don't correctly report getBBox() on SVG elements inside a <defs> element and/or <mask>. We try creating an SVG, adding it to the documentElement and toss the element in there so that it's definitely part of the rendering tree, then grab the bbox and if it works, we actually swap out the original getBBox() method for our own that does these extra steps whenever getBBox is needed. This helps ensure that performance is optimal (only do all these extra steps when absolutely necessary...most elements don't need it).
   var svg = _createElement("svg", this.ownerSVGElement && this.ownerSVGElement.getAttribute("xmlns") || "http://www.w3.org/2000/svg"),
@@ -3209,6 +3272,28 @@ _renderRoundedCSSProp = function _renderRoundedCSSProp(ratio, data) {
   _docElement.removeChild(svg);
 
   this.style.cssText = oldCSS;
+=======
+    _getReparentedCloneBBox = function _getReparentedCloneBBox(target) {
+  //works around issues in some browsers (like Firefox) that don't correctly report getBBox() on SVG elements inside a <defs> element and/or <mask>. We try creating an SVG, adding it to the documentElement and toss the element in there so that it's definitely part of the rendering tree, then grab the bbox and if it works, we actually swap out the original getBBox() method for our own that does these extra steps whenever getBBox is needed. This helps ensure that performance is optimal (only do all these extra steps when absolutely necessary...most elements don't need it).
+  var owner = target.ownerSVGElement,
+      svg = _createElement("svg", owner && owner.getAttribute("xmlns") || "http://www.w3.org/2000/svg"),
+      clone = target.cloneNode(true),
+      bbox;
+
+  clone.style.display = "block";
+  svg.appendChild(clone);
+
+  _docElement.appendChild(svg);
+
+  try {
+    bbox = clone.getBBox();
+  } catch (e) {}
+
+  svg.removeChild(clone);
+
+  _docElement.removeChild(svg);
+
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
   return bbox;
 },
     _getAttributeFallbacks = function _getAttributeFallbacks(target, attributesArray) {
@@ -3221,15 +3306,27 @@ _renderRoundedCSSProp = function _renderRoundedCSSProp(ratio, data) {
   }
 },
     _getBBox = function _getBBox(target) {
+<<<<<<< HEAD
   var bounds;
+=======
+  var bounds, cloned;
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
 
   try {
     bounds = target.getBBox(); //Firefox throws errors if you try calling getBBox() on an SVG element that's not rendered (like in a <symbol> or <defs>). https://bugzilla.mozilla.org/show_bug.cgi?id=612118
   } catch (error) {
+<<<<<<< HEAD
     bounds = _getBBoxHack.call(target, true);
   }
 
   bounds && (bounds.width || bounds.height) || target.getBBox === _getBBoxHack || (bounds = _getBBoxHack.call(target, true)); //some browsers (like Firefox) misreport the bounds if the element has zero width and height (it just assumes it's at x:0, y:0), thus we need to manually grab the position in that case.
+=======
+    bounds = _getReparentedCloneBBox(target);
+    cloned = 1;
+  }
+
+  bounds && (bounds.width || bounds.height) || cloned || (bounds = _getReparentedCloneBBox(target)); //some browsers (like Firefox) misreport the bounds if the element has zero width and height (it just assumes it's at x:0, y:0), thus we need to manually grab the position in that case.
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
 
   return bounds && !bounds.width && !bounds.x && !bounds.y ? {
     x: +_getAttributeFallbacks(target, ["x", "cx", "x1"]) || 0,
@@ -3244,19 +3341,34 @@ _renderRoundedCSSProp = function _renderRoundedCSSProp(ratio, data) {
     //reports if the element is an SVG on which getBBox() actually works
 _removeProperty = function _removeProperty(target, property) {
   if (property) {
+<<<<<<< HEAD
     var style = target.style;
+=======
+    var style = target.style,
+        first2Chars;
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
 
     if (property in _transformProps && property !== _transformOriginProp) {
       property = _transformProp;
     }
 
     if (style.removeProperty) {
+<<<<<<< HEAD
       if (property.substr(0, 2) === "ms" || property.substr(0, 6) === "webkit") {
+=======
+      first2Chars = property.substr(0, 2);
+
+      if (first2Chars === "ms" || property.substr(0, 6) === "webkit") {
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
         //Microsoft and some Webkit browsers don't conform to the standard of capitalizing the first prefix character, so we adjust so that when we prefix the caps with a dash, it's correct (otherwise it'd be "ms-transform" instead of "-ms-transform" for IE9, for example)
         property = "-" + property;
       }
 
+<<<<<<< HEAD
       style.removeProperty(property.replace(_capsExp, "-$1").toLowerCase());
+=======
+      style.removeProperty(first2Chars === "--" ? property : property.replace(_capsExp, "-$1").toLowerCase());
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
     } else {
       //note: old versions of IE use "removeAttribute()" instead of "removeProperty()"
       style.removeAttribute(property);
@@ -3312,7 +3424,11 @@ _convertToUnit = function _convertToUnit(target, property, value, unit) {
   }
 
   style[horizontal ? "width" : "height"] = amount + (toPixels ? curUnit : unit);
+<<<<<<< HEAD
   parent = ~property.indexOf("adius") || unit === "em" && target.appendChild && !isRootSVG ? target : target.parentNode;
+=======
+  parent = unit !== "rem" && ~property.indexOf("adius") || unit === "em" && target.appendChild && !isRootSVG ? target : target.parentNode;
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
 
   if (isSVG) {
     parent = (target.ownerSVGElement || {}).parentNode;
@@ -3327,6 +3443,7 @@ _convertToUnit = function _convertToUnit(target, property, value, unit) {
   if (cache && toPercent && cache.width && horizontal && cache.time === _gsap_core_js__WEBPACK_IMPORTED_MODULE_0__._ticker.time && !cache.uncache) {
     return (0,_gsap_core_js__WEBPACK_IMPORTED_MODULE_0__._round)(curValue / cache.width * amount);
   } else {
+<<<<<<< HEAD
     (toPercent || curUnit === "%") && !_nonStandardLayouts[_getComputedProperty(parent, "display")] && (style.position = _getComputedProperty(target, "position"));
     parent === target && (style.position = "static"); // like for borderRadius, if it's a % we must have it relative to the target itself but that may not have position: relative or position: absolute in which case it'd go up the chain until it finds its offsetParent (bad). position: static protects against that.
 
@@ -3334,6 +3451,23 @@ _convertToUnit = function _convertToUnit(target, property, value, unit) {
     px = _tempDiv[measureProperty];
     parent.removeChild(_tempDiv);
     style.position = "absolute";
+=======
+    if (toPercent && (property === "height" || property === "width")) {
+      // if we're dealing with width/height that's inside a container with padding and/or it's a flexbox/grid container, we must apply it to the target itself rather than the _tempDiv in order to ensure complete accuracy, factoring in the parent's padding.
+      var v = target.style[property];
+      target.style[property] = amount + unit;
+      px = target[measureProperty];
+      v ? target.style[property] = v : _removeProperty(target, property);
+    } else {
+      (toPercent || curUnit === "%") && !_nonStandardLayouts[_getComputedProperty(parent, "display")] && (style.position = _getComputedProperty(target, "position"));
+      parent === target && (style.position = "static"); // like for borderRadius, if it's a % we must have it relative to the target itself but that may not have position: relative or position: absolute in which case it'd go up the chain until it finds its offsetParent (bad). position: static protects against that.
+
+      parent.appendChild(_tempDiv);
+      px = _tempDiv[measureProperty];
+      parent.removeChild(_tempDiv);
+      style.position = "absolute";
+    }
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
 
     if (horizontal && toPercent) {
       cache = (0,_gsap_core_js__WEBPACK_IMPORTED_MODULE_0__._getCache)(parent);
@@ -3372,7 +3506,11 @@ _convertToUnit = function _convertToUnit(target, property, value, unit) {
     _tweenComplexCSSString = function _tweenComplexCSSString(target, prop, start, end) {
   // note: we call _tweenComplexCSSString.call(pluginInstance...) to ensure that it's scoped properly. We may call it from within a plugin too, thus "this" would refer to the plugin.
   if (!start || start === "none") {
+<<<<<<< HEAD
     // some browsers like Safari actually PREFER the prefixed property and mis-report the unprefixed value like clipPath (BUG). In other words, even though clipPath exists in the style ("clipPath" in target.style) and it's set in the CSS properly (along with -webkit-clip-path), Safari reports clipPath as "none" whereas WebkitClipPath reports accurately like "ellipse(100% 0% at 50% 0%)", so in this case we must SWITCH to using the prefixed property instead. See https://greensock.com/forums/topic/18310-clippath-doesnt-work-on-ios/
+=======
+    // some browsers like Safari actually PREFER the prefixed property and mis-report the unprefixed value like clipPath (BUG). In other words, even though clipPath exists in the style ("clipPath" in target.style) and it's set in the CSS properly (along with -webkit-clip-path), Safari reports clipPath as "none" whereas WebkitClipPath reports accurately like "ellipse(100% 0% at 50% 0%)", so in this case we must SWITCH to using the prefixed property instead. See https://gsap.com/forums/topic/18310-clippath-doesnt-work-on-ios/
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
     var p = _checkPropPrefix(prop, target, 1),
         s = p && _getComputedProperty(target, p, 1);
 
@@ -3380,7 +3518,11 @@ _convertToUnit = function _convertToUnit(target, property, value, unit) {
       prop = p;
       start = s;
     } else if (prop === "borderColor") {
+<<<<<<< HEAD
       start = _getComputedProperty(target, "borderTopColor"); // Firefox bug: always reports "borderColor" as "", so we must fall back to borderTopColor. See https://greensock.com/forums/topic/24583-how-to-return-colors-that-i-had-after-reverse/
+=======
+      start = _getComputedProperty(target, "borderTopColor"); // Firefox bug: always reports "borderColor" as "", so we must fall back to borderTopColor. See https://gsap.com/forums/topic/24583-how-to-return-colors-that-i-had-after-reverse/
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
     }
   }
 
@@ -3406,9 +3548,16 @@ _convertToUnit = function _convertToUnit(target, property, value, unit) {
   end += "";
 
   if (end === "auto") {
+<<<<<<< HEAD
     target.style[prop] = end;
     end = _getComputedProperty(target, prop) || end;
     target.style[prop] = start;
+=======
+    startValue = target.style[prop];
+    target.style[prop] = end;
+    end = _getComputedProperty(target, prop) || end;
+    startValue ? target.style[prop] = startValue : _removeProperty(target, prop);
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
   }
 
   a = [start, end];
@@ -3534,6 +3683,10 @@ _convertToUnit = function _convertToUnit(target, property, value, unit) {
 
       if (cache) {
         cache.svg && target.removeAttribute("transform");
+<<<<<<< HEAD
+=======
+        style.scale = style.rotate = style.translate = "none";
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
 
         _parseTransform(target, 1); // force all the cached values back to "normal"/identity, otherwise if there's another tween that's already set to render transforms on this element, it could display the wrong values.
 
@@ -3612,7 +3765,11 @@ _specialProps = {
   		}
   	}
   	cache.classPT = plugin._pt = new PropTween(plugin._pt, target, "className", 0, 0, _renderClassName, data, 0, -11);
+<<<<<<< HEAD
   	if (style.cssText !== cssText) { //only apply if things change. Otherwise, in cases like a background-image that's pulled dynamically, it could cause a refresh. See https://greensock.com/forums/topic/20368-possible-gsap-bug-switching-classnames-in-chrome/.
+=======
+  	if (style.cssText !== cssText) { //only apply if things change. Otherwise, in cases like a background-image that's pulled dynamically, it could cause a refresh. See https://gsap.com/forums/topic/20368-possible-gsap-bug-switching-classnames-in-chrome/.
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
   		style.cssText = cssText; //we recorded cssText before we swapped classes and ran _getAllStyles() because in cases when a className tween is overwritten, we remove all the related tweening properties from that class change (otherwise class-specific stuff can't override properties we've directly set on the target's style object due to specificity).
   	}
   	_parseTransform(target, true); //to clear the caching of transforms
@@ -3661,8 +3818,13 @@ _identity2DMatrix = [1, 0, 0, 1, 0, 0],
     style.display = "block";
     parent = target.parentNode;
 
+<<<<<<< HEAD
     if (!parent || !target.offsetParent) {
       // note: in 3.3.0 we switched target.offsetParent to _doc.body.contains(target) to avoid [sometimes unnecessary] MutationObserver calls but that wasn't adequate because there are edge cases where nested position: fixed elements need to get reparented to accurately sense transforms. See https://github.com/greensock/GSAP/issues/388 and https://github.com/greensock/GSAP/issues/375
+=======
+    if (!parent || !target.offsetParent && !target.getBoundingClientRect().width) {
+      // note: in 3.3.0 we switched target.offsetParent to _doc.body.contains(target) to avoid [sometimes unnecessary] MutationObserver calls but that wasn't adequate because there are edge cases where nested position: fixed elements need to get reparented to accurately sense transforms. See https://github.com/greensock/GSAP/issues/388 and https://github.com/greensock/GSAP/issues/375. Note: position: fixed elements report a null offsetParent but they could also be invisible because they're in an ancestor with display: none, so we check getBoundingClientRect(). We only want to alter the DOM if we absolutely have to because it can cause iframe content to reload, like a Vimeo video.
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
       addedToDOM = 1; //flag
 
       nextSibling = target.nextElementSibling;
@@ -3705,13 +3867,24 @@ _identity2DMatrix = [1, 0, 0, 1, 0, 0],
   if (!originIsAbsolute) {
     bounds = _getBBox(target);
     xOrigin = bounds.x + (~originSplit[0].indexOf("%") ? xOrigin / 100 * bounds.width : xOrigin);
+<<<<<<< HEAD
     yOrigin = bounds.y + (~(originSplit[1] || originSplit[0]).indexOf("%") ? yOrigin / 100 * bounds.height : yOrigin);
+=======
+    yOrigin = bounds.y + (~(originSplit[1] || originSplit[0]).indexOf("%") ? yOrigin / 100 * bounds.height : yOrigin); // if (!("xOrigin" in cache) && (xOrigin || yOrigin)) { // added in 3.12.3, reverted in 3.12.4; requires more exploration
+    // 	xOrigin -= bounds.x;
+    // 	yOrigin -= bounds.y;
+    // }
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
   } else if (matrix !== _identity2DMatrix && (determinant = a * d - b * c)) {
     //if it's zero (like if scaleX and scaleY are zero), skip it to avoid errors with dividing by zero.
     x = xOrigin * (d / determinant) + yOrigin * (-c / determinant) + (c * ty - d * tx) / determinant;
     y = xOrigin * (-b / determinant) + yOrigin * (a / determinant) - (a * ty - b * tx) / determinant;
     xOrigin = x;
+<<<<<<< HEAD
     yOrigin = y;
+=======
+    yOrigin = y; // theory: we only had to do this for smoothing and it assumes that the previous one was not originIsAbsolute.
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
   }
 
   if (smooth || smooth !== false && cache.smooth) {
@@ -3947,7 +4120,11 @@ _identity2DMatrix = [1, 0, 0, 1, 0, 0],
   cache.skewY = skewY + deg;
   cache.transformPerspective = perspective + px;
 
+<<<<<<< HEAD
   if (cache.zOrigin = parseFloat(origin.split(" ")[2]) || 0) {
+=======
+  if (cache.zOrigin = parseFloat(origin.split(" ")[2]) || !uncache && cache.zOrigin || 0) {
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
     style[_transformOriginProp] = _firstTwoOnly(origin);
   }
 
@@ -4337,7 +4514,11 @@ var CSSPlugin = {
           // in case someone hard-codes a complex value as the start, like top: "calc(2vh / 2)". Without this, it'd use the computed value (always in px)
           startValue = typeof startAt[p] === "function" ? startAt[p].call(tween, index, target, targets) : startAt[p];
           (0,_gsap_core_js__WEBPACK_IMPORTED_MODULE_0__._isString)(startValue) && ~startValue.indexOf("random(") && (startValue = (0,_gsap_core_js__WEBPACK_IMPORTED_MODULE_0__._replaceRandom)(startValue));
+<<<<<<< HEAD
           (0,_gsap_core_js__WEBPACK_IMPORTED_MODULE_0__.getUnit)(startValue + "") || (startValue += _gsap_core_js__WEBPACK_IMPORTED_MODULE_0__._config.units[p] || (0,_gsap_core_js__WEBPACK_IMPORTED_MODULE_0__.getUnit)(_get(target, p)) || ""); // for cases when someone passes in a unitless value like {x: 100}; if we try setting translate(100, 0px) it won't work.
+=======
+          (0,_gsap_core_js__WEBPACK_IMPORTED_MODULE_0__.getUnit)(startValue + "") || startValue === "auto" || (startValue += _gsap_core_js__WEBPACK_IMPORTED_MODULE_0__._config.units[p] || (0,_gsap_core_js__WEBPACK_IMPORTED_MODULE_0__.getUnit)(_get(target, p)) || ""); // for cases when someone passes in a unitless value like {x: 100}; if we try setting translate(100, 0px) it won't work.
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
 
           (startValue + "").charAt(1) === "=" && (startValue = _get(target, p)); // can't work with relative values
         } else {
@@ -4454,7 +4635,11 @@ var CSSPlugin = {
           _tweenComplexCSSString.call(this, target, p, startValue, relative ? relative + endValue : endValue);
         }
 
+<<<<<<< HEAD
         isTransformRelated || (p in style ? inlineProps.push(p, 0, style[p]) : inlineProps.push(p, 1, startValue || target[p]));
+=======
+        isTransformRelated || (p in style ? inlineProps.push(p, 0, style[p]) : typeof target[p] === "function" ? inlineProps.push(p, 2, target[p]()) : inlineProps.push(p, 1, startValue || target[p]));
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
         props.push(p);
       }
     }
@@ -4600,12 +4785,21 @@ function _assertThisInitialized(self) { if (self === void 0) { throw new Referen
 function _inheritsLoose(subClass, superClass) { subClass.prototype = Object.create(superClass.prototype); subClass.prototype.constructor = subClass; subClass.__proto__ = superClass; }
 
 /*!
+<<<<<<< HEAD
  * GSAP 3.11.5
  * https://greensock.com
  *
  * @license Copyright 2008-2023, GreenSock. All rights reserved.
  * Subject to the terms at https://greensock.com/standard-license or for
  * Club GreenSock members, the agreement issued with that membership.
+=======
+ * GSAP 3.12.7
+ * https://gsap.com
+ *
+ * @license Copyright 2008-2025, GreenSock. All rights reserved.
+ * Subject to the terms at https://gsap.com/standard-license or for
+ * Club GSAP members, the agreement issued with that membership.
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
  * @author: Jack Doyle, jack@greensock.com
 */
 
@@ -4920,7 +5114,11 @@ _parseRelative = function _parseRelative(start, value) {
   child._next = child._prev = child.parent = null; // don't delete the _dp just so we can revert if necessary. But parent should be null to indicate the item isn't in a linked list.
 },
     _removeFromParent = function _removeFromParent(child, onlyIfParentHasAutoRemove) {
+<<<<<<< HEAD
   child.parent && (!onlyIfParentHasAutoRemove || child.parent.autoRemoveChildren) && child.parent.remove(child);
+=======
+  child.parent && (!onlyIfParentHasAutoRemove || child.parent.autoRemoveChildren) && child.parent.remove && child.parent.remove(child);
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
   child._act = 0;
 },
     _uncache = function _uncache(animation, child) {
@@ -4959,7 +5157,11 @@ _parseRelative = function _parseRelative(start, value) {
 },
     // feed in the totalTime and cycleDuration and it'll return the cycle (iteration minus 1) and if the playhead is exactly at the very END, it will NOT bump up to the next cycle.
 _animationCycle = function _animationCycle(tTime, cycleDuration) {
+<<<<<<< HEAD
   var whole = Math.floor(tTime /= cycleDuration);
+=======
+  var whole = Math.floor(tTime = _roundPrecise(tTime / cycleDuration));
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
   return tTime && whole === tTime ? whole - 1 : whole;
 },
     _parentToChildTotalTime = function _parentToChildTotalTime(parentTime, child) {
@@ -4996,8 +5198,13 @@ _totalTimeToTime = (clampedTotalTime, duration, repeat, repeatDelay, yoyo) => {
 _postAddChecks = function _postAddChecks(timeline, child) {
   var t;
 
+<<<<<<< HEAD
   if (child._time || child._initted && !child._dur) {
     //in case, for example, the _start is moved on a tween that has already rendered. Imagine it's at its end state, then the startTime is moved WAY later (after the end of this timeline), it should render at its beginning.
+=======
+  if (child._time || !child._dur && child._initted || child._start < timeline._time && (child._dur || !child.add)) {
+    // in case, for example, the _start is moved on a tween that has already rendered, or if it's being inserted into a timeline BEFORE where the playhead is currently. Imagine it's at its end state, then the startTime is moved WAY later (after the end of this timeline), it should render at its beginning. Special case: if it's a timeline (has .add() method) and no duration, we can skip rendering because the user may be populating it AFTER adding it to a parent timeline (unconventional, but possible, and we wouldn't want it to get removed if the parent's autoRemoveChildren is true).
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
     t = _parentToChildTotalTime(timeline.rawTime(), child);
 
     if (!child._dur || _clamp(0, child.totalDuration(), t) - child._tTime > _tinyNum) {
@@ -5275,7 +5482,11 @@ toArray = function toArray(value, scope, leaveStrings) {
     return .5 - Math.random();
   });
 },
+<<<<<<< HEAD
     // alternative that's a bit faster and more reliably diverse but bigger:   for (let j, v, i = a.length; i; j = Math.floor(Math.random() * i), v = a[--i], a[i] = a[j], a[j] = v); return a;
+=======
+    // alternative that's a bit faster and more reliably diverse but bigger:   for (let j, v, i = a.length; i; j = (Math.random() * i) | 0, v = a[--i], a[i] = a[j], a[j] = v); return a;
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
 //for distributing values across an array. Can accept a number, a function or (most commonly) a function which can contain the following properties: {base, amount, from, ease, grid, axis, length, each}. Returns a function that expects the following parameters: index, target, array. Recognizes the following
 distribute = function distribute(v) {
   if (_isFunction(v)) {
@@ -5328,7 +5539,11 @@ distribute = function distribute(v) {
 
         while (max < (max = a[wrapAt++].getBoundingClientRect().left) && wrapAt < l) {}
 
+<<<<<<< HEAD
         wrapAt--;
+=======
+        wrapAt < l && wrapAt--;
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
       }
 
       distances = cache[l] = [];
@@ -5598,6 +5813,7 @@ distribute = function distribute(v) {
     _quickTween,
     _registerPluginQueue = [],
     _createPlugin = function _createPlugin(config) {
+<<<<<<< HEAD
   if (!_windowExists()) {
     _registerPluginQueue.push(config);
 
@@ -5655,6 +5871,65 @@ distribute = function distribute(v) {
   _addGlobal(name, Plugin);
 
   config.register && config.register(gsap, Plugin, PropTween);
+=======
+  if (!config) return;
+  config = !config.name && config["default"] || config; // UMD packaging wraps things oddly, so for example MotionPathHelper becomes {MotionPathHelper:MotionPathHelper, default:MotionPathHelper}.
+
+  if (_windowExists() || config.headless) {
+    // edge case: some build tools may pass in a null/undefined value
+    var name = config.name,
+        isFunc = _isFunction(config),
+        Plugin = name && !isFunc && config.init ? function () {
+      this._props = [];
+    } : config,
+        //in case someone passes in an object that's not a plugin, like CustomEase
+    instanceDefaults = {
+      init: _emptyFunc,
+      render: _renderPropTweens,
+      add: _addPropTween,
+      kill: _killPropTweensOf,
+      modifier: _addPluginModifier,
+      rawVars: 0
+    },
+        statics = {
+      targetTest: 0,
+      get: 0,
+      getSetter: _getSetter,
+      aliases: {},
+      register: 0
+    };
+
+    _wake();
+
+    if (config !== Plugin) {
+      if (_plugins[name]) {
+        return;
+      }
+
+      _setDefaults(Plugin, _setDefaults(_copyExcluding(config, instanceDefaults), statics)); //static methods
+
+
+      _merge(Plugin.prototype, _merge(instanceDefaults, _copyExcluding(config, statics))); //instance methods
+
+
+      _plugins[Plugin.prop = name] = Plugin;
+
+      if (config.targetTest) {
+        _harnessPlugins.push(Plugin);
+
+        _reservedProps[name] = 1;
+      }
+
+      name = (name === "css" ? "CSS" : name.charAt(0).toUpperCase() + name.substr(1)) + "Plugin"; //for the global name. "motionPath" should become MotionPathPlugin
+    }
+
+    _addGlobal(name, Plugin);
+
+    config.register && config.register(gsap, Plugin, PropTween);
+  } else {
+    _registerPluginQueue.push(config);
+  }
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
 },
 
 /*
@@ -5892,7 +6167,11 @@ _tickerActive,
         time,
         frame;
 
+<<<<<<< HEAD
     elapsed > _lagThreshold && (_startTime += elapsed - _adjustedLag);
+=======
+    (elapsed > _lagThreshold || elapsed < 0) && (_startTime += elapsed - _adjustedLag);
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
     _lastUpdate += elapsed;
     time = _lastUpdate - _startTime;
     overlap = time - _nextTime;
@@ -5934,11 +6213,18 @@ _tickerActive,
 
           _install(_installScope || _win.GreenSockGlobals || !_win.gsap && _win || {});
 
+<<<<<<< HEAD
           _raf = _win.requestAnimationFrame;
 
           _registerPluginQueue.forEach(_createPlugin);
         }
 
+=======
+          _registerPluginQueue.forEach(_createPlugin);
+        }
+
+        _raf = typeof requestAnimationFrame !== "undefined" && requestAnimationFrame;
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
         _id && _self.sleep();
 
         _req = _raf || function (f) {
@@ -5951,7 +6237,11 @@ _tickerActive,
       }
     },
     sleep: function sleep() {
+<<<<<<< HEAD
       (_raf ? _win.cancelAnimationFrame : clearTimeout)(_id);
+=======
+      (_raf ? cancelAnimationFrame : clearTimeout)(_id);
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
       _tickerActive = 0;
       _req = _emptyFunc;
     },
@@ -6182,8 +6472,14 @@ _insertEase("Elastic", _configElastic("in"), _configElastic("out"), _configElast
 })(7.5625, 2.75);
 
 _insertEase("Expo", function (p) {
+<<<<<<< HEAD
   return p ? Math.pow(2, 10 * (p - 1)) : 0;
 });
+=======
+  return Math.pow(2, 10 * (p - 1)) * p + p * p * p * p * p * p * (1 - p);
+}); // previously 2 ** (10 * (p - 1)) but that doesn't end up with the value quite at the right spot so we do a blended ease to ensure it lands where it should perfectly.
+
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
 
 _insertEase("Circ", function (p) {
   return -(_sqrt(1 - p * p) - 1);
@@ -6335,11 +6631,19 @@ var Animation = /*#__PURE__*/function () {
   };
 
   _proto.totalProgress = function totalProgress(value, suppressEvents) {
+<<<<<<< HEAD
     return arguments.length ? this.totalTime(this.totalDuration() * value, suppressEvents) : this.totalDuration() ? Math.min(1, this._tTime / this._tDur) : this.ratio;
   };
 
   _proto.progress = function progress(value, suppressEvents) {
     return arguments.length ? this.totalTime(this.duration() * (this._yoyo && !(this.iteration() & 1) ? 1 - value : value) + _elapsedCycleDuration(this), suppressEvents) : this.duration() ? Math.min(1, this._time / this._dur) : this.ratio;
+=======
+    return arguments.length ? this.totalTime(this.totalDuration() * value, suppressEvents) : this.totalDuration() ? Math.min(1, this._tTime / this._tDur) : this.rawTime() >= 0 && this._initted ? 1 : 0;
+  };
+
+  _proto.progress = function progress(value, suppressEvents) {
+    return arguments.length ? this.totalTime(this.duration() * (this._yoyo && !(this.iteration() & 1) ? 1 - value : value) + _elapsedCycleDuration(this), suppressEvents) : this.duration() ? Math.min(1, this._time / this._dur) : this.rawTime() > 0 ? 1 : 0;
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
   };
 
   _proto.iteration = function iteration(value, suppressEvents) {
@@ -6358,7 +6662,11 @@ var Animation = /*#__PURE__*/function () {
   // }
   ;
 
+<<<<<<< HEAD
   _proto.timeScale = function timeScale(value) {
+=======
+  _proto.timeScale = function timeScale(value, suppressEvents) {
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
     if (!arguments.length) {
       return this._rts === -_tinyNum ? 0 : this._rts; // recorded timeScale. Special case: if someone calls reverse() on an animation with timeScale of 0, we assign it -_tinyNum to remember it's reversed.
     }
@@ -6375,7 +6683,11 @@ var Animation = /*#__PURE__*/function () {
     this._rts = +value || 0;
     this._ts = this._ps || value === -_tinyNum ? 0 : this._rts; // _ts is the functional timeScale which would be 0 if the animation is paused.
 
+<<<<<<< HEAD
     this.totalTime(_clamp(-Math.abs(this._delay), this._tDur, tTime), true);
+=======
+    this.totalTime(_clamp(-Math.abs(this._delay), this._tDur, tTime), suppressEvents !== false);
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
 
     _setEnd(this); // if parent.smoothChildTiming was false, the end time didn't get updated in the _alignPlayhead() method, so do it here.
 
@@ -6386,7 +6698,13 @@ var Animation = /*#__PURE__*/function () {
   _proto.paused = function paused(value) {
     if (!arguments.length) {
       return this._ps;
+<<<<<<< HEAD
     }
+=======
+    } // possible future addition - if an animation is removed from its parent and then .restart() or .play() or .resume() is called, perhaps we should force it back into the globalTimeline but be careful because what if it's already at its end? We don't want it to just persist forever and not get released for GC.
+    // !this.parent && !value && this._tTime < this._tDur && this !== _globalTimeline && _globalTimeline.add(this);
+
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
 
     if (this._ps !== value) {
       this._ps = value;
@@ -6451,11 +6769,19 @@ var Animation = /*#__PURE__*/function () {
         time = arguments.length ? rawTime : animation.rawTime();
 
     while (animation) {
+<<<<<<< HEAD
       time = animation._start + time / (animation._ts || 1);
       animation = animation._dp;
     }
 
     return !this.parent && this._sat ? this._sat.vars.immediateRender ? -1 : this._sat.globalTime(rawTime) : time; // the _startAt tweens for .fromTo() and .from() that have immediateRender should always be FIRST in the timeline (important for context.revert()). "_sat" stands for _startAtTween, referring to the parent tween that created the _startAt. We must discern if that tween had immediateRender so that we can know whether or not to prioritize it in revert().
+=======
+      time = animation._start + time / (Math.abs(animation._ts) || 1);
+      animation = animation._dp;
+    }
+
+    return !this.parent && this._sat ? this._sat.globalTime(rawTime) : time; // the _startAt tweens for .fromTo() and .from() that have immediateRender should always be FIRST in the timeline (important for context.revert()). "_sat" stands for _startAtTween, referring to the parent tween that created the _startAt. We must discern if that tween had immediateRender so that we can know whether or not to prioritize it in revert().
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
   };
 
   _proto.repeat = function repeat(value) {
@@ -6494,7 +6820,14 @@ var Animation = /*#__PURE__*/function () {
   };
 
   _proto.restart = function restart(includeDelay, suppressEvents) {
+<<<<<<< HEAD
     return this.play().totalTime(includeDelay ? -this._delay : 0, _isNotFalse(suppressEvents));
+=======
+    this.play().totalTime(includeDelay ? -this._delay : 0, _isNotFalse(suppressEvents));
+    this._dur || (this._zTime = -_tinyNum); // ensures onComplete fires on a zero-duration animation that gets restarted.
+
+    return this;
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
   };
 
   _proto.play = function play(from, suppressEvents) {
@@ -6745,9 +7078,17 @@ var Timeline = /*#__PURE__*/function (_Animation) {
           iteration = this._repeat;
           time = dur;
         } else {
+<<<<<<< HEAD
           iteration = ~~(tTime / cycleDuration);
 
           if (iteration && iteration === tTime / cycleDuration) {
+=======
+          prevIteration = _roundPrecise(tTime / cycleDuration); // full decimal version of iterations, not the previous iteration (we're reusing prevIteration variable for efficiency)
+
+          iteration = ~~prevIteration;
+
+          if (iteration && iteration === prevIteration) {
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
             time = dur;
             iteration--;
           }
@@ -6756,7 +7097,11 @@ var Timeline = /*#__PURE__*/function (_Animation) {
         }
 
         prevIteration = _animationCycle(this._tTime, cycleDuration);
+<<<<<<< HEAD
         !prevTime && this._tTime && prevIteration !== iteration && this._tTime - prevIteration * cycleDuration - this._dur <= 0 && (prevIteration = iteration); // edge case - if someone does addPause() at the very beginning of a repeating timeline, that pause is technically at the same spot as the end which causes this._time to get set to 0 when the totalTime would normally place the playhead at the end. See https://greensock.com/forums/topic/23823-closing-nav-animation-not-working-on-ie-and-iphone-6-maybe-other-older-browser/?tab=comments#comment-113005 also, this._tTime - prevIteration * cycleDuration - this._dur <= 0 just checks to make sure it wasn't previously in the "repeatDelay" portion
+=======
+        !prevTime && this._tTime && prevIteration !== iteration && this._tTime - prevIteration * cycleDuration - this._dur <= 0 && (prevIteration = iteration); // edge case - if someone does addPause() at the very beginning of a repeating timeline, that pause is technically at the same spot as the end which causes this._time to get set to 0 when the totalTime would normally place the playhead at the end. See https://gsap.com/forums/topic/23823-closing-nav-animation-not-working-on-ie-and-iphone-6-maybe-other-older-browser/?tab=comments#comment-113005 also, this._tTime - prevIteration * cycleDuration - this._dur <= 0 just checks to make sure it wasn't previously in the "repeatDelay" portion
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
 
         if (yoyo && iteration & 1) {
           time = dur - time;
@@ -6776,7 +7121,12 @@ var Timeline = /*#__PURE__*/function (_Animation) {
           var rewinding = yoyo && prevIteration & 1,
               doesWrap = rewinding === (yoyo && iteration & 1);
           iteration < prevIteration && (rewinding = !rewinding);
+<<<<<<< HEAD
           prevTime = rewinding ? 0 : dur;
+=======
+          prevTime = rewinding ? 0 : tTime % dur ? dur : tTime; // if the playhead is landing exactly at the end of an iteration, use that totalTime rather than only the duration, otherwise it'll skip the 2nd render since it's effectively at the same time.
+
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
           this._lock = 1;
           this.render(prevTime || (isYoyo ? 0 : _roundPrecise(iteration * cycleDuration)), suppressEvents, !dur)._lock = 0;
           this._tTime = tTime; // if a user gets the iteration() inside the onRepeat, for example, it should be accurate.
@@ -6856,7 +7206,11 @@ var Timeline = /*#__PURE__*/function (_Animation) {
             if (time !== this._time || !this._ts && !prevPaused) {
               //in case a tween pauses or seeks the timeline when rendering, like inside of an onUpdate/onComplete
               pauseTween = 0;
+<<<<<<< HEAD
               next && (tTime += this._zTime = -_tinyNum); // it didn't finish rendering, so flag zTime as negative so that so that the next time render() is called it'll be forced (to render any remaining children)
+=======
+              next && (tTime += this._zTime = -_tinyNum); // it didn't finish rendering, so flag zTime as negative so that the next time render() is called it'll be forced (to render any remaining children)
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
 
               break;
             }
@@ -7005,7 +7359,11 @@ var Timeline = /*#__PURE__*/function (_Animation) {
       return this.killTweensOf(child);
     }
 
+<<<<<<< HEAD
     _removeLinkedListItem(this, child);
+=======
+    child.parent === this && _removeLinkedListItem(this, child);
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
 
     if (child === this._recent) {
       this._recent = this._last;
@@ -7467,8 +7825,11 @@ _forceAllPropTweens,
       immediateRender = vars.immediateRender,
       lazy = vars.lazy,
       onUpdate = vars.onUpdate,
+<<<<<<< HEAD
       onUpdateParams = vars.onUpdateParams,
       callbackScope = vars.callbackScope,
+=======
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
       runBackwards = vars.runBackwards,
       yoyoEase = vars.yoyoEase,
       keyframes = vars.keyframes,
@@ -7531,9 +7892,15 @@ _forceAllPropTweens,
         lazy: !prevStartAt && _isNotFalse(lazy),
         startAt: null,
         delay: 0,
+<<<<<<< HEAD
         onUpdate: onUpdate,
         onUpdateParams: onUpdateParams,
         callbackScope: callbackScope,
+=======
+        onUpdate: onUpdate && function () {
+          return _callback(tween, "onUpdate");
+        },
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
         stagger: 0
       }, startAt))); //copy the properties/values into a new object to avoid collisions, like var to = {x:0}, from = {x:500}; timeline.fromTo(e, from, to).fromTo(e, to, from);
 
@@ -7564,7 +7931,11 @@ _forceAllPropTweens,
           immediateRender: immediateRender,
           //zero-duration tweens render immediately by default, but if we're not specifically instructed to render this tween immediately, we should skip this and merely _init() to record the starting values (rendering them immediately would push them to completion which is wasteful in that case - we'd have to render(-1) immediately after)
           stagger: 0,
+<<<<<<< HEAD
           parent: parent //ensures that nested tweens that had a stagger are handled properly, like gsap.from(".class", {y:gsap.utils.wrap([-100,100])})
+=======
+          parent: parent //ensures that nested tweens that had a stagger are handled properly, like gsap.from(".class", {y: gsap.utils.wrap([-100,100]), stagger: 0.5})
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
 
         }, cleanVars);
         harnessVars && (p[harness.prop] = harnessVars); // in case someone does something like .from(..., {css:{}})
@@ -7642,7 +8013,11 @@ _forceAllPropTweens,
 
   keyframes && time <= 0 && tl.render(_bigNum, true, true); // if there's a 0% keyframe, it'll render in the "before" state for any staggered/delayed animations thus when the following tween initializes, it'll use the "before" state instead of the "after" state as the initial values.
 },
+<<<<<<< HEAD
     _updatePropTweens = function _updatePropTweens(tween, property, value, start, startIsRelative, ratio, time) {
+=======
+    _updatePropTweens = function _updatePropTweens(tween, property, value, start, startIsRelative, ratio, time, skipRecursion) {
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
   var ptCache = (tween._pt && tween._ptCache || (tween._ptCache = {}))[property],
       pt,
       rootPT,
@@ -7677,7 +8052,11 @@ _forceAllPropTweens,
         _initTween(tween, time);
 
         _forceAllPropTweens = 0;
+<<<<<<< HEAD
         return 1;
+=======
+        return skipRecursion ? _warn(property + " not eligible for reset") : 1; // if someone tries to do a quickTo() on a special property like borderRadius which must get split into 4 different properties, that's not eligible for .resetTo().
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
       }
 
       ptCache.push(pt);
@@ -7800,7 +8179,11 @@ var Tween = /*#__PURE__*/function (_Animation2) {
         curTarget,
         staggerFunc,
         staggerVarsToMerge;
+<<<<<<< HEAD
     _this3._targets = parsedTargets.length ? _harness(parsedTargets) : _warn("GSAP target " + targets + " not found. https://greensock.com", !_config.nullTargetWarn) || [];
+=======
+    _this3._targets = parsedTargets.length ? _harness(parsedTargets) : _warn("GSAP target " + targets + " not found. https://gsap.com", !_config.nullTargetWarn) || [];
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
     _this3._ptLookup = []; //PropTween lookup. An array containing an object for each target, having keys for each tweening property
 
     _this3._overwrite = overwrite;
@@ -7949,8 +8332,13 @@ var Tween = /*#__PURE__*/function (_Animation2) {
 
     if (!dur) {
       _renderZeroDurationTween(this, totalTime, suppressEvents, force);
+<<<<<<< HEAD
     } else if (tTime !== this._tTime || !totalTime || force || !this._initted && this._tTime || this._startAt && this._zTime < 0 !== isNegative) {
       //this senses if we're crossing over the start time, in which case we must record _zTime and force the render, but we do it in this lengthy conditional way for performance reasons (usually we can skip the calculations): this._initted && (this._zTime < 0) !== (totalTime < 0)
+=======
+    } else if (tTime !== this._tTime || !totalTime || force || !this._initted && this._tTime || this._startAt && this._zTime < 0 !== isNegative || this._lazy) {
+      // this senses if we're crossing over the start time, in which case we must record _zTime and force the render, but we do it in this lengthy conditional way for performance reasons (usually we can skip the calculations): this._initted && (this._zTime < 0) !== (totalTime < 0)
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
       time = tTime;
       timeline = this.timeline;
 
@@ -7969,6 +8357,7 @@ var Tween = /*#__PURE__*/function (_Animation2) {
           iteration = this._repeat;
           time = dur;
         } else {
+<<<<<<< HEAD
           iteration = ~~(tTime / cycleDuration);
 
           if (iteration && iteration === tTime / cycleDuration) {
@@ -7977,6 +8366,18 @@ var Tween = /*#__PURE__*/function (_Animation2) {
           }
 
           time > dur && (time = dur);
+=======
+          prevIteration = _roundPrecise(tTime / cycleDuration); // full decimal version of iterations, not the previous iteration (we're reusing prevIteration variable for efficiency)
+
+          iteration = ~~prevIteration;
+
+          if (iteration && iteration === prevIteration) {
+            time = dur;
+            iteration--;
+          } else if (time > dur) {
+            time = dur;
+          }
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
         }
 
         isYoyo = this._yoyo && iteration & 1;
@@ -7988,7 +8389,11 @@ var Tween = /*#__PURE__*/function (_Animation2) {
 
         prevIteration = _animationCycle(this._tTime, cycleDuration);
 
+<<<<<<< HEAD
         if (time === prevTime && !force && this._initted) {
+=======
+        if (time === prevTime && !force && this._initted && iteration === prevIteration) {
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
           //could be during the repeatDelay part. No need to render and fire callbacks.
           this._tTime = tTime;
           return this;
@@ -7997,7 +8402,12 @@ var Tween = /*#__PURE__*/function (_Animation2) {
         if (iteration !== prevIteration) {
           timeline && this._yEase && _propagateYoyoEase(timeline, isYoyo); //repeatRefresh functionality
 
+<<<<<<< HEAD
           if (this.vars.repeatRefresh && !isYoyo && !this._lock) {
+=======
+          if (this.vars.repeatRefresh && !isYoyo && !this._lock && time !== cycleDuration && this._initted) {
+            // this._time will === cycleDuration when we render at EXACTLY the end of an iteration. Without this condition, it'd often do the repeatRefresh render TWICE (again on the very next tick).
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
             this._lock = force = 1; //force, otherwise if lazy is true, the _attemptInitTween() will return and we'll jump out and get caught bouncing on each tick.
 
             this.render(_roundPrecise(cycleDuration * iteration), true).invalidate()._lock = 0;
@@ -8012,8 +8422,13 @@ var Tween = /*#__PURE__*/function (_Animation2) {
           return this;
         }
 
+<<<<<<< HEAD
         if (prevTime !== this._time) {
           // rare edge case - during initialization, an onUpdate in the _startAt (.fromTo()) might force this tween to render at a different spot in which case we should ditch this render() call so that it doesn't revert the values.
+=======
+        if (prevTime !== this._time && !(force && this.vars.repeatRefresh && iteration !== prevIteration)) {
+          // rare edge case - during initialization, an onUpdate in the _startAt (.fromTo()) might force this tween to render at a different spot in which case we should ditch this render() call so that it doesn't revert the values. But we also don't want to dump if we're doing a repeatRefresh render!
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
           return this;
         }
 
@@ -8054,7 +8469,11 @@ var Tween = /*#__PURE__*/function (_Animation2) {
         pt = pt._next;
       }
 
+<<<<<<< HEAD
       timeline && timeline.render(totalTime < 0 ? totalTime : !time && isYoyo ? -_tinyNum : timeline._dur * timeline._ease(time / this._dur), suppressEvents, force) || this._startAt && (this._zTime = totalTime);
+=======
+      timeline && timeline.render(totalTime < 0 ? totalTime : timeline._dur * timeline._ease(time / this._dur), suppressEvents, force) || this._startAt && (this._zTime = totalTime);
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
 
       if (this._onUpdate && !suppressEvents) {
         isNegative && _rewindStartAt(this, totalTime, suppressEvents, force); //note: for performance reasons, we tuck this conditional logic inside less traveled areas (most tweens don't have an onUpdate). We'd just have it at the end before the onComplete, but the values should be updated before any onUpdate is called, so we ALSO put it here and then if it's not called, we do so later near the onComplete.
@@ -8093,7 +8512,11 @@ var Tween = /*#__PURE__*/function (_Animation2) {
     return _Animation2.prototype.invalidate.call(this, soft);
   };
 
+<<<<<<< HEAD
   _proto3.resetTo = function resetTo(property, value, start, startIsRelative) {
+=======
+  _proto3.resetTo = function resetTo(property, value, start, startIsRelative, skipRecursion) {
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
     _tickerActive || _ticker.wake();
     this._ts || this.play();
     var time = Math.min(this._dur, (this._dp._time - this._start) * this._ts),
@@ -8109,8 +8532,13 @@ var Tween = /*#__PURE__*/function (_Animation2) {
     // 	}
     // } else {
 
+<<<<<<< HEAD
     if (_updatePropTweens(this, property, value, start, startIsRelative, ratio, time)) {
       return this.resetTo(property, value, start, startIsRelative); // if a PropTween wasn't found for the property, it'll get forced with a re-initialization so we need to jump out and start over again.
+=======
+    if (_updatePropTweens(this, property, value, start, startIsRelative, ratio, time, skipRecursion)) {
+      return this.resetTo(property, value, start, startIsRelative, 1); // if a PropTween wasn't found for the property, it'll get forced with a re-initialization so we need to jump out and start over again.
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
     } //}
 
 
@@ -8127,7 +8555,12 @@ var Tween = /*#__PURE__*/function (_Animation2) {
 
     if (!targets && (!vars || vars === "all")) {
       this._lazy = this._pt = 0;
+<<<<<<< HEAD
       return this.parent ? _interrupt(this) : this;
+=======
+      this.parent ? _interrupt(this) : this.scrollTrigger && this.scrollTrigger.kill(!!_reverting);
+      return this;
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
     }
 
     if (this.timeline) {
@@ -8450,6 +8883,10 @@ var _media = [],
     _listeners = {},
     _emptyArray = [],
     _lastMediaTime = 0,
+<<<<<<< HEAD
+=======
+    _contextID = 0,
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
     _dispatch = function _dispatch(type) {
   return (_listeners[type] || _emptyArray).map(function (f) {
     return f();
@@ -8490,7 +8927,13 @@ var _media = [],
     _dispatch("matchMediaRevert");
 
     matches.forEach(function (c) {
+<<<<<<< HEAD
       return c.onMatch(c);
+=======
+      return c.onMatch(c, function (func) {
+        return c.add(null, func);
+      });
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
     });
     _lastMediaTime = time;
 
@@ -8505,6 +8948,11 @@ var Context = /*#__PURE__*/function () {
     this._r = []; // returned/cleanup functions
 
     this.isReverted = false;
+<<<<<<< HEAD
+=======
+    this.id = _contextID++; // to work around issues that frameworks like Vue cause by making things into Proxies which make it impossible to do something like _media.indexOf(this) because "this" would no longer refer to the Context instance itself - it'd refer to a Proxy! We needed a way to identify the context uniquely
+
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
     func && this.add(func);
   }
 
@@ -8539,7 +8987,13 @@ var Context = /*#__PURE__*/function () {
     };
 
     self.last = f;
+<<<<<<< HEAD
     return name === _isFunction ? f(self) : name ? self[name] = f : f;
+=======
+    return name === _isFunction ? f(self, function (func) {
+      return self.add(null, func);
+    }) : name ? self[name] = f : f;
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
   };
 
   _proto5.ignore = function ignore(func) {
@@ -8565,6 +9019,7 @@ var Context = /*#__PURE__*/function () {
     var _this4 = this;
 
     if (revert) {
+<<<<<<< HEAD
       var tweens = this.getTweens();
       this.data.forEach(function (t) {
         // Flip plugin tweens are very different in that they should actually be pushed to their end. The plugin replaces the timeline's .revert() method to do exactly that. But we also need to remove any of those nested tweens inside the flip timeline so that they don't get individually reverted.
@@ -8596,6 +9051,59 @@ var Context = /*#__PURE__*/function () {
       });
 
       this.isReverted = true;
+=======
+      (function () {
+        var tweens = _this4.getTweens(),
+            i = _this4.data.length,
+            t;
+
+        while (i--) {
+          // Flip plugin tweens are very different in that they should actually be pushed to their end. The plugin replaces the timeline's .revert() method to do exactly that. But we also need to remove any of those nested tweens inside the flip timeline so that they don't get individually reverted.
+          t = _this4.data[i];
+
+          if (t.data === "isFlip") {
+            t.revert();
+            t.getChildren(true, true, false).forEach(function (tween) {
+              return tweens.splice(tweens.indexOf(tween), 1);
+            });
+          }
+        } // save as an object so that we can cache the globalTime for each tween to optimize performance during the sort
+
+
+        tweens.map(function (t) {
+          return {
+            g: t._dur || t._delay || t._sat && !t._sat.vars.immediateRender ? t.globalTime(0) : -Infinity,
+            t: t
+          };
+        }).sort(function (a, b) {
+          return b.g - a.g || -Infinity;
+        }).forEach(function (o) {
+          return o.t.revert(revert);
+        }); // note: all of the _startAt tweens should be reverted in reverse order that they were created, and they'll all have the same globalTime (-1) so the " || -1" in the sort keeps the order properly.
+
+        i = _this4.data.length;
+
+        while (i--) {
+          // make sure we loop backwards so that, for example, SplitTexts that were created later on the same element get reverted first
+          t = _this4.data[i];
+
+          if (t instanceof Timeline) {
+            if (t.data !== "nested") {
+              t.scrollTrigger && t.scrollTrigger.revert();
+              t.kill(); // don't revert() the timeline because that's duplicating efforts since we already reverted all the tweens
+            }
+          } else {
+            !(t instanceof Tween) && t.revert && t.revert(revert);
+          }
+        }
+
+        _this4._r.forEach(function (f) {
+          return f(revert, _this4);
+        });
+
+        _this4.isReverted = true;
+      })();
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
     } else {
       this.data.forEach(function (e) {
         return e.kill && e.kill();
@@ -8605,11 +9113,26 @@ var Context = /*#__PURE__*/function () {
     this.clear();
 
     if (matchMedia) {
+<<<<<<< HEAD
       var i = _media.indexOf(this);
 
       !!~i && _media.splice(i, 1);
     }
   };
+=======
+      var i = _media.length;
+
+      while (i--) {
+        // previously, we checked _media.indexOf(this), but some frameworks like Vue enforce Proxy objects that make it impossible to get the proper result that way, so we must use a unique ID number instead.
+        _media[i].id === this.id && _media.splice(i, 1);
+      }
+    }
+  } // killWithCleanup() {
+  // 	this.kill();
+  // 	this._r.forEach(f => f(false, this));
+  // }
+  ;
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
 
   _proto5.revert = function revert(config) {
     this.kill(config || {});
@@ -8622,6 +9145,10 @@ var MatchMedia = /*#__PURE__*/function () {
   function MatchMedia(scope) {
     this.contexts = [];
     this.scope = scope;
+<<<<<<< HEAD
+=======
+    _context && _context.data.push(this);
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
   }
 
   var _proto6 = MatchMedia.prototype;
@@ -8635,6 +9162,11 @@ var MatchMedia = /*#__PURE__*/function () {
         mq,
         p,
         active;
+<<<<<<< HEAD
+=======
+    _context && !context.selector && (context.selector = _context.selector); // in case a context is created inside a context. Like a gsap.matchMedia() that's inside a scoped gsap.context()
+
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
     this.contexts.push(context);
     func = context.add("onMatch", func);
     context.queries = conditions;
@@ -8653,7 +9185,13 @@ var MatchMedia = /*#__PURE__*/function () {
       }
     }
 
+<<<<<<< HEAD
     active && func(context);
+=======
+    active && func(context, function (f) {
+      return context.add(null, f);
+    });
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
     return this;
   } // refresh() {
   // 	let time = _lastMediaTime,
@@ -8748,9 +9286,15 @@ var _gsap = {
     };
   },
   quickTo: function quickTo(target, property, vars) {
+<<<<<<< HEAD
     var _merge2;
 
     var tween = gsap.to(target, _merge((_merge2 = {}, _merge2[property] = "+=0.1", _merge2.paused = true, _merge2), vars || {})),
+=======
+    var _setDefaults2;
+
+    var tween = gsap.to(target, _setDefaults((_setDefaults2 = {}, _setDefaults2[property] = "+=0.1", _setDefaults2.paused = true, _setDefaults2.stagger = 0, _setDefaults2), vars || {})),
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
         func = function func(value, start, startIsRelative) {
       return tween.resetTo(property, value, start, startIsRelative);
     };
@@ -9023,7 +9567,11 @@ var gsap = _gsap.registerPlugin({
   }
 }, _buildModifierPlugin("roundProps", _roundModifier), _buildModifierPlugin("modifiers"), _buildModifierPlugin("snap", snap)) || _gsap; //to prevent the core plugins from being dropped via aggressive tree shaking, we must include them in the variable declaration in this way.
 
+<<<<<<< HEAD
 Tween.version = Timeline.version = gsap.version = "3.11.5";
+=======
+Tween.version = Timeline.version = gsap.version = "3.12.7";
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
 _coreReady = 1;
 _windowExists() && _wake();
 var Power0 = _easeMap.Power0,
@@ -9097,6 +9645,7 @@ TweenMaxWithCSS = gsapWithCSS.core.Tween;
 
 /***/ }),
 
+<<<<<<< HEAD
 /***/ "./resources/scss/app.scss":
 /*!*********************************!*\
   !*** ./resources/scss/app.scss ***!
@@ -9108,6 +9657,311 @@ __webpack_require__.r(__webpack_exports__);
 // extracted by mini-css-extract-plugin
 
 
+=======
+/***/ "./node_modules/moment/locale sync recursive ^\\.\\/.*$":
+/*!***************************************************!*\
+  !*** ./node_modules/moment/locale/ sync ^\.\/.*$ ***!
+  \***************************************************/
+/***/ ((module, __unused_webpack_exports, __webpack_require__) => {
+
+var map = {
+	"./af": "./node_modules/moment/locale/af.js",
+	"./af.js": "./node_modules/moment/locale/af.js",
+	"./ar": "./node_modules/moment/locale/ar.js",
+	"./ar-dz": "./node_modules/moment/locale/ar-dz.js",
+	"./ar-dz.js": "./node_modules/moment/locale/ar-dz.js",
+	"./ar-kw": "./node_modules/moment/locale/ar-kw.js",
+	"./ar-kw.js": "./node_modules/moment/locale/ar-kw.js",
+	"./ar-ly": "./node_modules/moment/locale/ar-ly.js",
+	"./ar-ly.js": "./node_modules/moment/locale/ar-ly.js",
+	"./ar-ma": "./node_modules/moment/locale/ar-ma.js",
+	"./ar-ma.js": "./node_modules/moment/locale/ar-ma.js",
+	"./ar-ps": "./node_modules/moment/locale/ar-ps.js",
+	"./ar-ps.js": "./node_modules/moment/locale/ar-ps.js",
+	"./ar-sa": "./node_modules/moment/locale/ar-sa.js",
+	"./ar-sa.js": "./node_modules/moment/locale/ar-sa.js",
+	"./ar-tn": "./node_modules/moment/locale/ar-tn.js",
+	"./ar-tn.js": "./node_modules/moment/locale/ar-tn.js",
+	"./ar.js": "./node_modules/moment/locale/ar.js",
+	"./az": "./node_modules/moment/locale/az.js",
+	"./az.js": "./node_modules/moment/locale/az.js",
+	"./be": "./node_modules/moment/locale/be.js",
+	"./be.js": "./node_modules/moment/locale/be.js",
+	"./bg": "./node_modules/moment/locale/bg.js",
+	"./bg.js": "./node_modules/moment/locale/bg.js",
+	"./bm": "./node_modules/moment/locale/bm.js",
+	"./bm.js": "./node_modules/moment/locale/bm.js",
+	"./bn": "./node_modules/moment/locale/bn.js",
+	"./bn-bd": "./node_modules/moment/locale/bn-bd.js",
+	"./bn-bd.js": "./node_modules/moment/locale/bn-bd.js",
+	"./bn.js": "./node_modules/moment/locale/bn.js",
+	"./bo": "./node_modules/moment/locale/bo.js",
+	"./bo.js": "./node_modules/moment/locale/bo.js",
+	"./br": "./node_modules/moment/locale/br.js",
+	"./br.js": "./node_modules/moment/locale/br.js",
+	"./bs": "./node_modules/moment/locale/bs.js",
+	"./bs.js": "./node_modules/moment/locale/bs.js",
+	"./ca": "./node_modules/moment/locale/ca.js",
+	"./ca.js": "./node_modules/moment/locale/ca.js",
+	"./cs": "./node_modules/moment/locale/cs.js",
+	"./cs.js": "./node_modules/moment/locale/cs.js",
+	"./cv": "./node_modules/moment/locale/cv.js",
+	"./cv.js": "./node_modules/moment/locale/cv.js",
+	"./cy": "./node_modules/moment/locale/cy.js",
+	"./cy.js": "./node_modules/moment/locale/cy.js",
+	"./da": "./node_modules/moment/locale/da.js",
+	"./da.js": "./node_modules/moment/locale/da.js",
+	"./de": "./node_modules/moment/locale/de.js",
+	"./de-at": "./node_modules/moment/locale/de-at.js",
+	"./de-at.js": "./node_modules/moment/locale/de-at.js",
+	"./de-ch": "./node_modules/moment/locale/de-ch.js",
+	"./de-ch.js": "./node_modules/moment/locale/de-ch.js",
+	"./de.js": "./node_modules/moment/locale/de.js",
+	"./dv": "./node_modules/moment/locale/dv.js",
+	"./dv.js": "./node_modules/moment/locale/dv.js",
+	"./el": "./node_modules/moment/locale/el.js",
+	"./el.js": "./node_modules/moment/locale/el.js",
+	"./en-au": "./node_modules/moment/locale/en-au.js",
+	"./en-au.js": "./node_modules/moment/locale/en-au.js",
+	"./en-ca": "./node_modules/moment/locale/en-ca.js",
+	"./en-ca.js": "./node_modules/moment/locale/en-ca.js",
+	"./en-gb": "./node_modules/moment/locale/en-gb.js",
+	"./en-gb.js": "./node_modules/moment/locale/en-gb.js",
+	"./en-ie": "./node_modules/moment/locale/en-ie.js",
+	"./en-ie.js": "./node_modules/moment/locale/en-ie.js",
+	"./en-il": "./node_modules/moment/locale/en-il.js",
+	"./en-il.js": "./node_modules/moment/locale/en-il.js",
+	"./en-in": "./node_modules/moment/locale/en-in.js",
+	"./en-in.js": "./node_modules/moment/locale/en-in.js",
+	"./en-nz": "./node_modules/moment/locale/en-nz.js",
+	"./en-nz.js": "./node_modules/moment/locale/en-nz.js",
+	"./en-sg": "./node_modules/moment/locale/en-sg.js",
+	"./en-sg.js": "./node_modules/moment/locale/en-sg.js",
+	"./eo": "./node_modules/moment/locale/eo.js",
+	"./eo.js": "./node_modules/moment/locale/eo.js",
+	"./es": "./node_modules/moment/locale/es.js",
+	"./es-do": "./node_modules/moment/locale/es-do.js",
+	"./es-do.js": "./node_modules/moment/locale/es-do.js",
+	"./es-mx": "./node_modules/moment/locale/es-mx.js",
+	"./es-mx.js": "./node_modules/moment/locale/es-mx.js",
+	"./es-us": "./node_modules/moment/locale/es-us.js",
+	"./es-us.js": "./node_modules/moment/locale/es-us.js",
+	"./es.js": "./node_modules/moment/locale/es.js",
+	"./et": "./node_modules/moment/locale/et.js",
+	"./et.js": "./node_modules/moment/locale/et.js",
+	"./eu": "./node_modules/moment/locale/eu.js",
+	"./eu.js": "./node_modules/moment/locale/eu.js",
+	"./fa": "./node_modules/moment/locale/fa.js",
+	"./fa.js": "./node_modules/moment/locale/fa.js",
+	"./fi": "./node_modules/moment/locale/fi.js",
+	"./fi.js": "./node_modules/moment/locale/fi.js",
+	"./fil": "./node_modules/moment/locale/fil.js",
+	"./fil.js": "./node_modules/moment/locale/fil.js",
+	"./fo": "./node_modules/moment/locale/fo.js",
+	"./fo.js": "./node_modules/moment/locale/fo.js",
+	"./fr": "./node_modules/moment/locale/fr.js",
+	"./fr-ca": "./node_modules/moment/locale/fr-ca.js",
+	"./fr-ca.js": "./node_modules/moment/locale/fr-ca.js",
+	"./fr-ch": "./node_modules/moment/locale/fr-ch.js",
+	"./fr-ch.js": "./node_modules/moment/locale/fr-ch.js",
+	"./fr.js": "./node_modules/moment/locale/fr.js",
+	"./fy": "./node_modules/moment/locale/fy.js",
+	"./fy.js": "./node_modules/moment/locale/fy.js",
+	"./ga": "./node_modules/moment/locale/ga.js",
+	"./ga.js": "./node_modules/moment/locale/ga.js",
+	"./gd": "./node_modules/moment/locale/gd.js",
+	"./gd.js": "./node_modules/moment/locale/gd.js",
+	"./gl": "./node_modules/moment/locale/gl.js",
+	"./gl.js": "./node_modules/moment/locale/gl.js",
+	"./gom-deva": "./node_modules/moment/locale/gom-deva.js",
+	"./gom-deva.js": "./node_modules/moment/locale/gom-deva.js",
+	"./gom-latn": "./node_modules/moment/locale/gom-latn.js",
+	"./gom-latn.js": "./node_modules/moment/locale/gom-latn.js",
+	"./gu": "./node_modules/moment/locale/gu.js",
+	"./gu.js": "./node_modules/moment/locale/gu.js",
+	"./he": "./node_modules/moment/locale/he.js",
+	"./he.js": "./node_modules/moment/locale/he.js",
+	"./hi": "./node_modules/moment/locale/hi.js",
+	"./hi.js": "./node_modules/moment/locale/hi.js",
+	"./hr": "./node_modules/moment/locale/hr.js",
+	"./hr.js": "./node_modules/moment/locale/hr.js",
+	"./hu": "./node_modules/moment/locale/hu.js",
+	"./hu.js": "./node_modules/moment/locale/hu.js",
+	"./hy-am": "./node_modules/moment/locale/hy-am.js",
+	"./hy-am.js": "./node_modules/moment/locale/hy-am.js",
+	"./id": "./node_modules/moment/locale/id.js",
+	"./id.js": "./node_modules/moment/locale/id.js",
+	"./is": "./node_modules/moment/locale/is.js",
+	"./is.js": "./node_modules/moment/locale/is.js",
+	"./it": "./node_modules/moment/locale/it.js",
+	"./it-ch": "./node_modules/moment/locale/it-ch.js",
+	"./it-ch.js": "./node_modules/moment/locale/it-ch.js",
+	"./it.js": "./node_modules/moment/locale/it.js",
+	"./ja": "./node_modules/moment/locale/ja.js",
+	"./ja.js": "./node_modules/moment/locale/ja.js",
+	"./jv": "./node_modules/moment/locale/jv.js",
+	"./jv.js": "./node_modules/moment/locale/jv.js",
+	"./ka": "./node_modules/moment/locale/ka.js",
+	"./ka.js": "./node_modules/moment/locale/ka.js",
+	"./kk": "./node_modules/moment/locale/kk.js",
+	"./kk.js": "./node_modules/moment/locale/kk.js",
+	"./km": "./node_modules/moment/locale/km.js",
+	"./km.js": "./node_modules/moment/locale/km.js",
+	"./kn": "./node_modules/moment/locale/kn.js",
+	"./kn.js": "./node_modules/moment/locale/kn.js",
+	"./ko": "./node_modules/moment/locale/ko.js",
+	"./ko.js": "./node_modules/moment/locale/ko.js",
+	"./ku": "./node_modules/moment/locale/ku.js",
+	"./ku-kmr": "./node_modules/moment/locale/ku-kmr.js",
+	"./ku-kmr.js": "./node_modules/moment/locale/ku-kmr.js",
+	"./ku.js": "./node_modules/moment/locale/ku.js",
+	"./ky": "./node_modules/moment/locale/ky.js",
+	"./ky.js": "./node_modules/moment/locale/ky.js",
+	"./lb": "./node_modules/moment/locale/lb.js",
+	"./lb.js": "./node_modules/moment/locale/lb.js",
+	"./lo": "./node_modules/moment/locale/lo.js",
+	"./lo.js": "./node_modules/moment/locale/lo.js",
+	"./lt": "./node_modules/moment/locale/lt.js",
+	"./lt.js": "./node_modules/moment/locale/lt.js",
+	"./lv": "./node_modules/moment/locale/lv.js",
+	"./lv.js": "./node_modules/moment/locale/lv.js",
+	"./me": "./node_modules/moment/locale/me.js",
+	"./me.js": "./node_modules/moment/locale/me.js",
+	"./mi": "./node_modules/moment/locale/mi.js",
+	"./mi.js": "./node_modules/moment/locale/mi.js",
+	"./mk": "./node_modules/moment/locale/mk.js",
+	"./mk.js": "./node_modules/moment/locale/mk.js",
+	"./ml": "./node_modules/moment/locale/ml.js",
+	"./ml.js": "./node_modules/moment/locale/ml.js",
+	"./mn": "./node_modules/moment/locale/mn.js",
+	"./mn.js": "./node_modules/moment/locale/mn.js",
+	"./mr": "./node_modules/moment/locale/mr.js",
+	"./mr.js": "./node_modules/moment/locale/mr.js",
+	"./ms": "./node_modules/moment/locale/ms.js",
+	"./ms-my": "./node_modules/moment/locale/ms-my.js",
+	"./ms-my.js": "./node_modules/moment/locale/ms-my.js",
+	"./ms.js": "./node_modules/moment/locale/ms.js",
+	"./mt": "./node_modules/moment/locale/mt.js",
+	"./mt.js": "./node_modules/moment/locale/mt.js",
+	"./my": "./node_modules/moment/locale/my.js",
+	"./my.js": "./node_modules/moment/locale/my.js",
+	"./nb": "./node_modules/moment/locale/nb.js",
+	"./nb.js": "./node_modules/moment/locale/nb.js",
+	"./ne": "./node_modules/moment/locale/ne.js",
+	"./ne.js": "./node_modules/moment/locale/ne.js",
+	"./nl": "./node_modules/moment/locale/nl.js",
+	"./nl-be": "./node_modules/moment/locale/nl-be.js",
+	"./nl-be.js": "./node_modules/moment/locale/nl-be.js",
+	"./nl.js": "./node_modules/moment/locale/nl.js",
+	"./nn": "./node_modules/moment/locale/nn.js",
+	"./nn.js": "./node_modules/moment/locale/nn.js",
+	"./oc-lnc": "./node_modules/moment/locale/oc-lnc.js",
+	"./oc-lnc.js": "./node_modules/moment/locale/oc-lnc.js",
+	"./pa-in": "./node_modules/moment/locale/pa-in.js",
+	"./pa-in.js": "./node_modules/moment/locale/pa-in.js",
+	"./pl": "./node_modules/moment/locale/pl.js",
+	"./pl.js": "./node_modules/moment/locale/pl.js",
+	"./pt": "./node_modules/moment/locale/pt.js",
+	"./pt-br": "./node_modules/moment/locale/pt-br.js",
+	"./pt-br.js": "./node_modules/moment/locale/pt-br.js",
+	"./pt.js": "./node_modules/moment/locale/pt.js",
+	"./ro": "./node_modules/moment/locale/ro.js",
+	"./ro.js": "./node_modules/moment/locale/ro.js",
+	"./ru": "./node_modules/moment/locale/ru.js",
+	"./ru.js": "./node_modules/moment/locale/ru.js",
+	"./sd": "./node_modules/moment/locale/sd.js",
+	"./sd.js": "./node_modules/moment/locale/sd.js",
+	"./se": "./node_modules/moment/locale/se.js",
+	"./se.js": "./node_modules/moment/locale/se.js",
+	"./si": "./node_modules/moment/locale/si.js",
+	"./si.js": "./node_modules/moment/locale/si.js",
+	"./sk": "./node_modules/moment/locale/sk.js",
+	"./sk.js": "./node_modules/moment/locale/sk.js",
+	"./sl": "./node_modules/moment/locale/sl.js",
+	"./sl.js": "./node_modules/moment/locale/sl.js",
+	"./sq": "./node_modules/moment/locale/sq.js",
+	"./sq.js": "./node_modules/moment/locale/sq.js",
+	"./sr": "./node_modules/moment/locale/sr.js",
+	"./sr-cyrl": "./node_modules/moment/locale/sr-cyrl.js",
+	"./sr-cyrl.js": "./node_modules/moment/locale/sr-cyrl.js",
+	"./sr.js": "./node_modules/moment/locale/sr.js",
+	"./ss": "./node_modules/moment/locale/ss.js",
+	"./ss.js": "./node_modules/moment/locale/ss.js",
+	"./sv": "./node_modules/moment/locale/sv.js",
+	"./sv.js": "./node_modules/moment/locale/sv.js",
+	"./sw": "./node_modules/moment/locale/sw.js",
+	"./sw.js": "./node_modules/moment/locale/sw.js",
+	"./ta": "./node_modules/moment/locale/ta.js",
+	"./ta.js": "./node_modules/moment/locale/ta.js",
+	"./te": "./node_modules/moment/locale/te.js",
+	"./te.js": "./node_modules/moment/locale/te.js",
+	"./tet": "./node_modules/moment/locale/tet.js",
+	"./tet.js": "./node_modules/moment/locale/tet.js",
+	"./tg": "./node_modules/moment/locale/tg.js",
+	"./tg.js": "./node_modules/moment/locale/tg.js",
+	"./th": "./node_modules/moment/locale/th.js",
+	"./th.js": "./node_modules/moment/locale/th.js",
+	"./tk": "./node_modules/moment/locale/tk.js",
+	"./tk.js": "./node_modules/moment/locale/tk.js",
+	"./tl-ph": "./node_modules/moment/locale/tl-ph.js",
+	"./tl-ph.js": "./node_modules/moment/locale/tl-ph.js",
+	"./tlh": "./node_modules/moment/locale/tlh.js",
+	"./tlh.js": "./node_modules/moment/locale/tlh.js",
+	"./tr": "./node_modules/moment/locale/tr.js",
+	"./tr.js": "./node_modules/moment/locale/tr.js",
+	"./tzl": "./node_modules/moment/locale/tzl.js",
+	"./tzl.js": "./node_modules/moment/locale/tzl.js",
+	"./tzm": "./node_modules/moment/locale/tzm.js",
+	"./tzm-latn": "./node_modules/moment/locale/tzm-latn.js",
+	"./tzm-latn.js": "./node_modules/moment/locale/tzm-latn.js",
+	"./tzm.js": "./node_modules/moment/locale/tzm.js",
+	"./ug-cn": "./node_modules/moment/locale/ug-cn.js",
+	"./ug-cn.js": "./node_modules/moment/locale/ug-cn.js",
+	"./uk": "./node_modules/moment/locale/uk.js",
+	"./uk.js": "./node_modules/moment/locale/uk.js",
+	"./ur": "./node_modules/moment/locale/ur.js",
+	"./ur.js": "./node_modules/moment/locale/ur.js",
+	"./uz": "./node_modules/moment/locale/uz.js",
+	"./uz-latn": "./node_modules/moment/locale/uz-latn.js",
+	"./uz-latn.js": "./node_modules/moment/locale/uz-latn.js",
+	"./uz.js": "./node_modules/moment/locale/uz.js",
+	"./vi": "./node_modules/moment/locale/vi.js",
+	"./vi.js": "./node_modules/moment/locale/vi.js",
+	"./x-pseudo": "./node_modules/moment/locale/x-pseudo.js",
+	"./x-pseudo.js": "./node_modules/moment/locale/x-pseudo.js",
+	"./yo": "./node_modules/moment/locale/yo.js",
+	"./yo.js": "./node_modules/moment/locale/yo.js",
+	"./zh-cn": "./node_modules/moment/locale/zh-cn.js",
+	"./zh-cn.js": "./node_modules/moment/locale/zh-cn.js",
+	"./zh-hk": "./node_modules/moment/locale/zh-hk.js",
+	"./zh-hk.js": "./node_modules/moment/locale/zh-hk.js",
+	"./zh-mo": "./node_modules/moment/locale/zh-mo.js",
+	"./zh-mo.js": "./node_modules/moment/locale/zh-mo.js",
+	"./zh-tw": "./node_modules/moment/locale/zh-tw.js",
+	"./zh-tw.js": "./node_modules/moment/locale/zh-tw.js"
+};
+
+
+function webpackContext(req) {
+	var id = webpackContextResolve(req);
+	return __webpack_require__(id);
+}
+function webpackContextResolve(req) {
+	if(!__webpack_require__.o(map, req)) {
+		var e = new Error("Cannot find module '" + req + "'");
+		e.code = 'MODULE_NOT_FOUND';
+		throw e;
+	}
+	return map[req];
+}
+webpackContext.keys = function webpackContextKeys() {
+	return Object.keys(map);
+};
+webpackContext.resolve = webpackContextResolve;
+module.exports = webpackContext;
+webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
+
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
 /***/ }),
 
 /***/ "./node_modules/moment/locale/af.js":
@@ -9225,6 +10079,7 @@ __webpack_require__.r(__webpack_exports__);
             return n === 0
                 ? 0
                 : n === 1
+<<<<<<< HEAD
                 ? 1
                 : n === 2
                 ? 2
@@ -9233,6 +10088,16 @@ __webpack_require__.r(__webpack_exports__);
                 : n % 100 >= 11
                 ? 4
                 : 5;
+=======
+                  ? 1
+                  : n === 2
+                    ? 2
+                    : n % 100 >= 3 && n % 100 <= 10
+                      ? 3
+                      : n % 100 >= 11
+                        ? 4
+                        : 5;
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
         },
         plurals = {
             s: [
@@ -9482,6 +10347,7 @@ __webpack_require__.r(__webpack_exports__);
             return n === 0
                 ? 0
                 : n === 1
+<<<<<<< HEAD
                 ? 1
                 : n === 2
                 ? 2
@@ -9490,6 +10356,16 @@ __webpack_require__.r(__webpack_exports__);
                 : n % 100 >= 11
                 ? 4
                 : 5;
+=======
+                  ? 1
+                  : n === 2
+                    ? 2
+                    : n % 100 >= 3 && n % 100 <= 10
+                      ? 3
+                      : n % 100 >= 11
+                        ? 4
+                        : 5;
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
         },
         plurals = {
             s: [
@@ -9714,6 +10590,140 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+<<<<<<< HEAD
+=======
+/***/ "./node_modules/moment/locale/ar-ps.js":
+/*!*********************************************!*\
+  !*** ./node_modules/moment/locale/ar-ps.js ***!
+  \*********************************************/
+/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Arabic (Palestine) [ar-ps]
+//! author : Majd Al-Shihabi : https://github.com/majdal
+
+;(function (global, factory) {
+    true ? factory(__webpack_require__(/*! ../moment */ "./node_modules/moment/moment.js")) :
+   0
+}(this, (function (moment) { 'use strict';
+
+    //! moment.js locale configuration
+
+    var symbolMap = {
+            1: '١',
+            2: '٢',
+            3: '٣',
+            4: '٤',
+            5: '٥',
+            6: '٦',
+            7: '٧',
+            8: '٨',
+            9: '٩',
+            0: '٠',
+        },
+        numberMap = {
+            '١': '1',
+            '٢': '2',
+            '٣': '3',
+            '٤': '4',
+            '٥': '5',
+            '٦': '6',
+            '٧': '7',
+            '٨': '8',
+            '٩': '9',
+            '٠': '0',
+        };
+
+    var arPs = moment.defineLocale('ar-ps', {
+        months: 'كانون الثاني_شباط_آذار_نيسان_أيّار_حزيران_تمّوز_آب_أيلول_تشري الأوّل_تشرين الثاني_كانون الأوّل'.split(
+            '_'
+        ),
+        monthsShort:
+            'ك٢_شباط_آذار_نيسان_أيّار_حزيران_تمّوز_آب_أيلول_ت١_ت٢_ك١'.split('_'),
+        weekdays: 'الأحد_الإثنين_الثلاثاء_الأربعاء_الخميس_الجمعة_السبت'.split('_'),
+        weekdaysShort: 'أحد_إثنين_ثلاثاء_أربعاء_خميس_جمعة_سبت'.split('_'),
+        weekdaysMin: 'ح_ن_ث_ر_خ_ج_س'.split('_'),
+        weekdaysParseExact: true,
+        longDateFormat: {
+            LT: 'HH:mm',
+            LTS: 'HH:mm:ss',
+            L: 'DD/MM/YYYY',
+            LL: 'D MMMM YYYY',
+            LLL: 'D MMMM YYYY HH:mm',
+            LLLL: 'dddd D MMMM YYYY HH:mm',
+        },
+        meridiemParse: /ص|م/,
+        isPM: function (input) {
+            return 'م' === input;
+        },
+        meridiem: function (hour, minute, isLower) {
+            if (hour < 12) {
+                return 'ص';
+            } else {
+                return 'م';
+            }
+        },
+        calendar: {
+            sameDay: '[اليوم على الساعة] LT',
+            nextDay: '[غدا على الساعة] LT',
+            nextWeek: 'dddd [على الساعة] LT',
+            lastDay: '[أمس على الساعة] LT',
+            lastWeek: 'dddd [على الساعة] LT',
+            sameElse: 'L',
+        },
+        relativeTime: {
+            future: 'في %s',
+            past: 'منذ %s',
+            s: 'ثوان',
+            ss: '%d ثانية',
+            m: 'دقيقة',
+            mm: '%d دقائق',
+            h: 'ساعة',
+            hh: '%d ساعات',
+            d: 'يوم',
+            dd: '%d أيام',
+            M: 'شهر',
+            MM: '%d أشهر',
+            y: 'سنة',
+            yy: '%d سنوات',
+        },
+        preparse: function (string) {
+            return string
+                .replace(/[٣٤٥٦٧٨٩٠]/g, function (match) {
+                    return numberMap[match];
+                })
+                .split('') // reversed since negative lookbehind not supported everywhere
+                .reverse()
+                .join('')
+                .replace(/[١٢](?![\u062a\u0643])/g, function (match) {
+                    return numberMap[match];
+                })
+                .split('')
+                .reverse()
+                .join('')
+                .replace(/،/g, ',');
+        },
+        postformat: function (string) {
+            return string
+                .replace(/\d/g, function (match) {
+                    return symbolMap[match];
+                })
+                .replace(/,/g, '،');
+        },
+        week: {
+            dow: 0, // Sunday is the first day of the week.
+            doy: 6, // The week that contains Jan 6th is the first week of the year.
+        },
+    });
+
+    return arPs;
+
+})));
+
+
+/***/ }),
+
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
 /***/ "./node_modules/moment/locale/ar-sa.js":
 /*!*********************************************!*\
   !*** ./node_modules/moment/locale/ar-sa.js ***!
@@ -9959,6 +10969,7 @@ __webpack_require__.r(__webpack_exports__);
             return n === 0
                 ? 0
                 : n === 1
+<<<<<<< HEAD
                 ? 1
                 : n === 2
                 ? 2
@@ -9967,6 +10978,16 @@ __webpack_require__.r(__webpack_exports__);
                 : n % 100 >= 11
                 ? 4
                 : 5;
+=======
+                  ? 1
+                  : n === 2
+                    ? 2
+                    : n % 100 >= 3 && n % 100 <= 10
+                      ? 3
+                      : n % 100 >= 11
+                        ? 4
+                        : 5;
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
         },
         plurals = {
             s: [
@@ -10265,8 +11286,13 @@ __webpack_require__.r(__webpack_exports__);
         return num % 10 === 1 && num % 100 !== 11
             ? forms[0]
             : num % 10 >= 2 && num % 10 <= 4 && (num % 100 < 10 || num % 100 >= 20)
+<<<<<<< HEAD
             ? forms[1]
             : forms[2];
+=======
+              ? forms[1]
+              : forms[2];
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
     }
     function relativeTimeWithPlural(number, withoutSuffix, key) {
         var format = {
@@ -11203,6 +12229,10 @@ __webpack_require__.r(__webpack_exports__);
 //! moment.js locale configuration
 //! locale : Bosnian [bs]
 //! author : Nedim Cholich : https://github.com/frontyard
+<<<<<<< HEAD
+=======
+//! author : Rasid Redzic : https://github.com/rasidre
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
 //! based on (hr) translation by Bojan Marković
 
 ;(function (global, factory) {
@@ -11212,6 +12242,20 @@ __webpack_require__.r(__webpack_exports__);
 
     //! moment.js locale configuration
 
+<<<<<<< HEAD
+=======
+    function processRelativeTime(number, withoutSuffix, key, isFuture) {
+        switch (key) {
+            case 'm':
+                return withoutSuffix
+                    ? 'jedna minuta'
+                    : isFuture
+                      ? 'jednu minutu'
+                      : 'jedne minute';
+        }
+    }
+
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
     function translate(number, withoutSuffix, key) {
         var result = number + ' ';
         switch (key) {
@@ -11224,8 +12268,11 @@ __webpack_require__.r(__webpack_exports__);
                     result += 'sekundi';
                 }
                 return result;
+<<<<<<< HEAD
             case 'm':
                 return withoutSuffix ? 'jedna minuta' : 'jedne minute';
+=======
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
             case 'mm':
                 if (number === 1) {
                     result += 'minuta';
@@ -11236,7 +12283,11 @@ __webpack_require__.r(__webpack_exports__);
                 }
                 return result;
             case 'h':
+<<<<<<< HEAD
                 return withoutSuffix ? 'jedan sat' : 'jednog sata';
+=======
+                return withoutSuffix ? 'jedan sat' : 'jedan sat';
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
             case 'hh':
                 if (number === 1) {
                     result += 'sat';
@@ -11337,7 +12388,11 @@ __webpack_require__.r(__webpack_exports__);
             past: 'prije %s',
             s: 'par sekundi',
             ss: translate,
+<<<<<<< HEAD
             m: translate,
+=======
+            m: processRelativeTime,
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
             mm: translate,
             h: translate,
             hh: translate,
@@ -11458,12 +12513,21 @@ __webpack_require__.r(__webpack_exports__);
                 number === 1
                     ? 'r'
                     : number === 2
+<<<<<<< HEAD
                     ? 'n'
                     : number === 3
                     ? 'r'
                     : number === 4
                     ? 't'
                     : 'è';
+=======
+                      ? 'n'
+                      : number === 3
+                        ? 'r'
+                        : number === 4
+                          ? 't'
+                          : 'è';
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
             if (period === 'w' || period === 'W') {
                 output = 'a';
             }
@@ -11500,6 +12564,7 @@ __webpack_require__.r(__webpack_exports__);
     //! moment.js locale configuration
 
     var months = {
+<<<<<<< HEAD
             format: 'leden_únor_březen_duben_květen_červen_červenec_srpen_září_říjen_listopad_prosinec'.split(
                 '_'
             ),
@@ -11507,6 +12572,16 @@ __webpack_require__.r(__webpack_exports__);
                 'ledna_února_března_dubna_května_června_července_srpna_září_října_listopadu_prosince'.split(
                     '_'
                 ),
+=======
+            standalone:
+                'leden_únor_březen_duben_květen_červen_červenec_srpen_září_říjen_listopad_prosinec'.split(
+                    '_'
+                ),
+            format: 'ledna_února_března_dubna_května_června_července_srpna_září_října_listopadu_prosince'.split(
+                '_'
+            ),
+            isFormat: /DD?[o.]?(\[[^\[\]]*\]|\s)+MMMM/,
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
         },
         monthsShort = 'led_úno_bře_dub_kvě_čvn_čvc_srp_zář_říj_lis_pro'.split('_'),
         monthsParse = [
@@ -11730,8 +12805,13 @@ __webpack_require__.r(__webpack_exports__);
                 var affix = /сехет$/i.exec(output)
                     ? 'рен'
                     : /ҫул$/i.exec(output)
+<<<<<<< HEAD
                     ? 'тан'
                     : 'ран';
+=======
+                      ? 'тан'
+                      : 'ран';
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
                 return output + affix;
             },
             past: '%s каялла',
@@ -12542,12 +13622,21 @@ __webpack_require__.r(__webpack_exports__);
                     ~~((number % 100) / 10) === 1
                         ? 'th'
                         : b === 1
+<<<<<<< HEAD
                         ? 'st'
                         : b === 2
                         ? 'nd'
                         : b === 3
                         ? 'rd'
                         : 'th';
+=======
+                          ? 'st'
+                          : b === 2
+                            ? 'nd'
+                            : b === 3
+                              ? 'rd'
+                              : 'th';
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
             return number + output;
         },
         week: {
@@ -12629,12 +13718,21 @@ __webpack_require__.r(__webpack_exports__);
                     ~~((number % 100) / 10) === 1
                         ? 'th'
                         : b === 1
+<<<<<<< HEAD
                         ? 'st'
                         : b === 2
                         ? 'nd'
                         : b === 3
                         ? 'rd'
                         : 'th';
+=======
+                          ? 'st'
+                          : b === 2
+                            ? 'nd'
+                            : b === 3
+                              ? 'rd'
+                              : 'th';
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
             return number + output;
         },
     });
@@ -12712,12 +13810,21 @@ __webpack_require__.r(__webpack_exports__);
                     ~~((number % 100) / 10) === 1
                         ? 'th'
                         : b === 1
+<<<<<<< HEAD
                         ? 'st'
                         : b === 2
                         ? 'nd'
                         : b === 3
                         ? 'rd'
                         : 'th';
+=======
+                          ? 'st'
+                          : b === 2
+                            ? 'nd'
+                            : b === 3
+                              ? 'rd'
+                              : 'th';
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
             return number + output;
         },
         week: {
@@ -12799,12 +13906,21 @@ __webpack_require__.r(__webpack_exports__);
                     ~~((number % 100) / 10) === 1
                         ? 'th'
                         : b === 1
+<<<<<<< HEAD
                         ? 'st'
                         : b === 2
                         ? 'nd'
                         : b === 3
                         ? 'rd'
                         : 'th';
+=======
+                          ? 'st'
+                          : b === 2
+                            ? 'nd'
+                            : b === 3
+                              ? 'rd'
+                              : 'th';
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
             return number + output;
         },
         week: {
@@ -12886,12 +14002,21 @@ __webpack_require__.r(__webpack_exports__);
                     ~~((number % 100) / 10) === 1
                         ? 'th'
                         : b === 1
+<<<<<<< HEAD
                         ? 'st'
                         : b === 2
                         ? 'nd'
                         : b === 3
                         ? 'rd'
                         : 'th';
+=======
+                          ? 'st'
+                          : b === 2
+                            ? 'nd'
+                            : b === 3
+                              ? 'rd'
+                              : 'th';
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
             return number + output;
         },
     });
@@ -12969,12 +14094,21 @@ __webpack_require__.r(__webpack_exports__);
                     ~~((number % 100) / 10) === 1
                         ? 'th'
                         : b === 1
+<<<<<<< HEAD
                         ? 'st'
                         : b === 2
                         ? 'nd'
                         : b === 3
                         ? 'rd'
                         : 'th';
+=======
+                          ? 'st'
+                          : b === 2
+                            ? 'nd'
+                            : b === 3
+                              ? 'rd'
+                              : 'th';
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
             return number + output;
         },
         week: {
@@ -13056,12 +14190,21 @@ __webpack_require__.r(__webpack_exports__);
                     ~~((number % 100) / 10) === 1
                         ? 'th'
                         : b === 1
+<<<<<<< HEAD
                         ? 'st'
                         : b === 2
                         ? 'nd'
                         : b === 3
                         ? 'rd'
                         : 'th';
+=======
+                          ? 'st'
+                          : b === 2
+                            ? 'nd'
+                            : b === 3
+                              ? 'rd'
+                              : 'th';
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
             return number + output;
         },
         week: {
@@ -13143,12 +14286,21 @@ __webpack_require__.r(__webpack_exports__);
                     ~~((number % 100) / 10) === 1
                         ? 'th'
                         : b === 1
+<<<<<<< HEAD
                         ? 'st'
                         : b === 2
                         ? 'nd'
                         : b === 3
                         ? 'rd'
                         : 'th';
+=======
+                          ? 'st'
+                          : b === 2
+                            ? 'nd'
+                            : b === 3
+                              ? 'rd'
+                              : 'th';
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
             return number + output;
         },
         week: {
@@ -16664,8 +17816,13 @@ __webpack_require__.r(__webpack_exports__);
                             (this.hours() > 1
                                 ? 'lle '
                                 : this.hours() === 0
+<<<<<<< HEAD
                                 ? ' '
                                 : "ll'") +
+=======
+                                  ? ' '
+                                  : "ll'") +
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
                             ']LT'
                         );
                     default:
@@ -16674,8 +17831,13 @@ __webpack_require__.r(__webpack_exports__);
                             (this.hours() > 1
                                 ? 'lle '
                                 : this.hours() === 0
+<<<<<<< HEAD
                                 ? ' '
                                 : "ll'") +
+=======
+                                  ? ' '
+                                  : "ll'") +
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
                             ']LT'
                         );
                 }
@@ -17548,6 +18710,142 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+<<<<<<< HEAD
+=======
+/***/ "./node_modules/moment/locale/ku-kmr.js":
+/*!**********************************************!*\
+  !*** ./node_modules/moment/locale/ku-kmr.js ***!
+  \**********************************************/
+/***/ (function(__unused_webpack_module, __unused_webpack_exports, __webpack_require__) {
+
+//! moment.js locale configuration
+//! locale : Northern Kurdish [ku-kmr]
+//! authors : Mazlum Özdogan : https://github.com/mergehez
+
+;(function (global, factory) {
+    true ? factory(__webpack_require__(/*! ../moment */ "./node_modules/moment/moment.js")) :
+   0
+}(this, (function (moment) { 'use strict';
+
+    //! moment.js locale configuration
+
+    function processRelativeTime(num, withoutSuffix, key, isFuture) {
+        var format = {
+            s: ['çend sanîye', 'çend sanîyeyan'],
+            ss: [num + ' sanîye', num + ' sanîyeyan'],
+            m: ['deqîqeyek', 'deqîqeyekê'],
+            mm: [num + ' deqîqe', num + ' deqîqeyan'],
+            h: ['saetek', 'saetekê'],
+            hh: [num + ' saet', num + ' saetan'],
+            d: ['rojek', 'rojekê'],
+            dd: [num + ' roj', num + ' rojan'],
+            w: ['hefteyek', 'hefteyekê'],
+            ww: [num + ' hefte', num + ' hefteyan'],
+            M: ['mehek', 'mehekê'],
+            MM: [num + ' meh', num + ' mehan'],
+            y: ['salek', 'salekê'],
+            yy: [num + ' sal', num + ' salan'],
+        };
+        return withoutSuffix ? format[key][0] : format[key][1];
+    }
+    // function obliqueNumSuffix(num) {
+    //     if(num.includes(':'))
+    //         num = parseInt(num.split(':')[0]);
+    //     else
+    //         num = parseInt(num);
+    //     return num == 0 || num % 10 == 1 ? 'ê'
+    //                         : (num > 10 && num % 10 == 0 ? 'î' : 'an');
+    // }
+    function ezafeNumSuffix(num) {
+        num = '' + num;
+        var l = num.substring(num.length - 1),
+            ll = num.length > 1 ? num.substring(num.length - 2) : '';
+        if (
+            !(ll == 12 || ll == 13) &&
+            (l == '2' || l == '3' || ll == '50' || l == '70' || l == '80')
+        )
+            return 'yê';
+        return 'ê';
+    }
+
+    var kuKmr = moment.defineLocale('ku-kmr', {
+        // According to the spelling rules defined by the work group of Weqfa Mezopotamyayê (Mesopotamia Foundation)
+        // this should be: 'Kanûna Paşîn_Sibat_Adar_Nîsan_Gulan_Hezîran_Tîrmeh_Tebax_Îlon_Çirîya Pêşîn_Çirîya Paşîn_Kanûna Pêşîn'
+        // But the names below are more well known and handy
+        months: 'Rêbendan_Sibat_Adar_Nîsan_Gulan_Hezîran_Tîrmeh_Tebax_Îlon_Cotmeh_Mijdar_Berfanbar'.split(
+            '_'
+        ),
+        monthsShort: 'Rêb_Sib_Ada_Nîs_Gul_Hez_Tîr_Teb_Îlo_Cot_Mij_Ber'.split('_'),
+        monthsParseExact: true,
+        weekdays: 'Yekşem_Duşem_Sêşem_Çarşem_Pêncşem_În_Şemî'.split('_'),
+        weekdaysShort: 'Yek_Du_Sê_Çar_Pên_În_Şem'.split('_'),
+        weekdaysMin: 'Ye_Du_Sê_Ça_Pê_În_Şe'.split('_'),
+        meridiem: function (hours, minutes, isLower) {
+            if (hours < 12) {
+                return isLower ? 'bn' : 'BN';
+            } else {
+                return isLower ? 'pn' : 'PN';
+            }
+        },
+        meridiemParse: /bn|BN|pn|PN/,
+        longDateFormat: {
+            LT: 'HH:mm',
+            LTS: 'HH:mm:ss',
+            L: 'DD.MM.YYYY',
+            LL: 'Do MMMM[a] YYYY[an]',
+            LLL: 'Do MMMM[a] YYYY[an] HH:mm',
+            LLLL: 'dddd, Do MMMM[a] YYYY[an] HH:mm',
+            ll: 'Do MMM[.] YYYY[an]',
+            lll: 'Do MMM[.] YYYY[an] HH:mm',
+            llll: 'ddd[.], Do MMM[.] YYYY[an] HH:mm',
+        },
+        calendar: {
+            sameDay: '[Îro di saet] LT [de]',
+            nextDay: '[Sibê di saet] LT [de]',
+            nextWeek: 'dddd [di saet] LT [de]',
+            lastDay: '[Duh di saet] LT [de]',
+            lastWeek: 'dddd[a borî di saet] LT [de]',
+            sameElse: 'L',
+        },
+        relativeTime: {
+            future: 'di %s de',
+            past: 'berî %s',
+            s: processRelativeTime,
+            ss: processRelativeTime,
+            m: processRelativeTime,
+            mm: processRelativeTime,
+            h: processRelativeTime,
+            hh: processRelativeTime,
+            d: processRelativeTime,
+            dd: processRelativeTime,
+            w: processRelativeTime,
+            ww: processRelativeTime,
+            M: processRelativeTime,
+            MM: processRelativeTime,
+            y: processRelativeTime,
+            yy: processRelativeTime,
+        },
+        dayOfMonthOrdinalParse: /\d{1,2}(?:yê|ê|\.)/,
+        ordinal: function (num, period) {
+            var p = period.toLowerCase();
+            if (p.includes('w') || p.includes('m')) return num + '.';
+
+            return num + ezafeNumSuffix(num);
+        },
+        week: {
+            dow: 1, // Monday is the first day of the week.
+            doy: 4, // The week that contains Jan 4th is the first week of the year.
+        },
+    });
+
+    return kuKmr;
+
+})));
+
+
+/***/ }),
+
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
 /***/ "./node_modules/moment/locale/ku.js":
 /*!******************************************!*\
   !*** ./node_modules/moment/locale/ku.js ***!
@@ -18070,8 +19368,13 @@ __webpack_require__.r(__webpack_exports__);
         return withoutSuffix
             ? forms(key)[0]
             : isFuture
+<<<<<<< HEAD
             ? forms(key)[1]
             : forms(key)[2];
+=======
+              ? forms(key)[1]
+              : forms(key)[2];
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
     }
     function special(number) {
         return number % 10 === 0 || (number > 10 && number < 20);
@@ -18319,8 +19622,13 @@ __webpack_require__.r(__webpack_exports__);
             return number === 1
                 ? wordKey[0]
                 : number >= 2 && number <= 4
+<<<<<<< HEAD
                 ? wordKey[1]
                 : wordKey[2];
+=======
+                  ? wordKey[1]
+                  : wordKey[2];
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
         },
         translate: function (number, withoutSuffix, key) {
             var wordKey = translator.words[key];
@@ -19475,6 +20783,7 @@ __webpack_require__.r(__webpack_exports__);
             ss: '%d sekunder',
             m: 'ett minutt',
             mm: '%d minutter',
+<<<<<<< HEAD
             h: 'en time',
             hh: '%d timer',
             d: 'en dag',
@@ -19482,6 +20791,15 @@ __webpack_require__.r(__webpack_exports__);
             w: 'en uke',
             ww: '%d uker',
             M: 'en måned',
+=======
+            h: 'én time',
+            hh: '%d timer',
+            d: 'én dag',
+            dd: '%d dager',
+            w: 'én uke',
+            ww: '%d uker',
+            M: 'én måned',
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
             MM: '%d måneder',
             y: 'ett år',
             yy: '%d år',
@@ -19666,7 +20984,11 @@ __webpack_require__.r(__webpack_exports__);
         monthsParse = [
             /^jan/i,
             /^feb/i,
+<<<<<<< HEAD
             /^maart|mrt.?$/i,
+=======
+            /^(maart|mrt\.?)$/i,
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
             /^apr/i,
             /^mei$/i,
             /^jun[i.]?$/i,
@@ -19787,7 +21109,11 @@ __webpack_require__.r(__webpack_exports__);
         monthsParse = [
             /^jan/i,
             /^feb/i,
+<<<<<<< HEAD
             /^maart|mrt.?$/i,
+=======
+            /^(maart|mrt\.?)$/i,
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
             /^apr/i,
             /^mei$/i,
             /^jun[i.]?$/i,
@@ -20043,12 +21369,21 @@ __webpack_require__.r(__webpack_exports__);
                 number === 1
                     ? 'r'
                     : number === 2
+<<<<<<< HEAD
                     ? 'n'
                     : number === 3
                     ? 'r'
                     : number === 4
                     ? 't'
                     : 'è';
+=======
+                      ? 'n'
+                      : number === 3
+                        ? 'r'
+                        : number === 4
+                          ? 't'
+                          : 'è';
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
             if (period === 'w' || period === 'W') {
                 output = 'a';
             }
@@ -20645,8 +21980,13 @@ __webpack_require__.r(__webpack_exports__);
         return num % 10 === 1 && num % 100 !== 11
             ? forms[0]
             : num % 10 >= 2 && num % 10 <= 4 && (num % 100 < 10 || num % 100 >= 20)
+<<<<<<< HEAD
             ? forms[1]
             : forms[2];
+=======
+              ? forms[1]
+              : forms[2];
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
     }
     function relativeTimeWithPlural(number, withoutSuffix, key) {
         var format = {
@@ -22018,12 +23358,21 @@ __webpack_require__.r(__webpack_exports__);
                     ~~((number % 100) / 10) === 1
                         ? ':e'
                         : b === 1
+<<<<<<< HEAD
                         ? ':a'
                         : b === 2
                         ? ':a'
                         : b === 3
                         ? ':e'
                         : ':e';
+=======
+                          ? ':a'
+                          : b === 2
+                            ? ':a'
+                            : b === 3
+                              ? ':e'
+                              : ':e';
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
             return number + output;
         },
         week: {
@@ -22436,12 +23785,21 @@ __webpack_require__.r(__webpack_exports__);
                     ~~((number % 100) / 10) === 1
                         ? 'th'
                         : b === 1
+<<<<<<< HEAD
                         ? 'st'
                         : b === 2
                         ? 'nd'
                         : b === 3
                         ? 'rd'
                         : 'th';
+=======
+                          ? 'st'
+                          : b === 2
+                            ? 'nd'
+                            : b === 3
+                              ? 'rd'
+                              : 'th';
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
             return number + output;
         },
         week: {
@@ -22888,10 +24246,17 @@ __webpack_require__.r(__webpack_exports__);
             output.indexOf('jaj') !== -1
                 ? time.slice(0, -3) + 'leS'
                 : output.indexOf('jar') !== -1
+<<<<<<< HEAD
                 ? time.slice(0, -3) + 'waQ'
                 : output.indexOf('DIS') !== -1
                 ? time.slice(0, -3) + 'nem'
                 : time + ' pIq';
+=======
+                  ? time.slice(0, -3) + 'waQ'
+                  : output.indexOf('DIS') !== -1
+                    ? time.slice(0, -3) + 'nem'
+                    : time + ' pIq';
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
         return time;
     }
 
@@ -22901,10 +24266,17 @@ __webpack_require__.r(__webpack_exports__);
             output.indexOf('jaj') !== -1
                 ? time.slice(0, -3) + 'Hu’'
                 : output.indexOf('jar') !== -1
+<<<<<<< HEAD
                 ? time.slice(0, -3) + 'wen'
                 : output.indexOf('DIS') !== -1
                 ? time.slice(0, -3) + 'ben'
                 : time + ' ret';
+=======
+                  ? time.slice(0, -3) + 'wen'
+                  : output.indexOf('DIS') !== -1
+                    ? time.slice(0, -3) + 'ben'
+                    : time + ' ret';
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
         return time;
     }
 
@@ -23228,8 +24600,13 @@ __webpack_require__.r(__webpack_exports__);
         return isFuture
             ? format[key][0]
             : withoutSuffix
+<<<<<<< HEAD
             ? format[key][0]
             : format[key][1];
+=======
+              ? format[key][0]
+              : format[key][1];
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
     }
 
     return tzl;
@@ -23538,8 +24915,13 @@ __webpack_require__.r(__webpack_exports__);
         return num % 10 === 1 && num % 100 !== 11
             ? forms[0]
             : num % 10 >= 2 && num % 10 <= 4 && (num % 100 < 10 || num % 100 >= 20)
+<<<<<<< HEAD
             ? forms[1]
             : forms[2];
+=======
+              ? forms[1]
+              : forms[2];
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
     }
     function relativeTimeWithPlural(number, withoutSuffix, key) {
         var format = {
@@ -23587,8 +24969,13 @@ __webpack_require__.r(__webpack_exports__);
         nounCase = /(\[[ВвУу]\]) ?dddd/.test(format)
             ? 'accusative'
             : /\[?(?:минулої|наступної)? ?\] ?dddd/.test(format)
+<<<<<<< HEAD
             ? 'genitive'
             : 'nominative';
+=======
+              ? 'genitive'
+              : 'nominative';
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
         return weekdays[nounCase][m.day()];
     }
     function processHoursFunction(str) {
@@ -24115,12 +25502,21 @@ __webpack_require__.r(__webpack_exports__);
                     ~~((number % 100) / 10) === 1
                         ? 'th'
                         : b === 1
+<<<<<<< HEAD
                         ? 'st'
                         : b === 2
                         ? 'nd'
                         : b === 3
                         ? 'rd'
                         : 'th';
+=======
+                          ? 'st'
+                          : b === 2
+                            ? 'nd'
+                            : b === 3
+                              ? 'rd'
+                              : 'th';
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
             return number + output;
         },
         week: {
@@ -24704,6 +26100,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+<<<<<<< HEAD
 /***/ "./node_modules/moment/locale sync recursive ^\\.\\/.*$":
 /*!***************************************************!*\
   !*** ./node_modules/moment/locale/ sync ^\.\/.*$ ***!
@@ -25005,6 +26402,8 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
 /***/ }),
 
+=======
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
 /***/ "./node_modules/moment/moment.js":
 /*!***************************************!*\
   !*** ./node_modules/moment/moment.js ***!
@@ -25013,7 +26412,11 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
 /* module decorator */ module = __webpack_require__.nmd(module);
 //! moment.js
+<<<<<<< HEAD
 //! version : 2.29.4
+=======
+//! version : 2.30.1
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
 //! authors : Tim Wood, Iskren Chernev, Moment.js contributors
 //! license : MIT
 //! momentjs.com
@@ -25168,6 +26571,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     }
 
     function isValid(m) {
+<<<<<<< HEAD
         if (m._isValid == null) {
             var flags = getParsingFlags(m),
                 parsedParts = some.call(flags.parsedDateParts, function (i) {
@@ -25186,6 +26590,27 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
                     !flags.userInvalidated &&
                     (!flags.meridiem || (flags.meridiem && parsedParts));
 
+=======
+        var flags = null,
+            parsedParts = false,
+            isNowValid = m._d && !isNaN(m._d.getTime());
+        if (isNowValid) {
+            flags = getParsingFlags(m);
+            parsedParts = some.call(flags.parsedDateParts, function (i) {
+                return i != null;
+            });
+            isNowValid =
+                flags.overflow < 0 &&
+                !flags.empty &&
+                !flags.invalidEra &&
+                !flags.invalidMonth &&
+                !flags.invalidWeekday &&
+                !flags.weekdayMismatch &&
+                !flags.nullInput &&
+                !flags.invalidFormat &&
+                !flags.userInvalidated &&
+                (!flags.meridiem || (flags.meridiem && parsedParts));
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
             if (m._strict) {
                 isNowValid =
                     isNowValid &&
@@ -25193,12 +26618,20 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
                     flags.unusedTokens.length === 0 &&
                     flags.bigHour === undefined;
             }
+<<<<<<< HEAD
 
             if (Object.isFrozen == null || !Object.isFrozen(m)) {
                 m._isValid = isNowValid;
             } else {
                 return isNowValid;
             }
+=======
+        }
+        if (Object.isFrozen == null || !Object.isFrozen(m)) {
+            m._isValid = isNowValid;
+        } else {
+            return isNowValid;
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
         }
         return m._isValid;
     }
@@ -25643,12 +27076,65 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         return isFunction(format) ? format(output) : format.replace(/%s/i, output);
     }
 
+<<<<<<< HEAD
     var aliases = {};
 
     function addUnitAlias(unit, shorthand) {
         var lowerCase = unit.toLowerCase();
         aliases[lowerCase] = aliases[lowerCase + 's'] = aliases[shorthand] = unit;
     }
+=======
+    var aliases = {
+        D: 'date',
+        dates: 'date',
+        date: 'date',
+        d: 'day',
+        days: 'day',
+        day: 'day',
+        e: 'weekday',
+        weekdays: 'weekday',
+        weekday: 'weekday',
+        E: 'isoWeekday',
+        isoweekdays: 'isoWeekday',
+        isoweekday: 'isoWeekday',
+        DDD: 'dayOfYear',
+        dayofyears: 'dayOfYear',
+        dayofyear: 'dayOfYear',
+        h: 'hour',
+        hours: 'hour',
+        hour: 'hour',
+        ms: 'millisecond',
+        milliseconds: 'millisecond',
+        millisecond: 'millisecond',
+        m: 'minute',
+        minutes: 'minute',
+        minute: 'minute',
+        M: 'month',
+        months: 'month',
+        month: 'month',
+        Q: 'quarter',
+        quarters: 'quarter',
+        quarter: 'quarter',
+        s: 'second',
+        seconds: 'second',
+        second: 'second',
+        gg: 'weekYear',
+        weekyears: 'weekYear',
+        weekyear: 'weekYear',
+        GG: 'isoWeekYear',
+        isoweekyears: 'isoWeekYear',
+        isoweekyear: 'isoWeekYear',
+        w: 'week',
+        weeks: 'week',
+        week: 'week',
+        W: 'isoWeek',
+        isoweeks: 'isoWeek',
+        isoweek: 'isoWeek',
+        y: 'year',
+        years: 'year',
+        year: 'year',
+    };
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
 
     function normalizeUnits(units) {
         return typeof units === 'string'
@@ -25673,11 +27159,32 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         return normalizedInput;
     }
 
+<<<<<<< HEAD
     var priorities = {};
 
     function addUnitPriority(unit, priority) {
         priorities[unit] = priority;
     }
+=======
+    var priorities = {
+        date: 9,
+        day: 11,
+        weekday: 11,
+        isoWeekday: 11,
+        dayOfYear: 4,
+        hour: 13,
+        millisecond: 16,
+        minute: 14,
+        month: 8,
+        quarter: 7,
+        second: 15,
+        weekYear: 1,
+        isoWeekYear: 1,
+        week: 5,
+        isoWeek: 5,
+        year: 1,
+    };
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
 
     function getPrioritizedUnits(unitsObj) {
         var units = [],
@@ -25693,6 +27200,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         return units;
     }
 
+<<<<<<< HEAD
     function isLeapYear(year) {
         return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
     }
@@ -25783,6 +27291,8 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         return this;
     }
 
+=======
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
     var match1 = /\d/, //       0 - 9
         match2 = /\d\d/, //      00 - 99
         match3 = /\d{3}/, //     000 - 999
@@ -25803,6 +27313,11 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         // includes scottish gaelic two word and hyphenated months
         matchWord =
             /[0-9]{0,256}['a-z\u00A0-\u05FF\u0700-\uD7FF\uF900-\uFDCF\uFDF0-\uFF07\uFF10-\uFFEF]{1,256}|[\u0600-\u06FF\/]{1,256}(\s*?[\u0600-\u06FF]{1,256}){1,2}/i,
+<<<<<<< HEAD
+=======
+        match1to2NoLeadingZero = /^[1-9]\d?/, //         1-99
+        match1to2HasZero = /^([1-9]\d|\d)/, //           0-99
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
         regexes;
 
     regexes = {};
@@ -25841,6 +27356,29 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         return s.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
     }
 
+<<<<<<< HEAD
+=======
+    function absFloor(number) {
+        if (number < 0) {
+            // -0 -> 0
+            return Math.ceil(number) || 0;
+        } else {
+            return Math.floor(number);
+        }
+    }
+
+    function toInt(argumentForCoercion) {
+        var coercedNumber = +argumentForCoercion,
+            value = 0;
+
+        if (coercedNumber !== 0 && isFinite(coercedNumber)) {
+            value = absFloor(coercedNumber);
+        }
+
+        return value;
+    }
+
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
     var tokens = {};
 
     function addParseToken(token, callback) {
@@ -25874,6 +27412,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         }
     }
 
+<<<<<<< HEAD
+=======
+    function isLeapYear(year) {
+        return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
+    }
+
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
     var YEAR = 0,
         MONTH = 1,
         DATE = 2,
@@ -25884,6 +27429,176 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         WEEK = 7,
         WEEKDAY = 8;
 
+<<<<<<< HEAD
+=======
+    // FORMATTING
+
+    addFormatToken('Y', 0, 0, function () {
+        var y = this.year();
+        return y <= 9999 ? zeroFill(y, 4) : '+' + y;
+    });
+
+    addFormatToken(0, ['YY', 2], 0, function () {
+        return this.year() % 100;
+    });
+
+    addFormatToken(0, ['YYYY', 4], 0, 'year');
+    addFormatToken(0, ['YYYYY', 5], 0, 'year');
+    addFormatToken(0, ['YYYYYY', 6, true], 0, 'year');
+
+    // PARSING
+
+    addRegexToken('Y', matchSigned);
+    addRegexToken('YY', match1to2, match2);
+    addRegexToken('YYYY', match1to4, match4);
+    addRegexToken('YYYYY', match1to6, match6);
+    addRegexToken('YYYYYY', match1to6, match6);
+
+    addParseToken(['YYYYY', 'YYYYYY'], YEAR);
+    addParseToken('YYYY', function (input, array) {
+        array[YEAR] =
+            input.length === 2 ? hooks.parseTwoDigitYear(input) : toInt(input);
+    });
+    addParseToken('YY', function (input, array) {
+        array[YEAR] = hooks.parseTwoDigitYear(input);
+    });
+    addParseToken('Y', function (input, array) {
+        array[YEAR] = parseInt(input, 10);
+    });
+
+    // HELPERS
+
+    function daysInYear(year) {
+        return isLeapYear(year) ? 366 : 365;
+    }
+
+    // HOOKS
+
+    hooks.parseTwoDigitYear = function (input) {
+        return toInt(input) + (toInt(input) > 68 ? 1900 : 2000);
+    };
+
+    // MOMENTS
+
+    var getSetYear = makeGetSet('FullYear', true);
+
+    function getIsLeapYear() {
+        return isLeapYear(this.year());
+    }
+
+    function makeGetSet(unit, keepTime) {
+        return function (value) {
+            if (value != null) {
+                set$1(this, unit, value);
+                hooks.updateOffset(this, keepTime);
+                return this;
+            } else {
+                return get(this, unit);
+            }
+        };
+    }
+
+    function get(mom, unit) {
+        if (!mom.isValid()) {
+            return NaN;
+        }
+
+        var d = mom._d,
+            isUTC = mom._isUTC;
+
+        switch (unit) {
+            case 'Milliseconds':
+                return isUTC ? d.getUTCMilliseconds() : d.getMilliseconds();
+            case 'Seconds':
+                return isUTC ? d.getUTCSeconds() : d.getSeconds();
+            case 'Minutes':
+                return isUTC ? d.getUTCMinutes() : d.getMinutes();
+            case 'Hours':
+                return isUTC ? d.getUTCHours() : d.getHours();
+            case 'Date':
+                return isUTC ? d.getUTCDate() : d.getDate();
+            case 'Day':
+                return isUTC ? d.getUTCDay() : d.getDay();
+            case 'Month':
+                return isUTC ? d.getUTCMonth() : d.getMonth();
+            case 'FullYear':
+                return isUTC ? d.getUTCFullYear() : d.getFullYear();
+            default:
+                return NaN; // Just in case
+        }
+    }
+
+    function set$1(mom, unit, value) {
+        var d, isUTC, year, month, date;
+
+        if (!mom.isValid() || isNaN(value)) {
+            return;
+        }
+
+        d = mom._d;
+        isUTC = mom._isUTC;
+
+        switch (unit) {
+            case 'Milliseconds':
+                return void (isUTC
+                    ? d.setUTCMilliseconds(value)
+                    : d.setMilliseconds(value));
+            case 'Seconds':
+                return void (isUTC ? d.setUTCSeconds(value) : d.setSeconds(value));
+            case 'Minutes':
+                return void (isUTC ? d.setUTCMinutes(value) : d.setMinutes(value));
+            case 'Hours':
+                return void (isUTC ? d.setUTCHours(value) : d.setHours(value));
+            case 'Date':
+                return void (isUTC ? d.setUTCDate(value) : d.setDate(value));
+            // case 'Day': // Not real
+            //    return void (isUTC ? d.setUTCDay(value) : d.setDay(value));
+            // case 'Month': // Not used because we need to pass two variables
+            //     return void (isUTC ? d.setUTCMonth(value) : d.setMonth(value));
+            case 'FullYear':
+                break; // See below ...
+            default:
+                return; // Just in case
+        }
+
+        year = value;
+        month = mom.month();
+        date = mom.date();
+        date = date === 29 && month === 1 && !isLeapYear(year) ? 28 : date;
+        void (isUTC
+            ? d.setUTCFullYear(year, month, date)
+            : d.setFullYear(year, month, date));
+    }
+
+    // MOMENTS
+
+    function stringGet(units) {
+        units = normalizeUnits(units);
+        if (isFunction(this[units])) {
+            return this[units]();
+        }
+        return this;
+    }
+
+    function stringSet(units, value) {
+        if (typeof units === 'object') {
+            units = normalizeObjectUnits(units);
+            var prioritized = getPrioritizedUnits(units),
+                i,
+                prioritizedLen = prioritized.length;
+            for (i = 0; i < prioritizedLen; i++) {
+                this[prioritized[i].unit](units[prioritized[i].unit]);
+            }
+        } else {
+            units = normalizeUnits(units);
+            if (isFunction(this[units])) {
+                return this[units](value);
+            }
+        }
+        return this;
+    }
+
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
     function mod(n, x) {
         return ((n % x) + x) % x;
     }
@@ -25932,6 +27647,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         return this.localeData().months(this, format);
     });
 
+<<<<<<< HEAD
     // ALIASES
 
     addUnitAlias('month', 'M');
@@ -25943,6 +27659,11 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     // PARSING
 
     addRegexToken('M', match1to2);
+=======
+    // PARSING
+
+    addRegexToken('M', match1to2, match1to2NoLeadingZero);
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
     addRegexToken('MM', match1to2, match2);
     addRegexToken('MMM', function (isStrict, locale) {
         return locale.monthsShortRegex(isStrict);
@@ -26108,8 +27829,11 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     // MOMENTS
 
     function setMonth(mom, value) {
+<<<<<<< HEAD
         var dayOfMonth;
 
+=======
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
         if (!mom.isValid()) {
             // No op
             return mom;
@@ -26127,8 +27851,18 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
             }
         }
 
+<<<<<<< HEAD
         dayOfMonth = Math.min(mom.date(), daysInMonth(mom.year(), value));
         mom._d['set' + (mom._isUTC ? 'UTC' : '') + 'Month'](value, dayOfMonth);
+=======
+        var month = value,
+            date = mom.date();
+
+        date = date < 29 ? date : Math.min(date, daysInMonth(mom.year(), month));
+        void (mom._isUTC
+            ? mom._d.setUTCMonth(month, date)
+            : mom._d.setMonth(month, date));
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
         return mom;
     }
 
@@ -26195,6 +27929,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
             longPieces = [],
             mixedPieces = [],
             i,
+<<<<<<< HEAD
             mom;
         for (i = 0; i < 12; i++) {
             // make the regex if we don't have it already
@@ -26203,12 +27938,27 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
             longPieces.push(this.months(mom, ''));
             mixedPieces.push(this.months(mom, ''));
             mixedPieces.push(this.monthsShort(mom, ''));
+=======
+            mom,
+            shortP,
+            longP;
+        for (i = 0; i < 12; i++) {
+            // make the regex if we don't have it already
+            mom = createUTC([2000, i]);
+            shortP = regexEscape(this.monthsShort(mom, ''));
+            longP = regexEscape(this.months(mom, ''));
+            shortPieces.push(shortP);
+            longPieces.push(longP);
+            mixedPieces.push(longP);
+            mixedPieces.push(shortP);
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
         }
         // Sorting makes sure if one month (or abbr) is a prefix of another it
         // will match the longer piece.
         shortPieces.sort(cmpLenRev);
         longPieces.sort(cmpLenRev);
         mixedPieces.sort(cmpLenRev);
+<<<<<<< HEAD
         for (i = 0; i < 12; i++) {
             shortPieces[i] = regexEscape(shortPieces[i]);
             longPieces[i] = regexEscape(longPieces[i]);
@@ -26216,6 +27966,8 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         for (i = 0; i < 24; i++) {
             mixedPieces[i] = regexEscape(mixedPieces[i]);
         }
+=======
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
 
         this._monthsRegex = new RegExp('^(' + mixedPieces.join('|') + ')', 'i');
         this._monthsShortRegex = this._monthsRegex;
@@ -26229,6 +27981,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         );
     }
 
+<<<<<<< HEAD
     // FORMATTING
 
     addFormatToken('Y', 0, 0, function () {
@@ -26292,6 +28045,8 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         return isLeapYear(this.year());
     }
 
+=======
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
     function createDate(y, m, d, h, M, s, ms) {
         // can't just apply() to create a date:
         // https://stackoverflow.com/q/181348
@@ -26397,6 +28152,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     addFormatToken('w', ['ww', 2], 'wo', 'week');
     addFormatToken('W', ['WW', 2], 'Wo', 'isoWeek');
 
+<<<<<<< HEAD
     // ALIASES
 
     addUnitAlias('week', 'w');
@@ -26412,6 +28168,13 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     addRegexToken('w', match1to2);
     addRegexToken('ww', match1to2, match2);
     addRegexToken('W', match1to2);
+=======
+    // PARSING
+
+    addRegexToken('w', match1to2, match1to2NoLeadingZero);
+    addRegexToken('ww', match1to2, match2);
+    addRegexToken('W', match1to2, match1to2NoLeadingZero);
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
     addRegexToken('WW', match1to2, match2);
 
     addWeekParseToken(
@@ -26473,6 +28236,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     addFormatToken('e', 0, 0, 'weekday');
     addFormatToken('E', 0, 0, 'isoWeekday');
 
+<<<<<<< HEAD
     // ALIASES
 
     addUnitAlias('day', 'd');
@@ -26484,6 +28248,8 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     addUnitPriority('weekday', 11);
     addUnitPriority('isoWeekday', 11);
 
+=======
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
     // PARSING
 
     addRegexToken('d', match1to2);
@@ -26563,24 +28329,39 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         return m === true
             ? shiftWeekdays(weekdays, this._week.dow)
             : m
+<<<<<<< HEAD
             ? weekdays[m.day()]
             : weekdays;
+=======
+              ? weekdays[m.day()]
+              : weekdays;
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
     }
 
     function localeWeekdaysShort(m) {
         return m === true
             ? shiftWeekdays(this._weekdaysShort, this._week.dow)
             : m
+<<<<<<< HEAD
             ? this._weekdaysShort[m.day()]
             : this._weekdaysShort;
+=======
+              ? this._weekdaysShort[m.day()]
+              : this._weekdaysShort;
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
     }
 
     function localeWeekdaysMin(m) {
         return m === true
             ? shiftWeekdays(this._weekdaysMin, this._week.dow)
             : m
+<<<<<<< HEAD
             ? this._weekdaysMin[m.day()]
             : this._weekdaysMin;
+=======
+              ? this._weekdaysMin[m.day()]
+              : this._weekdaysMin;
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
     }
 
     function handleStrictParse$1(weekdayName, format, strict) {
@@ -26729,7 +28510,12 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         if (!this.isValid()) {
             return input != null ? this : NaN;
         }
+<<<<<<< HEAD
         var day = this._isUTC ? this._d.getUTCDay() : this._d.getDay();
+=======
+
+        var day = get(this, 'Day');
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
         if (input != null) {
             input = parseWeekday(input, this.localeData());
             return this.add(input - day, 'd');
@@ -26928,6 +28714,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     meridiem('a', true);
     meridiem('A', false);
 
+<<<<<<< HEAD
     // ALIASES
 
     addUnitAlias('hour', 'h');
@@ -26935,6 +28722,8 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     // PRIORITY
     addUnitPriority('hour', 13);
 
+=======
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
     // PARSING
 
     function matchMeridiem(isStrict, locale) {
@@ -26943,9 +28732,15 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
     addRegexToken('a', matchMeridiem);
     addRegexToken('A', matchMeridiem);
+<<<<<<< HEAD
     addRegexToken('H', match1to2);
     addRegexToken('h', match1to2);
     addRegexToken('k', match1to2);
+=======
+    addRegexToken('H', match1to2, match1to2HasZero);
+    addRegexToken('h', match1to2, match1to2NoLeadingZero);
+    addRegexToken('k', match1to2, match1to2NoLeadingZero);
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
     addRegexToken('HH', match1to2, match2);
     addRegexToken('hh', match1to2, match2);
     addRegexToken('kk', match1to2, match2);
@@ -27095,7 +28890,12 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
     function isLocaleNameSane(name) {
         // Prevent names that look like filesystem paths, i.e contain '/' or '\'
+<<<<<<< HEAD
         return name.match('^[^/\\\\]*$') != null;
+=======
+        // Ensure name is available and function returns boolean
+        return !!(name && name.match('^[^/\\\\]*$'));
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
     }
 
     function loadLocale(name) {
@@ -27287,6 +29087,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
                 a[MONTH] < 0 || a[MONTH] > 11
                     ? MONTH
                     : a[DATE] < 1 || a[DATE] > daysInMonth(a[YEAR], a[MONTH])
+<<<<<<< HEAD
                     ? DATE
                     : a[HOUR] < 0 ||
                       a[HOUR] > 24 ||
@@ -27302,6 +29103,23 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
                     : a[MILLISECOND] < 0 || a[MILLISECOND] > 999
                     ? MILLISECOND
                     : -1;
+=======
+                      ? DATE
+                      : a[HOUR] < 0 ||
+                          a[HOUR] > 24 ||
+                          (a[HOUR] === 24 &&
+                              (a[MINUTE] !== 0 ||
+                                  a[SECOND] !== 0 ||
+                                  a[MILLISECOND] !== 0))
+                        ? HOUR
+                        : a[MINUTE] < 0 || a[MINUTE] > 59
+                          ? MINUTE
+                          : a[SECOND] < 0 || a[SECOND] > 59
+                            ? SECOND
+                            : a[MILLISECOND] < 0 || a[MILLISECOND] > 999
+                              ? MILLISECOND
+                              : -1;
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
 
             if (
                 getParsingFlags(m)._overflowDayOfYear &&
@@ -28742,6 +30560,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         return diff < -6
             ? 'sameElse'
             : diff < -1
+<<<<<<< HEAD
             ? 'lastWeek'
             : diff < 0
             ? 'lastDay'
@@ -28752,6 +30571,18 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
             : diff < 7
             ? 'nextWeek'
             : 'sameElse';
+=======
+              ? 'lastWeek'
+              : diff < 0
+                ? 'lastDay'
+                : diff < 1
+                  ? 'sameDay'
+                  : diff < 2
+                    ? 'nextDay'
+                    : diff < 7
+                      ? 'nextWeek'
+                      : 'sameElse';
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
     }
 
     function calendar$1(time, formats) {
@@ -29559,6 +31390,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
             mixedPieces = [],
             i,
             l,
+<<<<<<< HEAD
             eras = this.eras();
 
         for (i = 0, l = eras.length; i < l; ++i) {
@@ -29569,6 +31401,24 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
             mixedPieces.push(regexEscape(eras[i].name));
             mixedPieces.push(regexEscape(eras[i].abbr));
             mixedPieces.push(regexEscape(eras[i].narrow));
+=======
+            erasName,
+            erasAbbr,
+            erasNarrow,
+            eras = this.eras();
+
+        for (i = 0, l = eras.length; i < l; ++i) {
+            erasName = regexEscape(eras[i].name);
+            erasAbbr = regexEscape(eras[i].abbr);
+            erasNarrow = regexEscape(eras[i].narrow);
+
+            namePieces.push(erasName);
+            abbrPieces.push(erasAbbr);
+            narrowPieces.push(erasNarrow);
+            mixedPieces.push(erasName);
+            mixedPieces.push(erasAbbr);
+            mixedPieces.push(erasNarrow);
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
         }
 
         this._erasRegex = new RegExp('^(' + mixedPieces.join('|') + ')', 'i');
@@ -29601,6 +31451,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
     // ALIASES
 
+<<<<<<< HEAD
     addUnitAlias('weekYear', 'gg');
     addUnitAlias('isoWeekYear', 'GG');
 
@@ -29609,6 +31460,8 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     addUnitPriority('weekYear', 1);
     addUnitPriority('isoWeekYear', 1);
 
+=======
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
     // PARSING
 
     addRegexToken('G', matchSigned);
@@ -29638,7 +31491,11 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
             this,
             input,
             this.week(),
+<<<<<<< HEAD
             this.weekday(),
+=======
+            this.weekday() + this.localeData()._week.dow,
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
             this.localeData()._week.dow,
             this.localeData()._week.doy
         );
@@ -29700,6 +31557,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
     addFormatToken('Q', 0, 'Qo', 'quarter');
 
+<<<<<<< HEAD
     // ALIASES
 
     addUnitAlias('quarter', 'Q');
@@ -29708,6 +31566,8 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
     addUnitPriority('quarter', 7);
 
+=======
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
     // PARSING
 
     addRegexToken('Q', match1);
@@ -29727,6 +31587,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
     addFormatToken('D', ['DD', 2], 'Do', 'date');
 
+<<<<<<< HEAD
     // ALIASES
 
     addUnitAlias('date', 'D');
@@ -29737,6 +31598,11 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     // PARSING
 
     addRegexToken('D', match1to2);
+=======
+    // PARSING
+
+    addRegexToken('D', match1to2, match1to2NoLeadingZero);
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
     addRegexToken('DD', match1to2, match2);
     addRegexToken('Do', function (isStrict, locale) {
         // TODO: Remove "ordinalParse" fallback in next major release.
@@ -29758,6 +31624,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
     addFormatToken('DDD', ['DDDD', 3], 'DDDo', 'dayOfYear');
 
+<<<<<<< HEAD
     // ALIASES
 
     addUnitAlias('dayOfYear', 'DDD');
@@ -29765,6 +31632,8 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     // PRIORITY
     addUnitPriority('dayOfYear', 4);
 
+=======
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
     // PARSING
 
     addRegexToken('DDD', match1to3);
@@ -29789,6 +31658,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
     addFormatToken('m', ['mm', 2], 0, 'minute');
 
+<<<<<<< HEAD
     // ALIASES
 
     addUnitAlias('minute', 'm');
@@ -29800,6 +31670,11 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     // PARSING
 
     addRegexToken('m', match1to2);
+=======
+    // PARSING
+
+    addRegexToken('m', match1to2, match1to2HasZero);
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
     addRegexToken('mm', match1to2, match2);
     addParseToken(['m', 'mm'], MINUTE);
 
@@ -29811,6 +31686,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
     addFormatToken('s', ['ss', 2], 0, 'second');
 
+<<<<<<< HEAD
     // ALIASES
 
     addUnitAlias('second', 's');
@@ -29822,6 +31698,11 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
     // PARSING
 
     addRegexToken('s', match1to2);
+=======
+    // PARSING
+
+    addRegexToken('s', match1to2, match1to2HasZero);
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
     addRegexToken('ss', match1to2, match2);
     addParseToken(['s', 'ss'], SECOND);
 
@@ -29859,6 +31740,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         return this.millisecond() * 1000000;
     });
 
+<<<<<<< HEAD
     // ALIASES
 
     addUnitAlias('millisecond', 'ms');
@@ -29867,6 +31749,8 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
     addUnitPriority('millisecond', 16);
 
+=======
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
     // PARSING
 
     addRegexToken('S', match1to3, match1);
@@ -30174,12 +32058,21 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
                     toInt((number % 100) / 10) === 1
                         ? 'th'
                         : b === 1
+<<<<<<< HEAD
                         ? 'st'
                         : b === 2
                         ? 'nd'
                         : b === 3
                         ? 'rd'
                         : 'th';
+=======
+                          ? 'st'
+                          : b === 2
+                            ? 'nd'
+                            : b === 3
+                              ? 'rd'
+                              : 'th';
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
             return number + output;
         },
     });
@@ -30352,6 +32245,7 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         }
     }
 
+<<<<<<< HEAD
     // TODO: Use this.as('ms')?
     function valueOf$1() {
         if (!this.isValid()) {
@@ -30365,6 +32259,8 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         );
     }
 
+=======
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
     function makeAs(alias) {
         return function () {
             return this.as(alias);
@@ -30379,7 +32275,12 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
         asWeeks = makeAs('w'),
         asMonths = makeAs('M'),
         asQuarters = makeAs('Q'),
+<<<<<<< HEAD
         asYears = makeAs('y');
+=======
+        asYears = makeAs('y'),
+        valueOf$1 = asMilliseconds;
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
 
     function clone$1() {
         return createDuration(this);
@@ -30648,7 +32549,11 @@ webpackContext.id = "./node_modules/moment/locale sync recursive ^\\.\\/.*$";
 
     //! moment.js
 
+<<<<<<< HEAD
     hooks.version = '2.29.4';
+=======
+    hooks.version = '2.30.1';
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
 
     setHookCallback(createLocal);
 
@@ -33981,7 +35886,1160 @@ process.umask = function() { return 0; };
 /***/ (function(module, __unused_webpack_exports, __webpack_require__) {
 
 /* provided dependency */ var process = __webpack_require__(/*! process/browser.js */ "./node_modules/process/browser.js");
+<<<<<<< HEAD
 !function(e,t){ true?module.exports=t():0}("undefined"!=typeof self?self:this,(()=>(()=>{var e={75:function(e){(function(){var t,n,r,o,a,s;"undefined"!=typeof performance&&null!==performance&&performance.now?e.exports=function(){return performance.now()}:"undefined"!=typeof process&&null!==process&&process.hrtime?(e.exports=function(){return(t()-a)/1e6},n=process.hrtime,o=(t=function(){var e;return 1e9*(e=n())[0]+e[1]})(),s=1e9*process.uptime(),a=o-s):Date.now?(e.exports=function(){return Date.now()-r},r=Date.now()):(e.exports=function(){return(new Date).getTime()-r},r=(new Date).getTime())}).call(this)},4087:(e,t,n)=>{for(var r=n(75),o="undefined"==typeof window?n.g:window,a=["moz","webkit"],s="AnimationFrame",i=o["request"+s],u=o["cancel"+s]||o["cancelRequest"+s],l=0;!i&&l<a.length;l++)i=o[a[l]+"Request"+s],u=o[a[l]+"Cancel"+s]||o[a[l]+"CancelRequest"+s];if(!i||!u){var c=0,p=0,d=[];i=function(e){if(0===d.length){var t=r(),n=Math.max(0,16.666666666666668-(t-c));c=n+t,setTimeout((function(){var e=d.slice(0);d.length=0;for(var t=0;t<e.length;t++)if(!e[t].cancelled)try{e[t].callback(c)}catch(e){setTimeout((function(){throw e}),0)}}),Math.round(n))}return d.push({handle:++p,callback:e,cancelled:!1}),p},u=function(e){for(var t=0;t<d.length;t++)d[t].handle===e&&(d[t].cancelled=!0)}}e.exports=function(e){return i.call(o,e)},e.exports.cancel=function(){u.apply(o,arguments)},e.exports.polyfill=function(e){e||(e=o),e.requestAnimationFrame=i,e.cancelAnimationFrame=u}}},t={};function n(r){var o=t[r];if(void 0!==o)return o.exports;var a=t[r]={exports:{}};return e[r].call(a.exports,a,a.exports,n),a.exports}n.n=e=>{var t=e&&e.__esModule?()=>e.default:()=>e;return n.d(t,{a:t}),t},n.d=(e,t)=>{for(var r in t)n.o(t,r)&&!n.o(e,r)&&Object.defineProperty(e,r,{enumerable:!0,get:t[r]})},n.g=function(){if("object"==typeof globalThis)return globalThis;try{return this||new Function("return this")()}catch(e){if("object"==typeof window)return window}}(),n.o=(e,t)=>Object.prototype.hasOwnProperty.call(e,t);var r={};return(()=>{"use strict";n.d(r,{default:()=>S});var e=n(4087),t=n.n(e);const o=function(e){return new RegExp(/<[a-z][\s\S]*>/i).test(e)},a=function(e){var t=document.createElement("div");return t.innerHTML=e,t.childNodes},s=function(e,t){return Math.floor(Math.random()*(t-e+1))+e};var i="TYPE_CHARACTER",u="REMOVE_CHARACTER",l="REMOVE_ALL",c="REMOVE_LAST_VISIBLE_NODE",p="PAUSE_FOR",d="CALL_FUNCTION",f="ADD_HTML_TAG_ELEMENT",v="CHANGE_DELETE_SPEED",h="CHANGE_DELAY",m="CHANGE_CURSOR",y="PASTE_STRING",g="HTML_TAG";function E(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e);t&&(r=r.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}return n}function w(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{};t%2?E(Object(n),!0).forEach((function(t){N(e,t,n[t])})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):E(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))}))}return e}function T(e){return function(e){if(Array.isArray(e))return b(e)}(e)||function(e){if("undefined"!=typeof Symbol&&null!=e[Symbol.iterator]||null!=e["@@iterator"])return Array.from(e)}(e)||function(e,t){if(e){if("string"==typeof e)return b(e,t);var n=Object.prototype.toString.call(e).slice(8,-1);return"Object"===n&&e.constructor&&(n=e.constructor.name),"Map"===n||"Set"===n?Array.from(e):"Arguments"===n||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)?b(e,t):void 0}}(e)||function(){throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}()}function b(e,t){(null==t||t>e.length)&&(t=e.length);for(var n=0,r=new Array(t);n<t;n++)r[n]=e[n];return r}function A(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,r.key,r)}}function N(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}const S=function(){function n(r,E){var b=this;if(function(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}(this,n),N(this,"state",{cursorAnimation:null,lastFrameTime:null,pauseUntil:null,eventQueue:[],eventLoop:null,eventLoopPaused:!1,reverseCalledEvents:[],calledEvents:[],visibleNodes:[],initialOptions:null,elements:{container:null,wrapper:document.createElement("span"),cursor:document.createElement("span")}}),N(this,"options",{strings:null,cursor:"|",delay:"natural",pauseFor:1500,deleteSpeed:"natural",loop:!1,autoStart:!1,devMode:!1,skipAddStyles:!1,wrapperClassName:"Typewriter__wrapper",cursorClassName:"Typewriter__cursor",stringSplitter:null,onCreateTextNode:null,onRemoveNode:null}),N(this,"setupWrapperElement",(function(){b.state.elements.container&&(b.state.elements.wrapper.className=b.options.wrapperClassName,b.state.elements.cursor.className=b.options.cursorClassName,b.state.elements.cursor.innerHTML=b.options.cursor,b.state.elements.container.innerHTML="",b.state.elements.container.appendChild(b.state.elements.wrapper),b.state.elements.container.appendChild(b.state.elements.cursor))})),N(this,"start",(function(){return b.state.eventLoopPaused=!1,b.runEventLoop(),b})),N(this,"pause",(function(){return b.state.eventLoopPaused=!0,b})),N(this,"stop",(function(){return b.state.eventLoop&&((0,e.cancel)(b.state.eventLoop),b.state.eventLoop=null),b})),N(this,"pauseFor",(function(e){return b.addEventToQueue(p,{ms:e}),b})),N(this,"typeOutAllStrings",(function(){return"string"==typeof b.options.strings?(b.typeString(b.options.strings).pauseFor(b.options.pauseFor),b):(b.options.strings.forEach((function(e){b.typeString(e).pauseFor(b.options.pauseFor).deleteAll(b.options.deleteSpeed)})),b)})),N(this,"typeString",(function(e){var t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:null;if(o(e))return b.typeOutHTMLString(e,t);if(e){var n=b.options||{},r=n.stringSplitter,a="function"==typeof r?r(e):e.split("");b.typeCharacters(a,t)}return b})),N(this,"pasteString",(function(e){var t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:null;return o(e)?b.typeOutHTMLString(e,t,!0):(e&&b.addEventToQueue(y,{character:e,node:t}),b)})),N(this,"typeOutHTMLString",(function(e){var t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:null,n=arguments.length>2?arguments[2]:void 0,r=a(e);if(r.length>0)for(var o=0;o<r.length;o++){var s=r[o],i=s.innerHTML;s&&3!==s.nodeType?(s.innerHTML="",b.addEventToQueue(f,{node:s,parentNode:t}),n?b.pasteString(i,s):b.typeString(i,s)):s.textContent&&(n?b.pasteString(s.textContent,t):b.typeString(s.textContent,t))}return b})),N(this,"deleteAll",(function(){var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:"natural";return b.addEventToQueue(l,{speed:e}),b})),N(this,"changeDeleteSpeed",(function(e){if(!e)throw new Error("Must provide new delete speed");return b.addEventToQueue(v,{speed:e}),b})),N(this,"changeDelay",(function(e){if(!e)throw new Error("Must provide new delay");return b.addEventToQueue(h,{delay:e}),b})),N(this,"changeCursor",(function(e){if(!e)throw new Error("Must provide new cursor");return b.addEventToQueue(m,{cursor:e}),b})),N(this,"deleteChars",(function(e){if(!e)throw new Error("Must provide amount of characters to delete");for(var t=0;t<e;t++)b.addEventToQueue(u);return b})),N(this,"callFunction",(function(e,t){if(!e||"function"!=typeof e)throw new Error("Callbak must be a function");return b.addEventToQueue(d,{cb:e,thisArg:t}),b})),N(this,"typeCharacters",(function(e){var t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:null;if(!e||!Array.isArray(e))throw new Error("Characters must be an array");return e.forEach((function(e){b.addEventToQueue(i,{character:e,node:t})})),b})),N(this,"removeCharacters",(function(e){if(!e||!Array.isArray(e))throw new Error("Characters must be an array");return e.forEach((function(){b.addEventToQueue(u)})),b})),N(this,"addEventToQueue",(function(e,t){var n=arguments.length>2&&void 0!==arguments[2]&&arguments[2];return b.addEventToStateProperty(e,t,n,"eventQueue")})),N(this,"addReverseCalledEvent",(function(e,t){var n=arguments.length>2&&void 0!==arguments[2]&&arguments[2],r=b.options.loop;return r?b.addEventToStateProperty(e,t,n,"reverseCalledEvents"):b})),N(this,"addEventToStateProperty",(function(e,t){var n=arguments.length>2&&void 0!==arguments[2]&&arguments[2],r=arguments.length>3?arguments[3]:void 0,o={eventName:e,eventArgs:t||{}};return b.state[r]=n?[o].concat(T(b.state[r])):[].concat(T(b.state[r]),[o]),b})),N(this,"runEventLoop",(function(){b.state.lastFrameTime||(b.state.lastFrameTime=Date.now());var e=Date.now(),n=e-b.state.lastFrameTime;if(!b.state.eventQueue.length){if(!b.options.loop)return;b.state.eventQueue=T(b.state.calledEvents),b.state.calledEvents=[],b.options=w({},b.state.initialOptions)}if(b.state.eventLoop=t()(b.runEventLoop),!b.state.eventLoopPaused){if(b.state.pauseUntil){if(e<b.state.pauseUntil)return;b.state.pauseUntil=null}var r,o=T(b.state.eventQueue),a=o.shift();if(!(n<=(r=a.eventName===c||a.eventName===u?"natural"===b.options.deleteSpeed?s(40,80):b.options.deleteSpeed:"natural"===b.options.delay?s(120,160):b.options.delay))){var E=a.eventName,A=a.eventArgs;switch(b.logInDevMode({currentEvent:a,state:b.state,delay:r}),E){case y:case i:var N=A.character,S=A.node,C=document.createTextNode(N),_=C;b.options.onCreateTextNode&&"function"==typeof b.options.onCreateTextNode&&(_=b.options.onCreateTextNode(N,C)),_&&(S?S.appendChild(_):b.state.elements.wrapper.appendChild(_)),b.state.visibleNodes=[].concat(T(b.state.visibleNodes),[{type:"TEXT_NODE",character:N,node:_}]);break;case u:o.unshift({eventName:c,eventArgs:{removingCharacterNode:!0}});break;case p:var O=a.eventArgs.ms;b.state.pauseUntil=Date.now()+parseInt(O);break;case d:var L=a.eventArgs,D=L.cb,M=L.thisArg;D.call(M,{elements:b.state.elements});break;case f:var x=a.eventArgs,P=x.node,j=x.parentNode;j?j.appendChild(P):b.state.elements.wrapper.appendChild(P),b.state.visibleNodes=[].concat(T(b.state.visibleNodes),[{type:g,node:P,parentNode:j||b.state.elements.wrapper}]);break;case l:var R=b.state.visibleNodes,k=A.speed,Q=[];k&&Q.push({eventName:v,eventArgs:{speed:k,temp:!0}});for(var F=0,H=R.length;F<H;F++)Q.push({eventName:c,eventArgs:{removingCharacterNode:!1}});k&&Q.push({eventName:v,eventArgs:{speed:b.options.deleteSpeed,temp:!0}}),o.unshift.apply(o,Q);break;case c:var I=a.eventArgs.removingCharacterNode;if(b.state.visibleNodes.length){var U=b.state.visibleNodes.pop(),q=U.type,G=U.node,Y=U.character;b.options.onRemoveNode&&"function"==typeof b.options.onRemoveNode&&b.options.onRemoveNode({node:G,character:Y}),G&&G.parentNode.removeChild(G),q===g&&I&&o.unshift({eventName:c,eventArgs:{}})}break;case v:b.options.deleteSpeed=a.eventArgs.speed;break;case h:b.options.delay=a.eventArgs.delay;break;case m:b.options.cursor=a.eventArgs.cursor,b.state.elements.cursor.innerHTML=a.eventArgs.cursor}b.options.loop&&(a.eventName===c||a.eventArgs&&a.eventArgs.temp||(b.state.calledEvents=[].concat(T(b.state.calledEvents),[a]))),b.state.eventQueue=o,b.state.lastFrameTime=e}}})),r)if("string"==typeof r){var A=document.querySelector(r);if(!A)throw new Error("Could not find container element");this.state.elements.container=A}else this.state.elements.container=r;E&&(this.options=w(w({},this.options),E)),this.state.initialOptions=w({},this.options),this.init()}var r,E;return r=n,(E=[{key:"init",value:function(){var e,t;this.setupWrapperElement(),this.addEventToQueue(m,{cursor:this.options.cursor},!0),this.addEventToQueue(l,null,!0),!window||window.___TYPEWRITER_JS_STYLES_ADDED___||this.options.skipAddStyles||(e=".Typewriter__cursor{-webkit-animation:Typewriter-cursor 1s infinite;animation:Typewriter-cursor 1s infinite;margin-left:1px}@-webkit-keyframes Typewriter-cursor{0%{opacity:0}50%{opacity:1}100%{opacity:0}}@keyframes Typewriter-cursor{0%{opacity:0}50%{opacity:1}100%{opacity:0}}",(t=document.createElement("style")).appendChild(document.createTextNode(e)),document.head.appendChild(t),window.___TYPEWRITER_JS_STYLES_ADDED___=!0),!0===this.options.autoStart&&this.options.strings&&this.typeOutAllStrings().start()}},{key:"logInDevMode",value:function(e){this.options.devMode&&console.log(e)}}])&&A(r.prototype,E),Object.defineProperty(r,"prototype",{writable:!1}),n}()})(),r.default})()));
+=======
+!function(e,t){ true?module.exports=t():0}("undefined"!=typeof self?self:this,(()=>(()=>{var e={75:function(e){(function(){var t,n,r,o,a,i;"undefined"!=typeof performance&&null!==performance&&performance.now?e.exports=function(){return performance.now()}:"undefined"!=typeof process&&null!==process&&process.hrtime?(e.exports=function(){return(t()-a)/1e6},n=process.hrtime,o=(t=function(){var e;return 1e9*(e=n())[0]+e[1]})(),i=1e9*process.uptime(),a=o-i):Date.now?(e.exports=function(){return Date.now()-r},r=Date.now()):(e.exports=function(){return(new Date).getTime()-r},r=(new Date).getTime())}).call(this)},4087:(e,t,n)=>{for(var r=n(75),o="undefined"==typeof window?n.g:window,a=["moz","webkit"],i="AnimationFrame",s=o["request"+i],u=o["cancel"+i]||o["cancelRequest"+i],l=0;!s&&l<a.length;l++)s=o[a[l]+"Request"+i],u=o[a[l]+"Cancel"+i]||o[a[l]+"CancelRequest"+i];if(!s||!u){var c=0,p=0,d=[];s=function(e){if(0===d.length){var t=r(),n=Math.max(0,16.666666666666668-(t-c));c=n+t,setTimeout((function(){var e=d.slice(0);d.length=0;for(var t=0;t<e.length;t++)if(!e[t].cancelled)try{e[t].callback(c)}catch(e){setTimeout((function(){throw e}),0)}}),Math.round(n))}return d.push({handle:++p,callback:e,cancelled:!1}),p},u=function(e){for(var t=0;t<d.length;t++)d[t].handle===e&&(d[t].cancelled=!0)}}e.exports=function(e){return s.call(o,e)},e.exports.cancel=function(){u.apply(o,arguments)},e.exports.polyfill=function(e){e||(e=o),e.requestAnimationFrame=s,e.cancelAnimationFrame=u}}},t={};function n(r){var o=t[r];if(void 0!==o)return o.exports;var a=t[r]={exports:{}};return e[r].call(a.exports,a,a.exports,n),a.exports}n.n=e=>{var t=e&&e.__esModule?()=>e.default:()=>e;return n.d(t,{a:t}),t},n.d=(e,t)=>{for(var r in t)n.o(t,r)&&!n.o(e,r)&&Object.defineProperty(e,r,{enumerable:!0,get:t[r]})},n.g=function(){if("object"==typeof globalThis)return globalThis;try{return this||new Function("return this")()}catch(e){if("object"==typeof window)return window}}(),n.o=(e,t)=>Object.prototype.hasOwnProperty.call(e,t);var r={};return(()=>{"use strict";n.d(r,{default:()=>C});var e=n(4087),t=n.n(e);const o=function(e){return new RegExp(/<[a-z][\s\S]*>/i).test(e)},a=function(e,t){return Math.floor(Math.random()*(t-e+1))+e};var i="TYPE_CHARACTER",s="REMOVE_CHARACTER",u="REMOVE_ALL",l="REMOVE_LAST_VISIBLE_NODE",c="PAUSE_FOR",p="CALL_FUNCTION",d="ADD_HTML_TAG_ELEMENT",f="CHANGE_DELETE_SPEED",v="CHANGE_DELAY",h="CHANGE_CURSOR",m="PASTE_STRING",y="HTML_TAG";function g(e){return g="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e},g(e)}function E(e,t){var n=Object.keys(e);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e);t&&(r=r.filter((function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable}))),n.push.apply(n,r)}return n}function w(e){for(var t=1;t<arguments.length;t++){var n=null!=arguments[t]?arguments[t]:{};t%2?E(Object(n),!0).forEach((function(t){A(e,t,n[t])})):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(n)):E(Object(n)).forEach((function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(n,t))}))}return e}function b(e){return function(e){if(Array.isArray(e))return T(e)}(e)||function(e){if("undefined"!=typeof Symbol&&null!=e[Symbol.iterator]||null!=e["@@iterator"])return Array.from(e)}(e)||function(e,t){if(e){if("string"==typeof e)return T(e,t);var n=Object.prototype.toString.call(e).slice(8,-1);return"Object"===n&&e.constructor&&(n=e.constructor.name),"Map"===n||"Set"===n?Array.from(e):"Arguments"===n||/^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)?T(e,t):void 0}}(e)||function(){throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.")}()}function T(e,t){(null==t||t>e.length)&&(t=e.length);for(var n=0,r=new Array(t);n<t;n++)r[n]=e[n];return r}function S(e,t){for(var n=0;n<t.length;n++){var r=t[n];r.enumerable=r.enumerable||!1,r.configurable=!0,"value"in r&&(r.writable=!0),Object.defineProperty(e,N(r.key),r)}}function A(e,t,n){return(t=N(t))in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}function N(e){var t=function(e,t){if("object"!==g(e)||null===e)return e;var n=e[Symbol.toPrimitive];if(void 0!==n){var r=n.call(e,"string");if("object"!==g(r))return r;throw new TypeError("@@toPrimitive must return a primitive value.")}return String(e)}(e);return"symbol"===g(t)?t:String(t)}const C=function(){function n(r,g){var E=this;if(function(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}(this,n),A(this,"state",{cursorAnimation:null,lastFrameTime:null,pauseUntil:null,eventQueue:[],eventLoop:null,eventLoopPaused:!1,reverseCalledEvents:[],calledEvents:[],visibleNodes:[],initialOptions:null,elements:{container:null,wrapper:document.createElement("span"),cursor:document.createElement("span")}}),A(this,"options",{strings:null,cursor:"|",delay:"natural",pauseFor:1500,deleteSpeed:"natural",loop:!1,autoStart:!1,devMode:!1,skipAddStyles:!1,wrapperClassName:"Typewriter__wrapper",cursorClassName:"Typewriter__cursor",stringSplitter:null,onCreateTextNode:null,onRemoveNode:null}),A(this,"setupWrapperElement",(function(){E.state.elements.container&&(E.state.elements.wrapper.className=E.options.wrapperClassName,E.state.elements.cursor.className=E.options.cursorClassName,E.state.elements.cursor.innerHTML=E.options.cursor,E.state.elements.container.innerHTML="",E.state.elements.container.appendChild(E.state.elements.wrapper),E.state.elements.container.appendChild(E.state.elements.cursor))})),A(this,"start",(function(){return E.state.eventLoopPaused=!1,E.runEventLoop(),E})),A(this,"pause",(function(){return E.state.eventLoopPaused=!0,E})),A(this,"stop",(function(){return E.state.eventLoop&&((0,e.cancel)(E.state.eventLoop),E.state.eventLoop=null),E})),A(this,"pauseFor",(function(e){return E.addEventToQueue(c,{ms:e}),E})),A(this,"typeOutAllStrings",(function(){return"string"==typeof E.options.strings?(E.typeString(E.options.strings).pauseFor(E.options.pauseFor),E):(E.options.strings.forEach((function(e){E.typeString(e).pauseFor(E.options.pauseFor).deleteAll(E.options.deleteSpeed)})),E)})),A(this,"typeString",(function(e){var t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:null;if(o(e))return E.typeOutHTMLString(e,t);if(e){var n=(E.options||{}).stringSplitter,r="function"==typeof n?n(e):e.split("");E.typeCharacters(r,t)}return E})),A(this,"pasteString",(function(e){var t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:null;return o(e)?E.typeOutHTMLString(e,t,!0):(e&&E.addEventToQueue(m,{character:e,node:t}),E)})),A(this,"typeOutHTMLString",(function(e){var t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:null,n=arguments.length>2?arguments[2]:void 0,r=function(e){var t=document.createElement("div");return t.innerHTML=e,t.childNodes}(e);if(r.length>0)for(var o=0;o<r.length;o++){var a=r[o],i=a.innerHTML;a&&3!==a.nodeType?(a.innerHTML="",E.addEventToQueue(d,{node:a,parentNode:t}),n?E.pasteString(i,a):E.typeString(i,a)):a.textContent&&(n?E.pasteString(a.textContent,t):E.typeString(a.textContent,t))}return E})),A(this,"deleteAll",(function(){var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:"natural";return E.addEventToQueue(u,{speed:e}),E})),A(this,"changeDeleteSpeed",(function(e){if(!e)throw new Error("Must provide new delete speed");return E.addEventToQueue(f,{speed:e}),E})),A(this,"changeDelay",(function(e){if(!e)throw new Error("Must provide new delay");return E.addEventToQueue(v,{delay:e}),E})),A(this,"changeCursor",(function(e){if(!e)throw new Error("Must provide new cursor");return E.addEventToQueue(h,{cursor:e}),E})),A(this,"deleteChars",(function(e){if(!e)throw new Error("Must provide amount of characters to delete");for(var t=0;t<e;t++)E.addEventToQueue(s);return E})),A(this,"callFunction",(function(e,t){if(!e||"function"!=typeof e)throw new Error("Callback must be a function");return E.addEventToQueue(p,{cb:e,thisArg:t}),E})),A(this,"typeCharacters",(function(e){var t=arguments.length>1&&void 0!==arguments[1]?arguments[1]:null;if(!e||!Array.isArray(e))throw new Error("Characters must be an array");return e.forEach((function(e){E.addEventToQueue(i,{character:e,node:t})})),E})),A(this,"removeCharacters",(function(e){if(!e||!Array.isArray(e))throw new Error("Characters must be an array");return e.forEach((function(){E.addEventToQueue(s)})),E})),A(this,"addEventToQueue",(function(e,t){var n=arguments.length>2&&void 0!==arguments[2]&&arguments[2];return E.addEventToStateProperty(e,t,n,"eventQueue")})),A(this,"addReverseCalledEvent",(function(e,t){var n=arguments.length>2&&void 0!==arguments[2]&&arguments[2];return E.options.loop?E.addEventToStateProperty(e,t,n,"reverseCalledEvents"):E})),A(this,"addEventToStateProperty",(function(e,t){var n=arguments.length>2&&void 0!==arguments[2]&&arguments[2],r=arguments.length>3?arguments[3]:void 0,o={eventName:e,eventArgs:t||{}};return E.state[r]=n?[o].concat(b(E.state[r])):[].concat(b(E.state[r]),[o]),E})),A(this,"runEventLoop",(function(){E.state.lastFrameTime||(E.state.lastFrameTime=Date.now());var e=Date.now(),n=e-E.state.lastFrameTime;if(!E.state.eventQueue.length){if(!E.options.loop)return;E.state.eventQueue=b(E.state.calledEvents),E.state.calledEvents=[],E.options=w({},E.state.initialOptions)}if(E.state.eventLoop=t()(E.runEventLoop),!E.state.eventLoopPaused){if(E.state.pauseUntil){if(e<E.state.pauseUntil)return;E.state.pauseUntil=null}var r,o=b(E.state.eventQueue),g=o.shift();if(!(n<=(r=g.eventName===l||g.eventName===s?"natural"===E.options.deleteSpeed?a(40,80):E.options.deleteSpeed:"natural"===E.options.delay?a(120,160):E.options.delay))){var T=g.eventName,S=g.eventArgs;switch(E.logInDevMode({currentEvent:g,state:E.state,delay:r}),T){case m:case i:var A=S.character,N=S.node,C=document.createTextNode(A),_=C;E.options.onCreateTextNode&&"function"==typeof E.options.onCreateTextNode&&(_=E.options.onCreateTextNode(A,C)),_&&(N?N.appendChild(_):E.state.elements.wrapper.appendChild(_)),E.state.visibleNodes=[].concat(b(E.state.visibleNodes),[{type:"TEXT_NODE",character:A,node:_}]);break;case s:o.unshift({eventName:l,eventArgs:{removingCharacterNode:!0}});break;case c:var O=g.eventArgs.ms;E.state.pauseUntil=Date.now()+parseInt(O);break;case p:var L=g.eventArgs,D=L.cb,M=L.thisArg;D.call(M,{elements:E.state.elements});break;case d:var x=g.eventArgs,P=x.node,j=x.parentNode;j?j.appendChild(P):E.state.elements.wrapper.appendChild(P),E.state.visibleNodes=[].concat(b(E.state.visibleNodes),[{type:y,node:P,parentNode:j||E.state.elements.wrapper}]);break;case u:var R=E.state.visibleNodes,k=S.speed,Q=[];k&&Q.push({eventName:f,eventArgs:{speed:k,temp:!0}});for(var F=0,H=R.length;F<H;F++)Q.push({eventName:l,eventArgs:{removingCharacterNode:!1}});k&&Q.push({eventName:f,eventArgs:{speed:E.options.deleteSpeed,temp:!0}}),o.unshift.apply(o,Q);break;case l:var I=g.eventArgs.removingCharacterNode;if(E.state.visibleNodes.length){var U=E.state.visibleNodes.pop(),q=U.type,G=U.node,Y=U.character;E.options.onRemoveNode&&"function"==typeof E.options.onRemoveNode&&E.options.onRemoveNode({node:G,character:Y}),G&&G.parentNode.removeChild(G),q===y&&I&&o.unshift({eventName:l,eventArgs:{}})}break;case f:E.options.deleteSpeed=g.eventArgs.speed;break;case v:E.options.delay=g.eventArgs.delay;break;case h:E.options.cursor=g.eventArgs.cursor,E.state.elements.cursor.innerHTML=g.eventArgs.cursor}E.options.loop&&(g.eventName===l||g.eventArgs&&g.eventArgs.temp||(E.state.calledEvents=[].concat(b(E.state.calledEvents),[g]))),E.state.eventQueue=o,E.state.lastFrameTime=e}}})),r)if("string"==typeof r){var T=document.querySelector(r);if(!T)throw new Error("Could not find container element");this.state.elements.container=T}else this.state.elements.container=r;g&&(this.options=w(w({},this.options),g)),this.state.initialOptions=w({},this.options),this.init()}var r,g;return r=n,(g=[{key:"init",value:function(){var e,t;this.setupWrapperElement(),this.addEventToQueue(h,{cursor:this.options.cursor},!0),this.addEventToQueue(u,null,!0),!window||window.___TYPEWRITER_JS_STYLES_ADDED___||this.options.skipAddStyles||(e=".Typewriter__cursor{-webkit-animation:Typewriter-cursor 1s infinite;animation:Typewriter-cursor 1s infinite;margin-left:1px}@-webkit-keyframes Typewriter-cursor{0%{opacity:0}50%{opacity:1}100%{opacity:0}}@keyframes Typewriter-cursor{0%{opacity:0}50%{opacity:1}100%{opacity:0}}",(t=document.createElement("style")).appendChild(document.createTextNode(e)),document.head.appendChild(t),window.___TYPEWRITER_JS_STYLES_ADDED___=!0),!0===this.options.autoStart&&this.options.strings&&this.typeOutAllStrings().start()}},{key:"logInDevMode",value:function(e){this.options.devMode&&console.log(e)}}])&&S(r.prototype,g),Object.defineProperty(r,"prototype",{writable:!1}),n}()})(),r.default})()));
+//# sourceMappingURL=core.js.map
+
+/***/ }),
+
+/***/ "./resources/js/app.js":
+/*!*****************************!*\
+  !*** ./resources/js/app.js ***!
+  \*****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var noty__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! noty */ "./node_modules/noty/lib/noty.js");
+/* harmony import */ var noty__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(noty__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var typewriter_effect_dist_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! typewriter-effect/dist/core */ "./node_modules/typewriter-effect/dist/core.js");
+/* harmony import */ var typewriter_effect_dist_core__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(typewriter_effect_dist_core__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var gsap_index_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! gsap/index.js */ "./node_modules/gsap/index.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _regeneratorRuntime() { "use strict"; /*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */ _regeneratorRuntime = function _regeneratorRuntime() { return e; }; var t, e = {}, r = Object.prototype, n = r.hasOwnProperty, o = Object.defineProperty || function (t, e, r) { t[e] = r.value; }, i = "function" == typeof Symbol ? Symbol : {}, a = i.iterator || "@@iterator", c = i.asyncIterator || "@@asyncIterator", u = i.toStringTag || "@@toStringTag"; function define(t, e, r) { return Object.defineProperty(t, e, { value: r, enumerable: !0, configurable: !0, writable: !0 }), t[e]; } try { define({}, ""); } catch (t) { define = function define(t, e, r) { return t[e] = r; }; } function wrap(t, e, r, n) { var i = e && e.prototype instanceof Generator ? e : Generator, a = Object.create(i.prototype), c = new Context(n || []); return o(a, "_invoke", { value: makeInvokeMethod(t, r, c) }), a; } function tryCatch(t, e, r) { try { return { type: "normal", arg: t.call(e, r) }; } catch (t) { return { type: "throw", arg: t }; } } e.wrap = wrap; var h = "suspendedStart", l = "suspendedYield", f = "executing", s = "completed", y = {}; function Generator() {} function GeneratorFunction() {} function GeneratorFunctionPrototype() {} var p = {}; define(p, a, function () { return this; }); var d = Object.getPrototypeOf, v = d && d(d(values([]))); v && v !== r && n.call(v, a) && (p = v); var g = GeneratorFunctionPrototype.prototype = Generator.prototype = Object.create(p); function defineIteratorMethods(t) { ["next", "throw", "return"].forEach(function (e) { define(t, e, function (t) { return this._invoke(e, t); }); }); } function AsyncIterator(t, e) { function invoke(r, o, i, a) { var c = tryCatch(t[r], t, o); if ("throw" !== c.type) { var u = c.arg, h = u.value; return h && "object" == _typeof(h) && n.call(h, "__await") ? e.resolve(h.__await).then(function (t) { invoke("next", t, i, a); }, function (t) { invoke("throw", t, i, a); }) : e.resolve(h).then(function (t) { u.value = t, i(u); }, function (t) { return invoke("throw", t, i, a); }); } a(c.arg); } var r; o(this, "_invoke", { value: function value(t, n) { function callInvokeWithMethodAndArg() { return new e(function (e, r) { invoke(t, n, e, r); }); } return r = r ? r.then(callInvokeWithMethodAndArg, callInvokeWithMethodAndArg) : callInvokeWithMethodAndArg(); } }); } function makeInvokeMethod(e, r, n) { var o = h; return function (i, a) { if (o === f) throw Error("Generator is already running"); if (o === s) { if ("throw" === i) throw a; return { value: t, done: !0 }; } for (n.method = i, n.arg = a;;) { var c = n.delegate; if (c) { var u = maybeInvokeDelegate(c, n); if (u) { if (u === y) continue; return u; } } if ("next" === n.method) n.sent = n._sent = n.arg;else if ("throw" === n.method) { if (o === h) throw o = s, n.arg; n.dispatchException(n.arg); } else "return" === n.method && n.abrupt("return", n.arg); o = f; var p = tryCatch(e, r, n); if ("normal" === p.type) { if (o = n.done ? s : l, p.arg === y) continue; return { value: p.arg, done: n.done }; } "throw" === p.type && (o = s, n.method = "throw", n.arg = p.arg); } }; } function maybeInvokeDelegate(e, r) { var n = r.method, o = e.iterator[n]; if (o === t) return r.delegate = null, "throw" === n && e.iterator["return"] && (r.method = "return", r.arg = t, maybeInvokeDelegate(e, r), "throw" === r.method) || "return" !== n && (r.method = "throw", r.arg = new TypeError("The iterator does not provide a '" + n + "' method")), y; var i = tryCatch(o, e.iterator, r.arg); if ("throw" === i.type) return r.method = "throw", r.arg = i.arg, r.delegate = null, y; var a = i.arg; return a ? a.done ? (r[e.resultName] = a.value, r.next = e.nextLoc, "return" !== r.method && (r.method = "next", r.arg = t), r.delegate = null, y) : a : (r.method = "throw", r.arg = new TypeError("iterator result is not an object"), r.delegate = null, y); } function pushTryEntry(t) { var e = { tryLoc: t[0] }; 1 in t && (e.catchLoc = t[1]), 2 in t && (e.finallyLoc = t[2], e.afterLoc = t[3]), this.tryEntries.push(e); } function resetTryEntry(t) { var e = t.completion || {}; e.type = "normal", delete e.arg, t.completion = e; } function Context(t) { this.tryEntries = [{ tryLoc: "root" }], t.forEach(pushTryEntry, this), this.reset(!0); } function values(e) { if (e || "" === e) { var r = e[a]; if (r) return r.call(e); if ("function" == typeof e.next) return e; if (!isNaN(e.length)) { var o = -1, i = function next() { for (; ++o < e.length;) if (n.call(e, o)) return next.value = e[o], next.done = !1, next; return next.value = t, next.done = !0, next; }; return i.next = i; } } throw new TypeError(_typeof(e) + " is not iterable"); } return GeneratorFunction.prototype = GeneratorFunctionPrototype, o(g, "constructor", { value: GeneratorFunctionPrototype, configurable: !0 }), o(GeneratorFunctionPrototype, "constructor", { value: GeneratorFunction, configurable: !0 }), GeneratorFunction.displayName = define(GeneratorFunctionPrototype, u, "GeneratorFunction"), e.isGeneratorFunction = function (t) { var e = "function" == typeof t && t.constructor; return !!e && (e === GeneratorFunction || "GeneratorFunction" === (e.displayName || e.name)); }, e.mark = function (t) { return Object.setPrototypeOf ? Object.setPrototypeOf(t, GeneratorFunctionPrototype) : (t.__proto__ = GeneratorFunctionPrototype, define(t, u, "GeneratorFunction")), t.prototype = Object.create(g), t; }, e.awrap = function (t) { return { __await: t }; }, defineIteratorMethods(AsyncIterator.prototype), define(AsyncIterator.prototype, c, function () { return this; }), e.AsyncIterator = AsyncIterator, e.async = function (t, r, n, o, i) { void 0 === i && (i = Promise); var a = new AsyncIterator(wrap(t, r, n, o), i); return e.isGeneratorFunction(r) ? a : a.next().then(function (t) { return t.done ? t.value : a.next(); }); }, defineIteratorMethods(g), define(g, u, "Generator"), define(g, a, function () { return this; }), define(g, "toString", function () { return "[object Generator]"; }), e.keys = function (t) { var e = Object(t), r = []; for (var n in e) r.push(n); return r.reverse(), function next() { for (; r.length;) { var t = r.pop(); if (t in e) return next.value = t, next.done = !1, next; } return next.done = !0, next; }; }, e.values = values, Context.prototype = { constructor: Context, reset: function reset(e) { if (this.prev = 0, this.next = 0, this.sent = this._sent = t, this.done = !1, this.delegate = null, this.method = "next", this.arg = t, this.tryEntries.forEach(resetTryEntry), !e) for (var r in this) "t" === r.charAt(0) && n.call(this, r) && !isNaN(+r.slice(1)) && (this[r] = t); }, stop: function stop() { this.done = !0; var t = this.tryEntries[0].completion; if ("throw" === t.type) throw t.arg; return this.rval; }, dispatchException: function dispatchException(e) { if (this.done) throw e; var r = this; function handle(n, o) { return a.type = "throw", a.arg = e, r.next = n, o && (r.method = "next", r.arg = t), !!o; } for (var o = this.tryEntries.length - 1; o >= 0; --o) { var i = this.tryEntries[o], a = i.completion; if ("root" === i.tryLoc) return handle("end"); if (i.tryLoc <= this.prev) { var c = n.call(i, "catchLoc"), u = n.call(i, "finallyLoc"); if (c && u) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } else if (c) { if (this.prev < i.catchLoc) return handle(i.catchLoc, !0); } else { if (!u) throw Error("try statement without catch or finally"); if (this.prev < i.finallyLoc) return handle(i.finallyLoc); } } } }, abrupt: function abrupt(t, e) { for (var r = this.tryEntries.length - 1; r >= 0; --r) { var o = this.tryEntries[r]; if (o.tryLoc <= this.prev && n.call(o, "finallyLoc") && this.prev < o.finallyLoc) { var i = o; break; } } i && ("break" === t || "continue" === t) && i.tryLoc <= e && e <= i.finallyLoc && (i = null); var a = i ? i.completion : {}; return a.type = t, a.arg = e, i ? (this.method = "next", this.next = i.finallyLoc, y) : this.complete(a); }, complete: function complete(t, e) { if ("throw" === t.type) throw t.arg; return "break" === t.type || "continue" === t.type ? this.next = t.arg : "return" === t.type ? (this.rval = this.arg = t.arg, this.method = "return", this.next = "end") : "normal" === t.type && e && (this.next = e), y; }, finish: function finish(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.finallyLoc === t) return this.complete(r.completion, r.afterLoc), resetTryEntry(r), y; } }, "catch": function _catch(t) { for (var e = this.tryEntries.length - 1; e >= 0; --e) { var r = this.tryEntries[e]; if (r.tryLoc === t) { var n = r.completion; if ("throw" === n.type) { var o = n.arg; resetTryEntry(r); } return o; } } throw Error("illegal catch attempt"); }, delegateYield: function delegateYield(e, r, n) { return this.delegate = { iterator: values(e), resultName: r, nextLoc: n }, "next" === this.method && (this.arg = t), y; } }, e; }
+function asyncGeneratorStep(n, t, e, r, o, a, c) { try { var i = n[a](c), u = i.value; } catch (n) { return void e(n); } i.done ? t(u) : Promise.resolve(u).then(r, o); }
+function _asyncToGenerator(n) { return function () { var t = this, e = arguments; return new Promise(function (r, o) { var a = n.apply(t, e); function _next(n) { asyncGeneratorStep(a, r, o, _next, _throw, "next", n); } function _throw(n) { asyncGeneratorStep(a, r, o, _next, _throw, "throw", n); } _next(void 0); }); }; }
+
+
+
+
+
+document.querySelector('.logoImg').addEventListener('click', function (evt) {
+  evt.preventDefault();
+  location.assign('/');
+});
+if (document.querySelector('.section-hero')) {
+  // GSAP animation for hero image
+  gsap_index_js__WEBPACK_IMPORTED_MODULE_4__.gsap.from(".hero-img", {
+    duration: 3,
+    scale: 0.5,
+    opacity: 0,
+    delay: 0.5,
+    stagger: 0.2,
+    ease: "elastic",
+    force3D: true
+  });
+  // GSAP animation for hero text box
+  gsap_index_js__WEBPACK_IMPORTED_MODULE_4__.gsap.from(".hero-text-box", {
+    duration: 2.5,
+    x: -400
+  });
+}
+
+// Smooth Scroll
+var learnMore = document.querySelector('.learnMore');
+var aboutUs = document.querySelector('#aboutUs');
+if (learnMore) {
+  learnMore.addEventListener('click', function (evt) {
+    evt.preventDefault();
+    aboutUs.scrollIntoView({
+      behavior: 'smooth'
+    });
+  });
+}
+
+// Intersection observer API (for typewritter effect )
+if (aboutUs) {
+  // we are surely on home page
+  var descriptionText = document.querySelector('.companyDesription');
+  var interSection = function interSection(entries, observer) {
+    var entry = entries[0];
+    if (entry.isIntersecting == true) {
+      console.log("Intersected");
+
+      // Typewritter animation
+      var typewriter = new (typewriter_effect_dist_core__WEBPACK_IMPORTED_MODULE_3___default())(descriptionText, {
+        loop: false
+      });
+      typewriter.typeString('Introducing <b class="companyDesriptionBrand">Feastwala</b> ,').changeDelay(2).pauseFor(1000).typeString(' delivering, healthy, and delicious <b class="boldBig">homemade like meals</b> straight to your doorstep. ').typeString('With a variety of meal options catering to different dietary needs and preferences, our menu is updated regularly for a <b class="boldBig"> new experience </b> every time. ').pauseFor(1000).typeString('Subscribe via our easy-to-use online ordering system, and our friendly and reliable delivery team will ensure your tiffin box <b class="boldBig">always arrives on time</b>. ').pauseFor(1000).typeString('Enjoy the convenience and <b class="boldBig">affordability</b> of homemade meals without the stress. Try us out today and savor the joy of delicious, healthy food delivered to you. ').pauseFor(1000).typeString('Enjoy your happy meal my friend with <b class="companyDesriptionBrand">Feastwala</b> 😊').pauseFor(1000).start();
+      observer.unobserve(entry.target);
+    }
+  };
+  var sectionObserver = new IntersectionObserver(interSection, {
+    root: null,
+    threshold: 0.1 // 0.1 means 10% errorMargin
+  });
+  sectionObserver.observe(descriptionText);
+}
+if (document.querySelector('.menuWrapper')) {
+  // ----------- Sorting Menu (UI) ------------
+  var menuCardArray = document.querySelectorAll('.cardWrapper');
+  var sortWalaLink = document.querySelectorAll('.sortLink');
+  sortWalaLink.forEach(function (sortLink) {
+    sortLink.addEventListener('click', function (evt) {
+      evt.preventDefault();
+      if (sortLink.classList.contains('sortLinkActive')) {
+        // already active wala btn pe click kiye, so reset
+        sortLink.classList.remove('sortLinkActive');
+        menuCardArray.forEach(function (card) {
+          card.style.display = "unset";
+          card.style.height = "100%";
+        });
+      } else {
+        // duste inactive btn pe click hua hai
+        // first of all remove all existing 'active' class from all links (if any)
+        sortWalaLink.forEach(function (sortLnkInside) {
+          if (sortLnkInside.classList.contains('sortLinkActive')) {
+            sortLnkInside.classList.remove('sortLinkActive');
+          }
+        });
+
+        // add 'active' class to this link
+        sortLink.classList.add('sortLinkActive');
+
+        // first of all show all card (make display: unset)
+        menuCardArray.forEach(function (card) {
+          card.style.display = "unset";
+          card.style.height = "100%";
+        });
+
+        //make those card's display none whose 'foodType' is !== sortLink.textContent
+        menuCardArray.forEach(function (card) {
+          var txt = sortLink.textContent;
+          if (txt === 'Break') {
+            txt = 'breakfast';
+          }
+          if (card.querySelector('.foodType').textContent !== txt) {
+            card.style.display = "none";
+            card.style.height = "100%";
+          }
+        });
+      }
+    });
+  });
+}
+if (document.querySelector('.orders')) {
+  // ----------- Sorting Order (UI) ------------
+  var tbodyArray = document.querySelectorAll('.tableBody');
+  var _sortWalaLink = document.querySelectorAll('.sortLink');
+  _sortWalaLink.forEach(function (sortLink) {
+    sortLink.addEventListener('click', function (evt) {
+      evt.preventDefault();
+      if (sortLink.classList.contains('sortLinkActive')) {
+        // already active wala btn pe click kiye, so reset
+        sortLink.classList.remove('sortLinkActive');
+        tbodyArray.forEach(function (tbody) {
+          tbody.style.display = "revert";
+        });
+      } else {
+        // first of all remove all existing 'active' class from all links (if any)
+        _sortWalaLink.forEach(function (sortLnkInside) {
+          if (sortLnkInside.classList.contains('sortLinkActive')) {
+            sortLnkInside.classList.remove('sortLinkActive');
+          }
+        });
+
+        // add 'active' class to this link
+        sortLink.classList.add('sortLinkActive');
+
+        // first of all show all card (make display: unset)
+        tbodyArray.forEach(function (tbody) {
+          tbody.style.display = "revert";
+        });
+
+        //make those card's display none whose 'foodType' is !== sortLink.textContent
+        tbodyArray.forEach(function (tbody) {
+          var txt = tbody.querySelector('.orderStatus').textContent;
+          if (sortLink.textContent === 'Active Orders' && (txt === 'completed' || txt === 'cancelled' || txt === 'refunded' || txt === 'reject-refund')) {
+            tbody.style.display = "none";
+          }
+          if (sortLink.textContent === 'Completed Orders' && txt !== 'completed') {
+            tbody.style.display = "none";
+          }
+          if (sortLink.textContent === 'Cancelled Orders' && !(txt === 'cancelled' || txt === 'refunded' || txt === 'reject-refund')) {
+            tbody.style.display = "none";
+          }
+        });
+      }
+    });
+  });
+}
+
+// ----------- Half-Full (UI) ------------
+function amountInNumber(amountSelector, conversion) {
+  var amount = amountSelector.innerText;
+  amount = amount.substring(1);
+  amount = parseInt(amount, 10);
+  if (conversion === "Full->Half") {
+    return parseInt(amount / 2, 10) + 5;
+  } else if (conversion === "Half->Full") {
+    return (amount - 5) * 2;
+  }
+  return amount;
+}
+
+// First things first, if user click on 'Half' / 'Full' button, it should change accordingly
+var halfs = document.querySelectorAll('.half');
+var fulls = document.querySelectorAll('.full');
+halfs.forEach(function (half) {
+  half.addEventListener('click', function (evt) {
+    evt.preventDefault();
+    if (half.classList.contains('activeHF') === false) {
+      // ise active karo, aur sideways nextSibling se active hatao
+      half.classList.add('activeHF');
+      half.nextElementSibling.classList.remove('activeHF');
+      var amountSelector = half.closest('.text').querySelector('.price');
+      amountSelector.innerText = '₹' + amountInNumber(amountSelector, 'Full->Half');
+    }
+  });
+});
+fulls.forEach(function (full) {
+  full.addEventListener('click', function (evt) {
+    evt.preventDefault();
+    if (full.classList.contains('activeHF') === false) {
+      // ise active karo, aur sideways prevSibling se active hatao
+      full.classList.add('activeHF');
+      full.previousElementSibling.classList.remove('activeHF');
+      var amountSelector = full.closest('.text').querySelector('.price');
+      amountSelector.innerText = '₹' + amountInNumber(amountSelector, 'Half->Full');
+    }
+  });
+});
+
+// Here we will keep all our client side code
+var addToCart = document.querySelectorAll('.add-to-cart');
+var cartCounter = document.querySelector('#cartCounter');
+var removeFromCart = document.querySelectorAll('.removeItem');
+var addFromCart = document.querySelectorAll('.addItemFromCart');
+var successMsg = function successMsg(msg) {
+  new (noty__WEBPACK_IMPORTED_MODULE_1___default())({
+    type: 'success',
+    timeout: 600,
+    text: msg,
+    progressBar: true
+    // ,layout: 'bottomLeft'
+  }).show();
+};
+var failureMsg = function failureMsg(errMsg) {
+  new (noty__WEBPACK_IMPORTED_MODULE_1___default())({
+    type: 'error',
+    timeout: 5000,
+    text: errMsg,
+    progressBar: true
+    // ,layout: 'bottomLeft'
+  }).show();
+};
+var addCart = /*#__PURE__*/function () {
+  var _ref = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee(pizza) {
+    var res;
+    return _regeneratorRuntime().wrap(function _callee$(_context) {
+      while (1) switch (_context.prev = _context.next) {
+        case 0:
+          _context.prev = 0;
+          _context.next = 3;
+          return axios__WEBPACK_IMPORTED_MODULE_0___default()({
+            method: 'POST',
+            url: '/add-cart',
+            // data that should be passed in API as body 
+            data: pizza,
+            withCredentials: true
+          });
+        case 3:
+          res = _context.sent;
+          if (res.data.status === 'Success') {
+            cartCounter.innerText = res.data.totalQty;
+            successMsg('Item added to cart');
+          }
+          _context.next = 10;
+          break;
+        case 7:
+          _context.prev = 7;
+          _context.t0 = _context["catch"](0);
+          failureMsg(_context.t0.response.data.message);
+        case 10:
+        case "end":
+          return _context.stop();
+      }
+    }, _callee, null, [[0, 7]]);
+  }));
+  return function addCart(_x) {
+    return _ref.apply(this, arguments);
+  };
+}();
+var addItemFromCart = /*#__PURE__*/function () {
+  var _ref2 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee2(pizza) {
+    var res;
+    return _regeneratorRuntime().wrap(function _callee2$(_context2) {
+      while (1) switch (_context2.prev = _context2.next) {
+        case 0:
+          _context2.prev = 0;
+          _context2.next = 3;
+          return axios__WEBPACK_IMPORTED_MODULE_0___default()({
+            method: 'POST',
+            url: '/add-item-from-cart',
+            // data that should be passed in API as body 
+            data: pizza,
+            withCredentials: true
+          });
+        case 3:
+          res = _context2.sent;
+          if (res.data.status === 'Success') {
+            successMsg('Item added to cart');
+          }
+          _context2.next = 10;
+          break;
+        case 7:
+          _context2.prev = 7;
+          _context2.t0 = _context2["catch"](0);
+          failureMsg(_context2.t0.response.data.message);
+        case 10:
+        case "end":
+          return _context2.stop();
+      }
+    }, _callee2, null, [[0, 7]]);
+  }));
+  return function addItemFromCart(_x2) {
+    return _ref2.apply(this, arguments);
+  };
+}();
+var removeCart = /*#__PURE__*/function () {
+  var _ref3 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee3(pizza) {
+    var res;
+    return _regeneratorRuntime().wrap(function _callee3$(_context3) {
+      while (1) switch (_context3.prev = _context3.next) {
+        case 0:
+          _context3.prev = 0;
+          _context3.next = 3;
+          return axios__WEBPACK_IMPORTED_MODULE_0___default()({
+            method: 'POST',
+            url: '/remove-cart',
+            // data that should be passed in API as body 
+            data: pizza,
+            withCredentials: true
+          });
+        case 3:
+          res = _context3.sent;
+          if (res.data.status === 'Success') {
+            successMsg('Item removed from cart');
+          }
+          _context3.next = 10;
+          break;
+        case 7:
+          _context3.prev = 7;
+          _context3.t0 = _context3["catch"](0);
+          failureMsg(_context3.t0.response.data.message);
+        case 10:
+        case "end":
+          return _context3.stop();
+      }
+    }, _callee3, null, [[0, 7]]);
+  }));
+  return function removeCart(_x3) {
+    return _ref3.apply(this, arguments);
+  };
+}();
+addToCart.forEach(function (btn) {
+  btn.addEventListener('click', function (evt) {
+    var pizza = JSON.parse(btn.dataset.pizza); // (string --> JSON)
+    if (pizza.halfFull === true) {
+      var closestHalfBtn = btn.closest('.text').querySelector('.half');
+      var closestFullBtn = btn.closest('.text').querySelector('.full');
+      console.log(closestHalfBtn, closestFullBtn);
+      if (closestFullBtn.classList.contains('activeHF') === true) {
+        pizza.hfStatus = 'Full';
+        addCart(pizza);
+      } else {
+        pizza.hfStatus = 'Half';
+        addCart(pizza);
+      }
+    } else {
+      pizza.hfStatus = 'Full'; // by deafault
+      addCart(pizza);
+    }
+  });
+});
+removeFromCart.forEach(function (btn) {
+  btn.addEventListener('click', function (evt) {
+    var pizza = JSON.parse(btn.dataset.pizza); // (string --> JSON)
+    removeCart(pizza);
+    window.setTimeout(function () {
+      location.assign('/cart'); // This is how we redirect to new route (here home route)
+    }, 1000);
+  });
+});
+addFromCart.forEach(function (btn) {
+  btn.addEventListener('click', function (evt) {
+    var pizza = JSON.parse(btn.dataset.pizza); // (string --> JSON)
+    addItemFromCart(pizza);
+    window.setTimeout(function () {
+      location.assign('/cart'); // This is how we redirect to new route (here home route)
+    }, 1000);
+  });
+});
+var registerForm = document.querySelector('.registerWalaForm');
+var register = /*#__PURE__*/function () {
+  var _ref4 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee4(username, email, phone, password, confirmPassword) {
+    var res;
+    return _regeneratorRuntime().wrap(function _callee4$(_context4) {
+      while (1) switch (_context4.prev = _context4.next) {
+        case 0:
+          _context4.prev = 0;
+          _context4.next = 3;
+          return axios__WEBPACK_IMPORTED_MODULE_0___default()({
+            method: 'POST',
+            url: '/register-user',
+            data: {
+              username: username,
+              email: email,
+              phone: phone,
+              password: password,
+              confirmPassword: confirmPassword
+            },
+            withCredentials: true
+          });
+        case 3:
+          res = _context4.sent;
+          if (res.data.status === 'Success') {
+            successMsg('Sign up successful ... ');
+            window.setTimeout(function () {
+              location.assign('/login'); // redirect to login route
+            }, 1000);
+          }
+          _context4.next = 10;
+          break;
+        case 7:
+          _context4.prev = 7;
+          _context4.t0 = _context4["catch"](0);
+          failureMsg(_context4.t0.response.data.message);
+        case 10:
+        case "end":
+          return _context4.stop();
+      }
+    }, _callee4, null, [[0, 7]]);
+  }));
+  return function register(_x4, _x5, _x6, _x7, _x8) {
+    return _ref4.apply(this, arguments);
+  };
+}();
+if (registerForm) {
+  registerForm.addEventListener('submit', function (evt) {
+    evt.preventDefault();
+    var username = document.querySelector('#username').value;
+    var email = document.querySelector('#email').value;
+    var phone = document.querySelector('#phone').value;
+    var password = document.querySelector('#password').value;
+    var confirmPassword = document.querySelector('#confirmPassword').value;
+    if (!username || !email || !phone || !password || !confirmPassword) {
+      failureMsg('All fields are mandatory');
+      window.setTimeout(function () {
+        location.reload();
+      }, 1000);
+    } else {
+      register(username, email, phone, password, confirmPassword);
+    }
+  });
+}
+var logInForm = document.querySelector('.logInWalaForm');
+var login = /*#__PURE__*/function () {
+  var _ref5 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee5(email, password) {
+    var res;
+    return _regeneratorRuntime().wrap(function _callee5$(_context5) {
+      while (1) switch (_context5.prev = _context5.next) {
+        case 0:
+          _context5.prev = 0;
+          _context5.next = 3;
+          return axios__WEBPACK_IMPORTED_MODULE_0___default()({
+            method: 'POST',
+            url: '/login-user',
+            data: {
+              email: email,
+              password: password
+            },
+            withCredentials: true
+          });
+        case 3:
+          res = _context5.sent;
+          if (res.data.status === 'Success') {
+            successMsg('Login successful ... ');
+            window.setTimeout(function () {
+              location.assign('/'); // This is how we redirect to new route (here home route)
+            }, 1000);
+          }
+          _context5.next = 10;
+          break;
+        case 7:
+          _context5.prev = 7;
+          _context5.t0 = _context5["catch"](0);
+          failureMsg(_context5.t0.response.data.message);
+        case 10:
+        case "end":
+          return _context5.stop();
+      }
+    }, _callee5, null, [[0, 7]]);
+  }));
+  return function login(_x9, _x10) {
+    return _ref5.apply(this, arguments);
+  };
+}();
+if (logInForm) {
+  logInForm.addEventListener('submit', function (evt) {
+    evt.preventDefault();
+    var email = document.querySelector('#email').value;
+    var password = document.querySelector('#password').value;
+    if (!email || !password) {
+      failureMsg('All fields are mandatory');
+      window.setTimeout(function () {
+        location.reload();
+      }, 1000);
+    } else {
+      login(email, password);
+    }
+  });
+}
+var logOutBtn = document.querySelector('.logoutBtn');
+var logOut = /*#__PURE__*/function () {
+  var _ref6 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee6() {
+    var res;
+    return _regeneratorRuntime().wrap(function _callee6$(_context6) {
+      while (1) switch (_context6.prev = _context6.next) {
+        case 0:
+          _context6.prev = 0;
+          _context6.next = 3;
+          return axios__WEBPACK_IMPORTED_MODULE_0___default()({
+            method: 'GET',
+            url: '/logout-user',
+            withCredentials: true
+          });
+        case 3:
+          res = _context6.sent;
+          if (res.data.status === 'Success') {
+            successMsg('Logout successful ... ');
+            window.setTimeout(function () {
+              location.assign('/'); // This is how we redirect to new route (here home route)
+            }, 1000);
+          }
+          _context6.next = 10;
+          break;
+        case 7:
+          _context6.prev = 7;
+          _context6.t0 = _context6["catch"](0);
+          failureMsg(_context6.t0.response.data.message);
+        case 10:
+        case "end":
+          return _context6.stop();
+      }
+    }, _callee6, null, [[0, 7]]);
+  }));
+  return function logOut() {
+    return _ref6.apply(this, arguments);
+  };
+}();
+if (logOutBtn) {
+  logOutBtn.addEventListener('click', function (evt) {
+    evt.preventDefault();
+    logOut();
+  });
+}
+var forgotPasswordForm = document.querySelector('.forgotWalaForm');
+var forgotPassword = /*#__PURE__*/function () {
+  var _ref7 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee7(email) {
+    var res, resetMsg;
+    return _regeneratorRuntime().wrap(function _callee7$(_context7) {
+      while (1) switch (_context7.prev = _context7.next) {
+        case 0:
+          _context7.prev = 0;
+          _context7.next = 3;
+          return axios__WEBPACK_IMPORTED_MODULE_0___default()({
+            method: 'POST',
+            url: '/forgot-password-user',
+            data: {
+              email: email
+            },
+            withCredentials: true
+          });
+        case 3:
+          res = _context7.sent;
+          if (res.data.status === 'Success') {
+            resetMsg = document.querySelector('.forgotPasswordMessage');
+            resetMsg.classList.remove('hidden');
+            successMsg('Reset link sent Successfully');
+          }
+          _context7.next = 10;
+          break;
+        case 7:
+          _context7.prev = 7;
+          _context7.t0 = _context7["catch"](0);
+          failureMsg(_context7.t0.response.data.message);
+        case 10:
+        case "end":
+          return _context7.stop();
+      }
+    }, _callee7, null, [[0, 7]]);
+  }));
+  return function forgotPassword(_x11) {
+    return _ref7.apply(this, arguments);
+  };
+}();
+if (forgotPasswordForm) {
+  forgotPasswordForm.addEventListener('submit', function (evt) {
+    evt.preventDefault();
+    var email = document.querySelector('#email').value;
+    if (!email) {
+      failureMsg('All fields are mandatory');
+      window.setTimeout(function () {
+        location.reload();
+      }, 1000);
+    } else {
+      forgotPassword(email);
+    }
+  });
+}
+var resetPasswordForm = document.querySelector('.resetWalaForm');
+var resetPassword = /*#__PURE__*/function () {
+  var _ref8 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee8(password, confirmPassword, token) {
+    var res;
+    return _regeneratorRuntime().wrap(function _callee8$(_context8) {
+      while (1) switch (_context8.prev = _context8.next) {
+        case 0:
+          _context8.prev = 0;
+          _context8.next = 3;
+          return axios__WEBPACK_IMPORTED_MODULE_0___default()({
+            method: 'PATCH',
+            url: '/reset-password-user',
+            data: {
+              password: password,
+              confirmPassword: confirmPassword,
+              token: token
+            },
+            withCredentials: true
+          });
+        case 3:
+          res = _context8.sent;
+          if (res.data.status === 'Success') {
+            successMsg('Password Resetted Successfully');
+            window.setTimeout(function () {
+              location.assign('/login'); // This is how we redirect to new route (here home route)
+            }, 1000);
+          }
+          _context8.next = 10;
+          break;
+        case 7:
+          _context8.prev = 7;
+          _context8.t0 = _context8["catch"](0);
+          failureMsg(_context8.t0.response.data.message);
+        case 10:
+        case "end":
+          return _context8.stop();
+      }
+    }, _callee8, null, [[0, 7]]);
+  }));
+  return function resetPassword(_x12, _x13, _x14) {
+    return _ref8.apply(this, arguments);
+  };
+}();
+if (resetPasswordForm) {
+  resetPasswordForm.addEventListener('submit', function (evt) {
+    evt.preventDefault();
+    var password = document.querySelector('#password').value;
+    var confirmPassword = document.querySelector('#confirmPassword').value;
+    var str = window.location.href;
+    var arr = str.split('/');
+    var size = arr.length;
+    var token = arr[size - 1];
+    if (!password || !confirmPassword) {
+      failureMsg('All fields are mandatory');
+      window.setTimeout(function () {
+        location.reload();
+      }, 1000);
+    } else {
+      resetPassword(password, confirmPassword, token);
+    }
+  });
+}
+
+// Change Order Status (in singleOrder page)
+var hiddenInput = document.querySelector('#hiddenInput'); // input whose value is storing current order object
+var allStatus = document.querySelectorAll('.status_line'); // all 5 steps
+var time = document.createElement('small'); // to display time beside current process
+// creating this tag <small></small>
+
+var updateOrderStatus = /*#__PURE__*/function () {
+  var _ref9 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee9(order) {
+    var stepCompleted;
+    return _regeneratorRuntime().wrap(function _callee9$(_context9) {
+      while (1) switch (_context9.prev = _context9.next) {
+        case 0:
+          // RESET
+          allStatus.forEach(function (status) {
+            status.classList.remove('step-completed');
+            status.classList.remove('current');
+          });
+
+          // form [starting till order.status] is 'step-completed', nextSibling after order.status is 'current'
+          stepCompleted = true;
+          allStatus.forEach(function (status) {
+            var dataProp = status.dataset.status;
+            if (stepCompleted) {
+              status.classList.add('step-completed');
+            }
+            if (dataProp === order.status) {
+              stepCompleted = false;
+              time.innerText = moment__WEBPACK_IMPORTED_MODULE_2___default()(order.updatedAt).format('hh:mm A');
+              status.appendChild(time);
+              if (status.nextElementSibling) {
+                status.nextElementSibling.classList.add('current');
+              }
+              // break;
+            }
+          });
+        case 3:
+        case "end":
+          return _context9.stop();
+      }
+    }, _callee9);
+  }));
+  return function updateOrderStatus(_x15) {
+    return _ref9.apply(this, arguments);
+  };
+}();
+if (hiddenInput) {
+  var order = JSON.parse(hiddenInput.value); // string --> JSON
+  updateOrderStatus(order);
+}
+var cancelOrderBtn = document.querySelector('.cancelOrderBtn');
+var cancelOrder = /*#__PURE__*/function () {
+  var _ref10 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee10(order) {
+    var res;
+    return _regeneratorRuntime().wrap(function _callee10$(_context10) {
+      while (1) switch (_context10.prev = _context10.next) {
+        case 0:
+          _context10.prev = 0;
+          _context10.next = 3;
+          return axios__WEBPACK_IMPORTED_MODULE_0___default()({
+            method: 'PATCH',
+            url: '/cancel-order',
+            data: {
+              orderID: order._id
+            },
+            withCredentials: true
+          });
+        case 3:
+          res = _context10.sent;
+          if (res.data.status === 'Success') {
+            successMsg('Order cancelled successfully');
+            window.setTimeout(function () {
+              location.assign('/customer-order'); // This is how we redirect to new route (here home route)
+            }, 1000);
+          }
+          _context10.next = 10;
+          break;
+        case 7:
+          _context10.prev = 7;
+          _context10.t0 = _context10["catch"](0);
+          failureMsg(_context10.t0.response.data.message);
+        case 10:
+        case "end":
+          return _context10.stop();
+      }
+    }, _callee10, null, [[0, 7]]);
+  }));
+  return function cancelOrder(_x16) {
+    return _ref10.apply(this, arguments);
+  };
+}();
+if (cancelOrderBtn) {
+  cancelOrderBtn.addEventListener('click', function (evt) {
+    evt.preventDefault();
+    var order = JSON.parse(cancelOrderBtn.dataset.order);
+    cancelOrder(order);
+    location.assign('/customer-order');
+  });
+}
+var userImg = document.querySelector('.userImg');
+if (userImg) {
+  userImg.addEventListener('click', function (evt) {
+    evt.preventDefault();
+    window.setTimeout(function () {
+      location.assign('/update-info'); // redirect to update info page when user click on userImg
+    }, 1000);
+  });
+}
+var updateInfoForm = document.querySelector('.updateInfoWalaForm');
+var updateInfo = /*#__PURE__*/function () {
+  var _ref11 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee11(updateObj) {
+    var res;
+    return _regeneratorRuntime().wrap(function _callee11$(_context11) {
+      while (1) switch (_context11.prev = _context11.next) {
+        case 0:
+          _context11.prev = 0;
+          _context11.next = 3;
+          return axios__WEBPACK_IMPORTED_MODULE_0___default()({
+            method: 'PATCH',
+            url: '/update-info-user',
+            data: updateObj,
+            withCredentials: true
+          });
+        case 3:
+          res = _context11.sent;
+          if (res.data.status === 'Success') {
+            successMsg('User data updated .. ');
+            window.setTimeout(function () {
+              location.assign('/me'); // redirect to login route
+            }, 1000);
+          }
+          _context11.next = 10;
+          break;
+        case 7:
+          _context11.prev = 7;
+          _context11.t0 = _context11["catch"](0);
+          failureMsg(_context11.t0.response.data.message);
+        case 10:
+        case "end":
+          return _context11.stop();
+      }
+    }, _callee11, null, [[0, 7]]);
+  }));
+  return function updateInfo(_x17) {
+    return _ref11.apply(this, arguments);
+  };
+}();
+if (updateInfoForm) {
+  updateInfoForm.addEventListener('submit', function (evt) {
+    evt.preventDefault();
+    var updateForm = new FormData();
+    if (document.querySelector('#username').value) {
+      updateForm.append('username', document.querySelector('#username').value);
+    }
+    if (document.querySelector('#email').value) {
+      updateForm.append('email', document.querySelector('#email').value);
+    }
+    if (document.querySelector('#phone').value) {
+      updateForm.append('phone', document.querySelector('#phone').value);
+    }
+    if (document.querySelector('#photo').files) {
+      updateForm.append('photo', document.querySelector('#photo').files[0]);
+    } // for this reason, we need to do it in this way
+
+    updateInfo(updateForm);
+  });
+}
+var updatePasswordForm = document.querySelector('.updatePasswordWalaForm');
+var updatePassword = /*#__PURE__*/function () {
+  var _ref12 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee12(currentPassword, newPassword, newConfirmPassword) {
+    var res;
+    return _regeneratorRuntime().wrap(function _callee12$(_context12) {
+      while (1) switch (_context12.prev = _context12.next) {
+        case 0:
+          _context12.prev = 0;
+          _context12.next = 3;
+          return axios__WEBPACK_IMPORTED_MODULE_0___default()({
+            method: 'PATCH',
+            url: '/update-password-user',
+            data: {
+              currentPassword: currentPassword,
+              newPassword: newPassword,
+              newConfirmPassword: newConfirmPassword
+            },
+            withCredentials: true
+          });
+        case 3:
+          res = _context12.sent;
+          if (res.data.status === 'Success') {
+            successMsg('User password updated .. ');
+            window.setTimeout(function () {
+              location.assign('/login'); // redirect to login route
+            }, 1000);
+          }
+          _context12.next = 10;
+          break;
+        case 7:
+          _context12.prev = 7;
+          _context12.t0 = _context12["catch"](0);
+          failureMsg(_context12.t0.response.data.message);
+        case 10:
+        case "end":
+          return _context12.stop();
+      }
+    }, _callee12, null, [[0, 7]]);
+  }));
+  return function updatePassword(_x18, _x19, _x20) {
+    return _ref12.apply(this, arguments);
+  };
+}();
+if (updatePasswordForm) {
+  updatePasswordForm.addEventListener('submit', function (evt) {
+    evt.preventDefault();
+    var currentPassword = document.querySelector('#currentPassword').value;
+    var newPassword = document.querySelector('#newPassword').value;
+    var newConfirmPassword = document.querySelector('#newConfirmPassword').value;
+    if (!currentPassword || !newPassword || !newConfirmPassword) {
+      failureMsg("All fields are mandatory");
+      window.setTimeout(function () {
+        location.reload();
+      }, 1000);
+    } else {
+      updatePassword(currentPassword, newPassword, newConfirmPassword);
+    }
+  });
+}
+var deactivateAcc = document.querySelector('.deactivateAcc');
+var deactivateUser = /*#__PURE__*/function () {
+  var _ref13 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee13() {
+    var res;
+    return _regeneratorRuntime().wrap(function _callee13$(_context13) {
+      while (1) switch (_context13.prev = _context13.next) {
+        case 0:
+          _context13.prev = 0;
+          _context13.next = 3;
+          return axios__WEBPACK_IMPORTED_MODULE_0___default()({
+            method: 'PATCH',
+            url: '/deactivate-user',
+            withCredentials: true
+          });
+        case 3:
+          res = _context13.sent;
+          if (res.status === 204) {
+            successMsg('User account deactivated ... ');
+            window.setTimeout(function () {
+              location.assign('/'); // redirect to home route
+            }, 1000);
+          }
+          _context13.next = 10;
+          break;
+        case 7:
+          _context13.prev = 7;
+          _context13.t0 = _context13["catch"](0);
+          failureMsg(_context13.t0.response.data.message);
+        case 10:
+        case "end":
+          return _context13.stop();
+      }
+    }, _callee13, null, [[0, 7]]);
+  }));
+  return function deactivateUser() {
+    return _ref13.apply(this, arguments);
+  };
+}();
+if (deactivateAcc) {
+  deactivateAcc.addEventListener('click', function (evt) {
+    evt.preventDefault();
+    deactivateUser();
+  });
+}
+var addFoodForm = document.querySelector('.addFoodWalaForm');
+var addFood = /*#__PURE__*/function () {
+  var _ref14 = _asyncToGenerator(/*#__PURE__*/_regeneratorRuntime().mark(function _callee14(updateForm) {
+    var res;
+    return _regeneratorRuntime().wrap(function _callee14$(_context14) {
+      while (1) switch (_context14.prev = _context14.next) {
+        case 0:
+          _context14.prev = 0;
+          _context14.next = 3;
+          return axios__WEBPACK_IMPORTED_MODULE_0___default()({
+            method: 'POST',
+            url: '/admin-backend-add-food',
+            data: updateForm,
+            withCredentials: true
+          });
+        case 3:
+          res = _context14.sent;
+          if (res.data.status === 'Success') {
+            successMsg('Food item added to menu');
+            window.setTimeout(function () {
+              location.assign('/me'); // redirect to home route
+            }, 1000);
+          }
+          _context14.next = 10;
+          break;
+        case 7:
+          _context14.prev = 7;
+          _context14.t0 = _context14["catch"](0);
+          failureMsg(_context14.t0.response.data.message);
+        case 10:
+        case "end":
+          return _context14.stop();
+      }
+    }, _callee14, null, [[0, 7]]);
+  }));
+  return function addFood(_x21) {
+    return _ref14.apply(this, arguments);
+  };
+}();
+if (addFoodForm) {
+  addFoodForm.addEventListener('submit', function (evt) {
+    evt.preventDefault();
+    var name = document.querySelector('#name').value;
+    var foodType = document.querySelector('#foodType').value;
+    var isVeg = document.querySelector('#isVeg').checked ? true : false;
+    var halfFull = document.querySelector('#halfFull').checked ? true : false;
+    var price = Number(document.querySelector('#price').value);
+    var description = document.querySelector('#description').value;
+    if (!name || !foodType || !price || !description) {
+      failureMsg("Name, Food Type, Price and Description are mandatory");
+      window.setTimeout(function () {
+        location.reload();
+      }, 1000);
+    } else {
+      var updateForm = new FormData();
+      if (name) {
+        updateForm.append('name', name);
+      }
+      if (foodType) {
+        updateForm.append('foodType', foodType);
+      }
+      if (isVeg) {
+        updateForm.append('isVeg', isVeg);
+      }
+      if (halfFull) {
+        updateForm.append('halfFull', halfFull);
+      }
+      if (price) {
+        updateForm.append('price', price);
+      }
+      if (description) {
+        updateForm.append('description', description);
+      }
+      if (document.querySelector('#foodPhoto').files) {
+        updateForm.append('foodPhoto', document.querySelector('#foodPhoto').files[0]);
+      } // for this reason, we need to do it in this way
+
+      addFood(updateForm);
+    }
+  });
+}
+
+/* ---------------- MAP INTEGRATION ----------------- */
+
+// getting content from dataset property
+var mapID = document.getElementById('map');
+//const locations= JSON.parse(mapID.dataset.locations); // string --> Object/JSON
+
+if (mapID) {
+  var interSectionMap = function interSectionMap(entries, observer) {
+    var entry = entries[0];
+    if (entry.isIntersecting == true) {
+      console.log("Intersected");
+
+      // Actual Map Integration
+      var locations = [{
+        coordinates: [77.1676293, 28.5230879],
+        description: "Kishangarh, New Delhi, India"
+      }, {
+        coordinates: [77.1690067, 28.5567326],
+        description: "Munirka Enclave, New Delhi, India"
+      }];
+      console.log(locations);
+      var map = new maplibregl.Map({
+        container: 'map',
+        // that id in which map will be placed
+        style: 'https://api.maptiler.com/maps/streets-v2/style.json?key=yExgVD2w6i8h5kbsJEcM',
+        // style of map
+        scrollZoom: true
+      });
+      var bounds = new maplibregl.LngLatBounds();
+      locations.forEach(function (loc) {
+        // Create marker
+        var el = document.createElement('div'); // create div
+        el.className = 'marker'; // apply pre-defined style class named 'marker'
+
+        // Add marker
+        new maplibregl.Marker({
+          element: el,
+          anchor: 'bottom'
+        }).setLngLat(loc.coordinates).addTo(map);
+
+        // Add popup
+        new maplibregl.Popup({
+          offset: 30
+        }).setLngLat(loc.coordinates).setHTML("<p>".concat(loc.description, "</p>")) // what will be written on each of the marker
+        .addTo(map);
+
+        // Extend map bounds to include current location. [OR adjust map zoom to accommodate all locations]
+        bounds.extend(loc.coordinates);
+      });
+      map.fitBounds(bounds, {
+        padding: {
+          top: 100,
+          bottom: 100,
+          left: 100,
+          right: 100
+        }
+      });
+      observer.unobserve(entry.target);
+    }
+  };
+  var sectionObserverMap = new IntersectionObserver(interSectionMap, {
+    root: null,
+    threshold: 0.1 // 0.1 means 10% error margin
+  });
+  sectionObserverMap.observe(mapID);
+}
+
+/* ---------------------  SOCKET IO INTEGRATION ------------------ */
+
+// Creating socket connection on client side
+var socket = io(); // due to '<script src="/socket.io/socket.io.js"></script>' in 'layout.ejs'
+
+// Task 1 : on changing order status on '/admin-order', it should reflect to '/customer-order/:orderID' (singleOrder) in realtime
+if (hiddenInput) {
+  var _order = JSON.parse(hiddenInput.value); // string --> JSON
+
+  // as we need separate rooms for separate orders
+  var roomName = "order_".concat(_order._id);
+  socket.emit('joinRoom', roomName); // emit socket event to with event name 'joinRoom' to sever join the uniuqe room
+
+  socket.on('statusUpdateFromSever', function (data) {
+    // listning to event named 'statusUpdateFromSever' and update order status
+    var updatedOrder = _objectSpread({}, _order);
+    updatedOrder.updatedAt = moment__WEBPACK_IMPORTED_MODULE_2___default()().format();
+    updatedOrder.status = data.status;
+    successMsg('Order status updated successfully');
+    updateOrderStatus(updatedOrder);
+  });
+}
+
+// Task 2: on creating new order at route '/order-cart', it should reflect to '/admin-order' (with a autometic page reload)
+var isAdminPage = document.querySelector('#orderTableBody');
+if (isAdminPage) {
+  // Indide this 'if' means we are either 'adminOrderPage' or 'adminRefundPage'
+  socket.emit('joinRoom', 'adminRoom'); // will be listened by server
+
+  socket.on('orderPlaceFromServer', function () {
+    // listning to event named 'orderPlaceFromServer' and update admin-order page
+    // we can't render 'adminOrder' with all orders (which '/admin-order' can), so
+    location.reload();
+    successMsg('New order arrived ... ');
+  });
+  socket.on('orderCancelFromServer', function () {
+    location.reload();
+    failureMsg('Order was cancelled :( ');
+  });
+}
+
+/***/ }),
+
+/***/ "./resources/scss/app.scss":
+/*!*********************************!*\
+  !*** ./resources/scss/app.scss ***!
+  \*********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
 
 /***/ })
 
@@ -34148,7 +37206,11 @@ process.umask = function() { return 0; };
 /******/ 			return __webpack_require__.O(result);
 /******/ 		}
 /******/ 		
+<<<<<<< HEAD
 /******/ 		var chunkLoadingGlobal = self["webpackChunkmealmate"] = self["webpackChunkmealmate"] || [];
+=======
+/******/ 		var chunkLoadingGlobal = self["webpackChunkfeastwala"] = self["webpackChunkfeastwala"] || [];
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
 /******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
 /******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
 /******/ 	})();
@@ -34163,4 +37225,8 @@ process.umask = function() { return 0; };
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()
+<<<<<<< HEAD
 ;
+=======
+;
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)

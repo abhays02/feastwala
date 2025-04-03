@@ -897,7 +897,11 @@ if (mapID) {
 
             var map = new maplibregl.Map({
                 container: 'map', // that id in which map will be placed
+<<<<<<< HEAD
                 style: 'https://api.maptiler.com/maps/0195e0aa-04ad-7323-9028-cb5d7a5d36c3/style.json?key=yExgVD2w6i8h5kbsJEcM', // style of map
+=======
+                style: 'https://api.maptiler.com/maps/streets-v2/style.json?key=yExgVD2w6i8h5kbsJEcM', // style of map
+>>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
                 scrollZoom: true 
             });
 
