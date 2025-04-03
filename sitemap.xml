@@ -1,34 +1,42 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
-		<!--	created with www.mysitemapgenerator.com	-->
-		<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+      xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+<!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
+
+
 <url>
-	<loc>https://mealmate-app.up.railway.app/</loc>
-	<lastmod>2024-06-06T20:21:51+01:00</lastmod>
-	<priority>1.0</priority>
+  <loc>https://feastwala.com/</loc>
+  <lastmod>2025-04-03T05:17:37+00:00</lastmod>
+  <priority>1.00</priority>
 </url>
 <url>
-	<loc>https://mealmate-app.up.railway.app/menu</loc>
-	<lastmod>2024-06-06T20:21:51+01:00</lastmod>
-	<priority>1.0</priority>
+  <loc>https://feastwala.com/menu</loc>
+  <lastmod>2025-04-03T05:17:37+00:00</lastmod>
+  <priority>0.80</priority>
 </url>
 <url>
-	<loc>https://mealmate-app.up.railway.app/register</loc>
-	<lastmod>2024-06-06T20:21:51+01:00</lastmod>
-	<priority>1.0</priority>
+  <loc>https://feastwala.com/register</loc>
+  <lastmod>2025-04-03T05:17:37+00:00</lastmod>
+  <priority>0.80</priority>
 </url>
 <url>
-	<loc>https://mealmate-app.up.railway.app/login</loc>
-	<lastmod>2024-06-06T20:21:51+01:00</lastmod>
-	<priority>1.0</priority>
+  <loc>https://feastwala.com/login</loc>
+  <lastmod>2025-04-03T05:17:37+00:00</lastmod>
+  <priority>0.80</priority>
 </url>
 <url>
-	<loc>https://mealmate-app.up.railway.app/cart</loc>
-	<lastmod>2024-06-06T20:21:51+01:00</lastmod>
-	<priority>1.0</priority>
+  <loc>https://feastwala.com/cart</loc>
+  <lastmod>2025-04-03T05:17:37+00:00</lastmod>
+  <priority>0.80</priority>
 </url>
 <url>
-	<loc>https://mealmate-app.up.railway.app/forgot-password</loc>
-	<lastmod>2024-06-06T20:21:54+01:00</lastmod>
-	<priority>1.0</priority>
+  <loc>https://feastwala.com/forgot-password</loc>
+  <lastmod>2025-04-03T05:17:37+00:00</lastmod>
+  <priority>0.64</priority>
 </url>
+
+
 </urlset>
