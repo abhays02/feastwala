@@ -12,19 +12,11 @@
   "dependencies": {
     "axios": "^0.19.2",
     "bcryptjs": "^2.4.3",
-<<<<<<< HEAD
-=======
-    "body-parser": "^2.2.0",
->>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
     "connect-mongo": "^3.2.0",
     "cookie-parser": "^1.4.6",
     "dotenv": "^16.4.7",
     "ejs": "^3.1.3",
-<<<<<<< HEAD
     "express": "^4.17.1",
-=======
-    "express": "^4.21.2",
->>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
     "express-ejs-layouts": "^2.5.0",
     "express-flash": "^0.0.2",
     "express-session": "^1.17.3",

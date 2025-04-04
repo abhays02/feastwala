@@ -849,12 +849,8 @@ a:hover {
 
 /* NAVBAR CSS BEGINS */
 .navLogo {
-<<<<<<< HEAD
   width: 12rem;
   height: auto;
-=======
-  width: 8.5rem;
->>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
 }
 
 .dropDownName {
@@ -1817,12 +1813,8 @@ section.status {
 /* Logo image size */
 .logoImg {
   cursor: pointer;
-<<<<<<< HEAD
   width: 30%;
   height: auto;
-=======
-  width: 15%;
->>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
 }
 
 /* -------- Footer ---------- */
