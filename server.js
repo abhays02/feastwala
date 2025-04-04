@@ -92,8 +92,7 @@ app.use((req, res, next) => {
 const webRouter = require('./routes/webRouter');
 app.use('/', webRouter);
 
-<<<<<<< HEAD
-=======
+
 // Integrate Support Module
 const integrateSupportModule = require('./support-module-integration');
 integrateSupportModule(app, {
@@ -102,7 +101,7 @@ integrateSupportModule(app, {
     enableWhatsapp: true
 });
 
->>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
+
 const server = app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`);
 });
