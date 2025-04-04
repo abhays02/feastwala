@@ -1,4 +1,3 @@
-@ -1,38 +0,0 @@
 // support-module-integration.js
 const SupportModule = require('./support-module/live-support-whatsapp-module');
 const path = require('path');
