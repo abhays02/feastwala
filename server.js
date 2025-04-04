@@ -92,6 +92,16 @@ app.use((req, res, next) => {
 const webRouter = require('./routes/webRouter');
 app.use('/', webRouter);
 
+
+// Integrate Support Module
+const integrateSupportModule = require('./support-module-integration');
+integrateSupportModule(app, {
+    whatsappNumber: '+91 9711386982', // Replace with your actual WhatsApp business number
+    whatsappMessage: 'Hello! I would like to place an order from Feastwala:',
+    enableWhatsapp: true
+});
+
+
 const server = app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`);
 });
