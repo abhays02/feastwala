@@ -37206,11 +37206,7 @@ __webpack_require__.r(__webpack_exports__);
 /******/ 			return __webpack_require__.O(result);
 /******/ 		}
 /******/ 		
-<<<<<<< HEAD
-/******/ 		var chunkLoadingGlobal = self["webpackChunkmealmate"] = self["webpackChunkmealmate"] || [];
-=======
 /******/ 		var chunkLoadingGlobal = self["webpackChunkfeastwala"] = self["webpackChunkfeastwala"] || [];
->>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
 /******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
 /******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
 /******/ 	})();
@@ -37225,8 +37221,7 @@ __webpack_require__.r(__webpack_exports__);
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 	
 /******/ })()
-<<<<<<< HEAD
+
 ;
-=======
+
 ;
->>>>>>> d9537ae (Updated WhatsApp number and removed unused support module code)
