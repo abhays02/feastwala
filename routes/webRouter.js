@@ -117,6 +117,23 @@ router.route('/admin-backend-add-food')
             foodPhotoController.foodPhotoProcessing,
             adminOrderController.addFoodBackend);
 
+// Menu Management Routes
+router.route('/admin-manage-menu')
+    .get(authController.protectedAccess, authController.allowAdmin('admin'), adminOrderController.manageMenu);
+
+router.route('/admin-edit-food/:id')
+    .get(authController.protectedAccess, authController.allowAdmin('admin'), adminOrderController.getEditFood);
+
+router.route('/admin-update-food/:id')
+    .post(authController.protectedAccess, 
+          authController.allowAdmin('admin'),
+          foodPhotoController.uploadPhoto,
+          foodPhotoController.foodPhotoProcessing,
+          adminOrderController.updateFood);
+
+router.route('/admin-delete-food/:id')
+    .delete(authController.protectedAccess, authController.allowAdmin('admin'), adminOrderController.deleteFood);
+
 router.route('/sitemap.xml')
     .get((req, res) => {
         res.sendFile(path.join(process.cwd(), "sitemap.xml"));

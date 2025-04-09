@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Menu Item - FeastWala</title>
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/app.css">
+</head>
+
+<body>
+    <!-- We'll use the main layout instead -->
+
+    <section class="login flex justify-center items-center pt-24">
+        <div class="w-full max-w-xs">
+            <form action="/admin-update-food/<%= menuItem._id %>" method="POST" enctype="multipart/form-data" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4 editFoodWalaForm">
+                <input type="hidden" id="menuId" name="menuId" value="<%= menuItem._id %>">
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
+                        Name
+                    </label>
+                    <input name="name"
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        id="name" type="text" placeholder="Enter name of food" value="<%= menuItem.name %>" required>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="foodType">
+                        Food Type
+                    </label>
+                    <select name="foodType"
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        id="foodType" required>
+                        <option value="breakfast" <%= menuItem.foodType === 'breakfast' || menuItem.foodType === 'Breakfast' ? 'selected' : '' %>>Breakfast</option>
+                        <option value="lunch" <%= menuItem.foodType === 'lunch' || menuItem.foodType === 'Lunch' ? 'selected' : '' %>>Lunch</option>
+                        <option value="dinner" <%= menuItem.foodType === 'dinner' || menuItem.foodType === 'Dinner' ? 'selected' : '' %>>Dinner</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="foodPhoto">
+                        Image
+                    </label>
+                    <div class="flex items-center mb-2">
+                        <img src="/img/foodPic/<%= menuItem.image %>" alt="<%= menuItem.name %>" class="h-16 w-16 object-cover rounded">
+                        <p class="ml-2 text-sm text-gray-600">Current image</p>
+                    </div>
+                    <input name="foodPhoto"
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        id="foodPhoto" type="file" accept="image/*">
+                    <p class="text-xs text-gray-500 mt-1">Leave empty to keep current image</p>
+                </div>
+                <div class="mb-4">
+                    <input name="isVeg" type="checkbox" id="isVeg" <%= menuItem.isVeg ? 'checked' : '' %>>
+                    <label class="text-gray-700 text-sm font-bold mb-2" for="isVeg"> Is this food item veg?</label><br>
+
+                    <input name="halfFull" type="checkbox" id="halfFull" <%= menuItem.halfFull ? 'checked' : '' %>>
+                    <label class="text-gray-700 text-sm font-bold mb-2" for="halfFull"> Want to add Half/Full size option?</label><br>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="price">
+                        Price
+                    </label>
+                    <input name="price"
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        id="price" type="number" placeholder="Enter price of food" value="<%= menuItem.price %>" required>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 text-sm font-bold mb-2" for="description">
+                        Description
+                    </label>
+                    <textarea name="description"
+                        class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        id="description" placeholder="Enter description of food" required><%= menuItem.description %></textarea>
+                </div>
+            
+                <div class="flex items-center justify-between">
+                    <button
+                        class="btn-primary rounded-full text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                        Update Menu Item
+                    </button>
+                    <a href="/admin-manage-menu" class="text-blue-500 hover:text-blue-700">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    <script src="/js/app.js"></script>
+</body>
+
+</html>

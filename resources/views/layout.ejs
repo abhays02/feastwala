@@ -100,6 +100,11 @@
                             <li class="nav-item navSec">
                                 <a style="display: flex; gap: 0.5rem;" href="/me" class="experience-nav navSec"><img style="width: 2rem; border-radius: 100%;" src="/img/userPic/<%= user.photo %>" alt="user" onerror="this.onerror=null;this.src='/img/userPic/default.jpeg';"> <p class="dropDownName"><%= user.username.split(' ')[0] %></p></a>
                             </li>
+                            <% if(user.role === 'admin'){ %>
+                                <li class="nav-item navSec">
+                                    <a class="skill-nav navSec" href="/admin-order">Orders</a>
+                                </li>
+                            <% } %>
                             <li class="nav-item navSec">
                                 <a class="skill-nav navSec logoutBtn" href="#">Logout</a>
                             </li>

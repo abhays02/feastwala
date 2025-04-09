@@ -7,7 +7,7 @@ const menuSchema = new mongoose.Schema({
     },
     foodType: {
         type: String,
-        enum: ['breakfast', 'lunch', 'dinner', ],
+        enum: ['breakfast', 'lunch', 'dinner', 'Breakfast', 'Lunch', 'Dinner'],
         required: [true, 'Menu must have a type']
     },
     image: { 

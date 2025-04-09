@@ -97,6 +97,16 @@ exports.addFoodBackend= async (req, res) => {
         if(req.file) { // if there is any field name 'req.file'. Then it means user wants to upload picture
             filterField.image= req.file.filename; // add a new field named 'photo'
             // 'req.file.filename' store the name (that we have specified in 'multerStorage') of uploaded photo
+            
+            // Copy the image to the menu directory as well to ensure it's accessible from both paths
+            const fs = require('fs');
+            const path = require('path');
+            const sourcePath = path.join(process.cwd(), 'public', 'img', 'foodPic', req.file.filename);
+            const destPath = path.join(process.cwd(), 'public', 'img', 'menu', req.file.filename);
+            
+            if (fs.existsSync(sourcePath)) {
+                fs.copyFileSync(sourcePath, destPath);
+            }
 
             newFoodItem= await Menu.create({ 
                 name: filterField.name,
@@ -216,6 +226,116 @@ exports.refundStatusUpdate= async (req, res) => {
     } catch (err) {
         res.status(404).render('error', {
             message: "Can't view refund status page :("
+        });
+    }
+}
+
+// Menu Management Functions
+exports.manageMenu = async (req, res) => {
+    try {
+        const menuItems = await Menu.find().sort('foodType');
+        
+        res.status(200).render('admin/manageMenu', {
+            menuItems: menuItems
+        });
+    } catch (err) {
+        res.status(404).render('error', {
+            message: "Can't view menu management page :("
+        });
+    }
+}
+
+exports.getEditFood = async (req, res) => {
+    try {
+        const menuItem = await Menu.findById(req.params.id);
+        
+        if (!menuItem) {
+            return res.status(404).render('error', {
+                message: "Menu item not found"
+            });
+        }
+        
+        res.status(200).render('admin/editFood', {
+            menuItem: menuItem
+        });
+    } catch (err) {
+        res.status(404).render('error', {
+            message: "Can't view edit food form :("
+        });
+    }
+}
+
+exports.updateFood = async (req, res) => {
+    try {
+        const filterField = filterObj(req.body, 'name', 'foodType', 'halfFull', 'isVeg', 'price', 'description');
+        
+        // Convert checkbox values to boolean
+        if (filterField.halfFull) {
+            filterField.halfFull = filterField.halfFull === 'on' ? true : false;
+        }
+        
+        if (filterField.isVeg) {
+            filterField.isVeg = filterField.isVeg === 'on' ? true : false;
+        }
+        
+        // Handle image update if new image is uploaded
+        if (req.file) {
+            filterField.image = req.file.filename;
+            
+            // Copy the image to the menu directory as well to ensure it's accessible from both paths
+            const fs = require('fs');
+            const path = require('path');
+            const sourcePath = path.join(process.cwd(), 'public', 'img', 'foodPic', req.file.filename);
+            const destPath = path.join(process.cwd(), 'public', 'img', 'menu', req.file.filename);
+            
+            if (fs.existsSync(sourcePath)) {
+                fs.copyFileSync(sourcePath, destPath);
+            }
+        }
+        
+        const updatedMenuItem = await Menu.findByIdAndUpdate(
+            req.params.id,
+            filterField,
+            {
+                new: true,
+                runValidators: true
+            }
+        );
+        
+        if (!updatedMenuItem) {
+            return res.status(404).render('error', {
+                message: "Menu item not found"
+            });
+        }
+        
+        res.status(200).redirect('/admin-manage-menu');
+    } catch (err) {
+        console.error(err);
+        res.status(404).render('error', {
+            message: "Failed to update menu item :("
+        });
+    }
+}
+
+exports.deleteFood = async (req, res) => {
+    try {
+        const menuItem = await Menu.findByIdAndDelete(req.params.id);
+        
+        if (!menuItem) {
+            return res.status(404).json({
+                status: 'error',
+                message: 'Menu item not found'
+            });
+        }
+        
+        res.status(200).json({
+            status: 'success',
+            message: 'Menu item deleted successfully'
+        });
+    } catch (err) {
+        res.status(500).json({
+            status: 'error',
+            message: 'Failed to delete menu item'
         });
     }
 }

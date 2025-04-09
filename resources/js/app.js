@@ -867,6 +867,124 @@ if (addFoodForm) {
     });
 }
 
+// Edit Food Form Handling
+const editFoodForm = document.querySelector('.editFoodWalaForm');
+
+const updateFood = async (updateForm, menuId) => {
+    try {
+        const res = await axios({
+            method: 'POST',
+            url: `/admin-update-food/${menuId}`,
+            data: updateForm,
+            withCredentials: true
+        });
+
+        if (res.data.status === 'Success' || res.status === 200) {
+            successMsg('Menu item updated successfully');
+
+            window.setTimeout(() => {
+                location.assign('/admin-manage-menu');
+            }, 1000);
+        }
+    } catch (err) {
+        failureMsg(err.response?.data?.message || 'Failed to update menu item');
+    }
+}
+
+if (editFoodForm) {
+    editFoodForm.addEventListener('submit', (evt) => {
+        evt.preventDefault();
+
+        const menuId = document.querySelector('#menuId').value;
+        const name = document.querySelector('#name').value;
+        const foodType = document.querySelector('#foodType').value;
+        const isVeg = document.querySelector('#isVeg').checked;
+        const halfFull = document.querySelector('#halfFull').checked;
+        const price = Number(document.querySelector('#price').value);
+        const description = document.querySelector('#description').value;
+
+        if (!name || !foodType || !price || !description) {
+            failureMsg("Name, Food Type, Price and Description are mandatory");
+            return;
+        }
+        
+        const updateForm = new FormData();
+        updateForm.append('name', name);
+        updateForm.append('foodType', foodType);
+        updateForm.append('isVeg', isVeg);
+        updateForm.append('halfFull', halfFull);
+        updateForm.append('price', price);
+        updateForm.append('description', description);
+        
+        if (document.querySelector('#foodPhoto').files[0]) {
+            updateForm.append('foodPhoto', document.querySelector('#foodPhoto').files[0]);
+        }
+
+        updateFood(updateForm, menuId);
+    });
+}
+
+// Delete Menu Item Handling
+const deleteButtons = document.querySelectorAll('.delete-menu-item');
+const deleteModal = document.getElementById('deleteModal');
+const cancelDeleteBtn = document.getElementById('cancelDelete');
+const confirmDeleteBtn = document.getElementById('confirmDelete');
+let menuItemToDelete = null;
+
+const deleteFood = async (menuId) => {
+    try {
+        const res = await axios({
+            method: 'DELETE',
+            url: `/admin-delete-food/${menuId}`,
+            withCredentials: true
+        });
+
+        if (res.data.status === 'success') {
+            successMsg('Menu item deleted successfully');
+            
+            // Remove the row from the table
+            const row = document.querySelector(`[data-id="${menuId}"]`).closest('tr');
+            if (row) {
+                row.remove();
+            }
+            
+            // Hide the modal
+            if (deleteModal) {
+                deleteModal.classList.add('hidden');
+            }
+        }
+    } catch (err) {
+        failureMsg(err.response?.data?.message || 'Failed to delete menu item');
+    }
+}
+
+if (deleteButtons && deleteButtons.length > 0) {
+    deleteButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            menuItemToDelete = button.dataset.id;
+            if (deleteModal) {
+                deleteModal.classList.remove('hidden');
+            }
+        });
+    });
+}
+
+if (cancelDeleteBtn) {
+    cancelDeleteBtn.addEventListener('click', () => {
+        menuItemToDelete = null;
+        if (deleteModal) {
+            deleteModal.classList.add('hidden');
+        }
+    });
+}
+
+if (confirmDeleteBtn) {
+    confirmDeleteBtn.addEventListener('click', () => {
+        if (menuItemToDelete) {
+            deleteFood(menuItemToDelete);
+        }
+    });
+}
 
 /* ---------------- MAP INTEGRATION ----------------- */
 
