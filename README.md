@@ -1,4 +1,4 @@
-"Feastwala Open-Source Food Service Portal"
+"Feastwala Open-Source Food Subscription Portal"
 ```markdown
 # Feastwala 🍴
 
