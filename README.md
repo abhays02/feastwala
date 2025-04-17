@@ -2,7 +2,7 @@
 ```markdown
 # Feastwala 🍴
 
-Welcome to the **Feastwala** repository! Feastwala is a web-based platform designed for food enthusiasts to explore and order their favorite cuisines. The website is live at [feastwala.com](https://feastwala.com).
+Welcome to the *Feastwala* repository! Feastwala is a web-based platform designed for food enthusiasts to explore and order their favorite cuisines. The website is live at [feastwala.com](https://feastwala.com).
 
 ---
 
