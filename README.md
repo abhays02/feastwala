@@ -1,4 +1,4 @@
-Feastwala Open-Source tiffin Service Portal
+"Feastwala Open-Source Food Service Portal"
 ```markdown
 # Feastwala 🍴
 
